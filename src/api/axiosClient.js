@@ -1,0 +1,80 @@
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+
+import "dotenv/config";
+import { ENV, TOKEN } from "../constant";
+
+// Set up default config for http requests here
+// Please have a look at here `https://github.com/axios/axios#request-config` for the full list of configs
+// const cookies = new Cookies();
+const axiosClient = axios.create({
+  // config credentials
+  withCredentials: false,
+  baseURL: ENV.API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+// Add a request interceptor
+axiosClient.interceptors.request.use(
+  function (config) {
+    if (config?.headers == null) {
+      throw new Error(
+        `Expected 'config' and 'config.headers' not to be undefined`
+      );
+    }
+    const url = config.url !== undefined ? config.url : "";
+    // console.log('api call: ', url);
+
+    if (!url.startsWith("/api/auth")) {
+      config.headers.Authorization = `Bearer ${TOKEN.getAccessToken()}`;
+    }
+    // Do something before request is sent
+    return config;
+  },
+  async function (error) {
+    // Do something with request error
+    return await Promise.reject(error);
+  }
+);
+
+// Add a response interceptor
+axiosClient.interceptors.response.use(
+  function (response) {
+    // Any status code that lie within the range of 2xx cause this function to trigger
+    // Do something with response data
+    return response.data;
+  },
+  async function (err) {
+    const config = err.config;
+    console.log(err);
+    if (err.response != null && err.response.status === 401) {
+      config._retry = true;
+      try {
+        const refreshToken = TOKEN.getRefreshToken() || "";
+        if (refreshToken !== "") {
+          // TODO: call request token and retry api
+          // refreshTokenApi({ refreshToken })
+          //   .then((response) => {
+          //     localStorage.setItem('user_accessToken', response.data?.token || '');
+          //     localStorage.setItem('user_refreshToken', response.data?.refreshToken || '');
+          //   })
+          //   .catch((status) => {
+          //     if (status === 401) {
+          //       console.log(err);
+          //     }
+          //   });
+          return await axios(err.response.config);
+        }
+      } catch (err) {
+        console.log(err);
+        return await Promise.reject(err);
+      }
+    }
+    // Any status codes that falls outside the range of 2xx cause this function to trigger
+    // Do something with response error
+    return await Promise.reject(err);
+  }
+);
+
+export default axiosClient;
