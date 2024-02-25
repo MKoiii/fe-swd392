@@ -31,15 +31,17 @@ import {
   FiChevronDown,
   FiUsers,
 } from "react-icons/fi";
+import { BiCategory } from "react-icons/bi";
+import { MdOutlineSell } from "react-icons/md";
 import { IconType } from "react-icons";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const LinkItems = [
-  { name: "Home", icon: FiHome },
-  { name: "Users", icon: FiUsers },
-  { name: "Trending", icon: FiTrendingUp },
-  { name: "Explore", icon: FiCompass },
-  { name: "Favourites", icon: FiStar },
+  { name: "Home", icon: FiHome, path: "/dashboard" },
+  { name: "Users", icon: FiUsers, path: "/manage-users" },
+  { name: "Categories", icon: BiCategory, path: "/manage-categories" },
+  { name: "Products", icon: MdOutlineSell, path: "/manage-products" },
   { name: "Settings", icon: FiSettings },
 ];
 
@@ -62,7 +64,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
+        <NavItem key={link.name} icon={link.icon} path={link?.path}>
           {link.name}
         </NavItem>
       ))}
@@ -70,13 +72,20 @@ const SidebarContent = ({ onClose, ...rest }) => {
   );
 };
 
-const NavItem = ({ icon, children, ...rest }) => {
+const NavItem = ({ icon, path, children, ...rest }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [active, setActive] = useState(location?.pathname === path);
+
+  useEffect(() => {
+    setActive(location.pathname === path);
+  }, [location.pathname]);
   return (
     <Box
       as="a"
-      href="#"
       style={{ textDecoration: "none" }}
       _focus={{ boxShadow: "none" }}
+      onClick={() => navigate(path ? path : "#")}
     >
       <Flex
         align="center"
@@ -85,6 +94,8 @@ const NavItem = ({ icon, children, ...rest }) => {
         borderRadius="lg"
         role="group"
         cursor="pointer"
+        backgroundColor={active ? "cyan.400" : "#fff"}
+        color={active ? "#fff" : "gray.800"}
         _hover={{
           bg: "cyan.400",
           color: "white",
@@ -179,7 +190,9 @@ const MobileNav = ({ onOpen, ...rest }) => {
               bg={useColorModeValue("white", "gray.900")}
               borderColor={useColorModeValue("gray.200", "gray.700")}
             >
-              <MenuItem>Profile</MenuItem>
+              <MenuItem onClick={() => navigate("/my-profile")}>
+                Profile
+              </MenuItem>
               <MenuItem>Settings</MenuItem>
               <MenuItem>Billing</MenuItem>
               <MenuDivider />
@@ -215,7 +228,7 @@ const MainBoard = ({ children }) => {
       </Drawer>
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }} p="4">
+      <Box ml={{ base: 0, md: 60 }} p="4" backgroundColor={"#fff"}>
         {/* Content */}
         {children}
       </Box>
