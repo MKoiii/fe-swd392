@@ -9,7 +9,6 @@ import {
   Heading,
   HStack,
   Input,
-  Link,
   Stack,
   Text,
 } from "@chakra-ui/react";
@@ -17,6 +16,7 @@ import React from "react";
 import { Logo } from "./components/logo";
 import { OAuthButtonGroup } from "./components/oauthButtonGroup";
 import { PasswordField } from "./components/passwordField";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
@@ -50,7 +50,7 @@ const Login = () => {
               Log in to your account
             </Heading>
             <Text color="fg.muted">
-              Don't have an account? <Link href="#">Sign up</Link>
+              Don't have an account? <Link to={"/register"}>Sign up</Link>
             </Text>
           </Stack>
         </Stack>
