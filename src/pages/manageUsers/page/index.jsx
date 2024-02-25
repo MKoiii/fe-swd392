@@ -1,19 +1,19 @@
 import React from "react";
 import BreadcrumbCustom from "../../../components/breadcrumb";
 import { Box } from "@chakra-ui/react";
-import Authors from "../components";
 import { TABLE_USER_DATA } from "../../../mock";
-const DashboardContent = () => {
+import TableUsers from "../components/tableUser";
+const ManageUserContent = () => {
   const links = [
-    { link: "#", name: "Dashboard" },
-    { link: "#", name: "Dashboard" },
+    { link: "/dashboard", name: "Home" },
+    { link: "#", name: "Manage Users" },
   ];
   return (
     <>
       <BreadcrumbCustom links={links} />
       <Box>
-        <Authors
-          title={"Authors Table"}
+        <TableUsers
+          title={"Users Table"}
           captions={["Author", "Function", "Status", "Employed", ""]}
           data={TABLE_USER_DATA}
         />
@@ -22,4 +22,4 @@ const DashboardContent = () => {
   );
 };
 
-export default DashboardContent;
+export default ManageUserContent;
