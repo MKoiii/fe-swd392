@@ -12,13 +12,49 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Logo } from "./components/logo";
 import { OAuthButtonGroup } from "./components/oauthButtonGroup";
-import { PasswordField } from "./components/passwordField";
-import { Link } from "react-router-dom";
+import PasswordField from "./components/passwordField";
+import { Link, useNavigate } from "react-router-dom";
+import { logInWithEmailAndPassword } from "../../utils/firebase";
+import { ROLE, TOKEN } from "../../constant";
+import { jwtDecode } from "jwt-decode";
+import { AuthContext } from "../../App";
 
 const Login = () => {
+  const { auth, updateAuth } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const handleLogin = async () => {
+    try {
+      const res = await logInWithEmailAndPassword(email, password);
+      // console.log(res?.user?.accessToken);
+      if (res && res.user) {
+        const accessToken = res?.user?.accessToken;
+        TOKEN.setAccessToken(accessToken);
+        TOKEN.setRefreshToken(res?.user?.refreshToken);
+        const decoded = jwtDecode(accessToken);
+        const roles = decoded?.resource_access?.auction?.roles;
+        console.log(res.user);
+        const isCms =
+          roles.includes(ROLE.CMS) || roles.includes(ROLE.SUPER_ADMIN);
+        const isUser = roles.includes(ROLE.USER);
+        updateAuth({
+          isLogin: true,
+          userInfo: res.user,
+        });
+        if (isCms) {
+          navigate("/dashboard");
+        } else if (isUser) {
+          navigate("/home");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Container
       maxW="lg"
@@ -47,10 +83,13 @@ const Login = () => {
                 md: "sm",
               }}
             >
-              Log in to your account
+              Đăng nhập
             </Heading>
             <Text color="fg.muted">
-              Don't have an account? <Link to={"/register"}>Sign up</Link>
+              Bạn chưa có tài khoản?{" "}
+              <Link style={{ color: "blue" }} to={"/register"}>
+                Đăng ký ngay
+              </Link>
             </Text>
           </Stack>
         </Stack>
@@ -80,26 +119,38 @@ const Login = () => {
             <Stack spacing="5">
               <FormControl>
                 <FormLabel htmlFor="email">Email</FormLabel>
-                <Input id="email" type="email" />
+                <Input
+                  id="email"
+                  type="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </FormControl>
-              <PasswordField />
+              <PasswordField
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
             </Stack>
             <HStack justify="space-between">
-              <Checkbox defaultChecked>Remember me</Checkbox>
-              <Button variant="text" size="sm">
-                Forgot password?
+              <Checkbox defaultChecked>Lưu đăng nhập</Checkbox>
+              <Button
+                variant="text"
+                size="sm"
+                onClick={() => navigate("/forgot-pass")}
+              >
+                Quên mật khẩu?
               </Button>
             </HStack>
             <Stack spacing="6">
-              <Button>Sign in</Button>
-              <HStack>
+              <Button onClick={handleLogin}>Đăng nhập</Button>
+              {/* <HStack>
                 <Divider />
                 <Text textStyle="sm" whiteSpace="nowrap" color="fg.muted">
                   or continue with
                 </Text>
                 <Divider />
               </HStack>
-              <OAuthButtonGroup />
+              <OAuthButtonGroup /> */}
             </Stack>
           </Stack>
         </Box>

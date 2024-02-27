@@ -5,23 +5,14 @@ import {
   Input,
   InputGroup,
   InputRightElement,
-  useDisclosure,
-  useMergeRefs,
 } from "@chakra-ui/react";
-import { forwardRef, useRef } from "react";
+import React, { useState } from "react";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 
-export const PasswordField = forwardRef((props, ref) => {
-  const { isOpen, onToggle } = useDisclosure();
-  const inputRef = useRef(null);
-  const mergeRef = useMergeRefs(inputRef, ref);
+const PasswordField = ({ props, onChange }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const onClickReveal = () => {
-    onToggle();
-    if (inputRef.current) {
-      inputRef.current.focus({
-        preventScroll: true,
-      });
-    }
+    setIsOpen(!isOpen);
   };
   return (
     <FormControl>
@@ -37,15 +28,16 @@ export const PasswordField = forwardRef((props, ref) => {
         </InputRightElement>
         <Input
           id="password"
-          ref={mergeRef}
           name="password"
           type={isOpen ? "text" : "password"}
           autoComplete="current-password"
           required
           {...props}
+          onChange={(e) => onChange(e)}
         />
       </InputGroup>
     </FormControl>
   );
-});
-PasswordField.displayName = "PasswordField";
+};
+
+export default PasswordField;

@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Flex, Td, Text, Tr } from "@chakra-ui/react";
+import { GrFormPrevious } from "react-icons/gr";
+import { MdNavigateNext } from "react-icons/md";
 
-const Paginate = ({ isTable, currentPage, totalPages, onPageChange }) => {
+const Paginate = ({
+  isTable,
+  currentPage,
+  totalPages,
+  onPageChange,
+  colSpan,
+}) => {
   const pageNumbers = [];
   const maxPageNumbers = 5; // Số lượng trang tối đa hiển thị
   const ellipsis = "...";
@@ -76,7 +84,7 @@ const Paginate = ({ isTable, currentPage, totalPages, onPageChange }) => {
       {isTable ? (
         <tfoot>
           <Tr>
-            <Td colSpan="5">
+            <Td colSpan={colSpan}>
               <Flex justify="right" mt={4} width={"100%"}>
                 <Button
                   isDisabled={currentPage === 1}
@@ -84,7 +92,7 @@ const Paginate = ({ isTable, currentPage, totalPages, onPageChange }) => {
                   size="sm"
                   mx={1}
                 >
-                  Previous
+                  <GrFormPrevious />
                 </Button>
                 <Box display={"flex"} alignItems={"center"}>
                   {renderPageNumbers()}
@@ -95,7 +103,7 @@ const Paginate = ({ isTable, currentPage, totalPages, onPageChange }) => {
                   size="sm"
                   mx={1}
                 >
-                  Next
+                  <MdNavigateNext />
                 </Button>
               </Flex>
             </Td>
@@ -109,7 +117,7 @@ const Paginate = ({ isTable, currentPage, totalPages, onPageChange }) => {
             size="sm"
             mx={1}
           >
-            Previous
+            <GrFormPrevious />
           </Button>
           <Box display={"flex"} alignItems={"center"}>
             {renderPageNumbers()}
@@ -120,7 +128,7 @@ const Paginate = ({ isTable, currentPage, totalPages, onPageChange }) => {
             size="sm"
             mx={1}
           >
-            Next
+            <MdNavigateNext />
           </Button>
         </Flex>
       )}

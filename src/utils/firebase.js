@@ -16,7 +16,7 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import { TOKEN_INFO } from "./constants";
+import { TOKEN } from "../constant";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDuMCNpRJXs1cdAaQSgXv8Nv7o9ykJjB6U",
@@ -96,9 +96,9 @@ const logout = () => {
 
 const refreshToken = async () => {
   const res = await auth.currentUser?.getIdToken(true);
-  console.log(res);
-
-  res ? localStorage.setItem(TOKEN_INFO.accessToken, res) : "";
+  if (res) {
+    TOKEN.setAccessToken(res);
+  }
 };
 
 export {
