@@ -35,7 +35,9 @@ import { BiCategory } from "react-icons/bi";
 import { MdOutlineSell } from "react-icons/md";
 import { IconType } from "react-icons";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { TOKEN } from "../../constant";
+import { AuthContext } from "../../App";
 
 const LinkItems = [
   { name: "Home", icon: FiHome, path: "/dashboard" },
@@ -119,7 +121,10 @@ const NavItem = ({ icon, path, children, ...rest }) => {
 };
 
 const MobileNav = ({ onOpen, ...rest }) => {
+  const { auth } = useContext(AuthContext);
+  const { userInfo } = auth;
   const navigate = useNavigate();
+  console.log(auth);
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -176,7 +181,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
                   spacing="1px"
                   ml="2"
                 >
-                  <Text fontSize="sm">Justina Clark</Text>
+                  <Text fontSize="sm">{userInfo?.displayName}</Text>
                   <Text fontSize="xs" color="gray.600">
                     Admin
                   </Text>
@@ -196,7 +201,14 @@ const MobileNav = ({ onOpen, ...rest }) => {
               <MenuItem>Settings</MenuItem>
               <MenuItem>Billing</MenuItem>
               <MenuDivider />
-              <MenuItem onClick={() => navigate("/login")}>Sign out</MenuItem>
+              <MenuItem
+                onClick={() => {
+                  navigate("/login");
+                  TOKEN.clear();
+                }}
+              >
+                Sign out
+              </MenuItem>
             </MenuList>
           </Menu>
         </Flex>

@@ -11,24 +11,48 @@ import Profile from "./pages/profile";
 import LandingPage from "./pages/landingPage";
 import Products from "./pages/products";
 import ProductDetail from "./pages/productDetail";
+import AdminPrivateRouter from "./router/AdminPrivateRouter";
+import CommonPrivateRouter from "./router/CommonPrivateRouter";
+import UserPrivateRouter from "./router/UserPrivateRouter";
+import { createContext, useState } from "react";
+import ManageCategories from "./pages/categories";
+
+const AuthContext = createContext(null);
+const initialValue = {
+  isLogin: false,
+  userInfo: {},
+};
+
 function App() {
+  const [auth, setAuth] = useState(initialValue);
   return (
-    <>
+    <AuthContext.Provider
+      value={{ auth: auth, updateAuth: (data) => setAuth(data) }}
+    >
       <Routes>
         <Route path="" element={<Navigate to={"/home"} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/manage-users" element={<ManageUsers />} />
         <Route path="/forgot-pass" element={<ForgotPassword />} />
         <Route path="/rest-pass" element={<ResetPasswordForm />} />
-        <Route path="/my-profile" element={<Profile />} />
         <Route path="/home" element={<LandingPage />} />
-        <Route path="/products" element={<Products />} />
         <Route path="/product-detail" element={<ProductDetail />} />
+        <Route element={<UserPrivateRouter />}>
+          <Route path="/products" element={<Products />} />
+        </Route>
+        <Route element={<AdminPrivateRouter />}>
+          <Route path="/manage-users" element={<ManageUsers />} />
+          <Route path="/manage-categories" element={<ManageCategories />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+        <Route element={<CommonPrivateRouter />}>
+          <Route path="/my-profile" element={<Profile />} />
+        </Route>
       </Routes>
-    </>
+    </AuthContext.Provider>
   );
 }
+
+export { AuthContext };
 
 export default App;
