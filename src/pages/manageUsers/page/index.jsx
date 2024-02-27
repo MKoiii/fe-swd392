@@ -13,8 +13,15 @@ const ManageUserContent = () => {
       <BreadcrumbCustom links={links} />
       <Box>
         <TableUsers
-          title={"Users Table"}
-          captions={["Author", "Function", "Status", "Employed", ""]}
+          title={"Bảng người dùng"}
+          captions={[
+            "Họ Tên",
+            "Số điện thoại",
+            "Email",
+            "Role",
+            "Trạng thái",
+            "Hành động",
+          ]}
           data={TABLE_USER_DATA}
         />
       </Box>
