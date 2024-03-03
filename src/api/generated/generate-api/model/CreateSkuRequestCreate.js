@@ -12,7 +12,6 @@
  */
 
 import ApiClient from '../ApiClient';
-import SkuConfigInfoCreate from './SkuConfigInfoCreate';
 
 /**
  * The CreateSkuRequestCreate model module.
@@ -23,10 +22,11 @@ class CreateSkuRequestCreate {
     /**
      * Constructs a new <code>CreateSkuRequestCreate</code>.
      * @alias module:model/CreateSkuRequestCreate
+     * @param productId {Number} 
      */
-    constructor() { 
+    constructor(productId) { 
         
-        CreateSkuRequestCreate.initialize(this);
+        CreateSkuRequestCreate.initialize(this, productId);
     }
 
     /**
@@ -34,7 +34,8 @@ class CreateSkuRequestCreate {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj) { 
+    static initialize(obj, productId) { 
+        obj['productId'] = productId;
     }
 
     /**
@@ -57,8 +58,11 @@ class CreateSkuRequestCreate {
             if (data.hasOwnProperty('image')) {
                 obj['image'] = ApiClient.convertToType(data['image'], 'String');
             }
-            if (data.hasOwnProperty('configs')) {
-                obj['configs'] = ApiClient.convertToType(data['configs'], [SkuConfigInfoCreate]);
+            if (data.hasOwnProperty('productId')) {
+                obj['productId'] = ApiClient.convertToType(data['productId'], 'Number');
+            }
+            if (data.hasOwnProperty('variantIds')) {
+                obj['variantIds'] = ApiClient.convertToType(data['variantIds'], ['Number']);
             }
         }
         return obj;
@@ -70,19 +74,19 @@ class CreateSkuRequestCreate {
      * @return {boolean} to indicate whether the JSON data is valid with respect to <code>CreateSkuRequestCreate</code>.
      */
     static validateJSON(data) {
+        // check to make sure all required properties are present in the JSON string
+        for (const property of CreateSkuRequestCreate.RequiredProperties) {
+            if (!data.hasOwnProperty(property)) {
+                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
+            }
+        }
         // ensure the json data is a string
         if (data['image'] && !(typeof data['image'] === 'string' || data['image'] instanceof String)) {
             throw new Error("Expected the field `image` to be a primitive type in the JSON string but got " + data['image']);
         }
-        if (data['configs']) { // data not null
-            // ensure the json data is an array
-            if (!Array.isArray(data['configs'])) {
-                throw new Error("Expected the field `configs` to be an array in the JSON data but got " + data['configs']);
-            }
-            // validate the optional field `configs` (array)
-            for (const item of data['configs']) {
-                SkuConfigInfoCreate.validateJSON(item);
-            };
+        // ensure the json data is an array
+        if (!Array.isArray(data['variantIds'])) {
+            throw new Error("Expected the field `variantIds` to be an array in the JSON data but got " + data['variantIds']);
         }
 
         return true;
@@ -91,7 +95,7 @@ class CreateSkuRequestCreate {
 
 }
 
-
+CreateSkuRequestCreate.RequiredProperties = ["productId"];
 
 /**
  * @member {Number} price
@@ -109,9 +113,14 @@ CreateSkuRequestCreate.prototype['quantity'] = undefined;
 CreateSkuRequestCreate.prototype['image'] = undefined;
 
 /**
- * @member {Array.<module:model/SkuConfigInfoCreate>} configs
+ * @member {Number} productId
  */
-CreateSkuRequestCreate.prototype['configs'] = undefined;
+CreateSkuRequestCreate.prototype['productId'] = undefined;
+
+/**
+ * @member {Array.<Number>} variantIds
+ */
+CreateSkuRequestCreate.prototype['variantIds'] = undefined;
 
 
 

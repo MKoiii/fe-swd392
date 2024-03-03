@@ -12,22 +12,22 @@
  */
 
 import ApiClient from '../ApiClient';
-import ProductConfigInfoDetails from './ProductConfigInfoDetails';
-import SkuInfoDetails from './SkuInfoDetails';
+import ProductConfigInfo from './ProductConfigInfo';
+import SkuInfo from './SkuInfo';
 
 /**
- * The ProductDetailsDetails model module.
- * @module model/ProductDetailsDetails
+ * The ProductDetails model module.
+ * @module model/ProductDetails
  * @version 1.0.0
  */
-class ProductDetailsDetails {
+class ProductDetails {
     /**
-     * Constructs a new <code>ProductDetailsDetails</code>.
-     * @alias module:model/ProductDetailsDetails
+     * Constructs a new <code>ProductDetails</code>.
+     * @alias module:model/ProductDetails
      */
     constructor() { 
         
-        ProductDetailsDetails.initialize(this);
+        ProductDetails.initialize(this);
     }
 
     /**
@@ -39,15 +39,15 @@ class ProductDetailsDetails {
     }
 
     /**
-     * Constructs a <code>ProductDetailsDetails</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>ProductDetails</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/ProductDetailsDetails} obj Optional instance to populate.
-     * @return {module:model/ProductDetailsDetails} The populated <code>ProductDetailsDetails</code> instance.
+     * @param {module:model/ProductDetails} obj Optional instance to populate.
+     * @return {module:model/ProductDetails} The populated <code>ProductDetails</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new ProductDetailsDetails();
+            obj = obj || new ProductDetails();
 
             if (data.hasOwnProperty('id')) {
                 obj['id'] = ApiClient.convertToType(data['id'], 'Number');
@@ -71,19 +71,19 @@ class ProductDetailsDetails {
                 obj['description'] = ApiClient.convertToType(data['description'], 'String');
             }
             if (data.hasOwnProperty('productConfigs')) {
-                obj['productConfigs'] = ApiClient.convertToType(data['productConfigs'], [ProductConfigInfoDetails]);
+                obj['productConfigs'] = ApiClient.convertToType(data['productConfigs'], [ProductConfigInfo]);
             }
             if (data.hasOwnProperty('skus')) {
-                obj['skus'] = ApiClient.convertToType(data['skus'], [SkuInfoDetails]);
+                obj['skus'] = ApiClient.convertToType(data['skus'], [SkuInfo]);
             }
         }
         return obj;
     }
 
     /**
-     * Validates the JSON data with respect to <code>ProductDetailsDetails</code>.
+     * Validates the JSON data with respect to <code>ProductDetails</code>.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>ProductDetailsDetails</code>.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>ProductDetails</code>.
      */
     static validateJSON(data) {
         // ensure the json data is a string
@@ -113,7 +113,7 @@ class ProductDetailsDetails {
             }
             // validate the optional field `productConfigs` (array)
             for (const item of data['productConfigs']) {
-                ProductConfigInfoDetails.validateJSON(item);
+                ProductConfigInfo.validateJSON(item);
             };
         }
         if (data['skus']) { // data not null
@@ -123,7 +123,7 @@ class ProductDetailsDetails {
             }
             // validate the optional field `skus` (array)
             for (const item of data['skus']) {
-                SkuInfoDetails.validateJSON(item);
+                SkuInfo.validateJSON(item);
             };
         }
 
@@ -138,47 +138,47 @@ class ProductDetailsDetails {
 /**
  * @member {Number} id
  */
-ProductDetailsDetails.prototype['id'] = undefined;
+ProductDetails.prototype['id'] = undefined;
 
 /**
  * @member {String} name
  */
-ProductDetailsDetails.prototype['name'] = undefined;
+ProductDetails.prototype['name'] = undefined;
 
 /**
  * @member {String} image
  */
-ProductDetailsDetails.prototype['image'] = undefined;
+ProductDetails.prototype['image'] = undefined;
 
 /**
- * @member {module:model/ProductDetailsDetails.StatusEnum} status
+ * @member {module:model/ProductDetails.StatusEnum} status
  */
-ProductDetailsDetails.prototype['status'] = undefined;
+ProductDetails.prototype['status'] = undefined;
 
 /**
  * @member {Number} categoryId
  */
-ProductDetailsDetails.prototype['categoryId'] = undefined;
+ProductDetails.prototype['categoryId'] = undefined;
 
 /**
  * @member {String} categoryName
  */
-ProductDetailsDetails.prototype['categoryName'] = undefined;
+ProductDetails.prototype['categoryName'] = undefined;
 
 /**
  * @member {String} description
  */
-ProductDetailsDetails.prototype['description'] = undefined;
+ProductDetails.prototype['description'] = undefined;
 
 /**
- * @member {Array.<module:model/ProductConfigInfoDetails>} productConfigs
+ * @member {Array.<module:model/ProductConfigInfo>} productConfigs
  */
-ProductDetailsDetails.prototype['productConfigs'] = undefined;
+ProductDetails.prototype['productConfigs'] = undefined;
 
 /**
- * @member {Array.<module:model/SkuInfoDetails>} skus
+ * @member {Array.<module:model/SkuInfo>} skus
  */
-ProductDetailsDetails.prototype['skus'] = undefined;
+ProductDetails.prototype['skus'] = undefined;
 
 
 
@@ -189,7 +189,7 @@ ProductDetailsDetails.prototype['skus'] = undefined;
  * @enum {String}
  * @readonly
  */
-ProductDetailsDetails['StatusEnum'] = {
+ProductDetails['StatusEnum'] = {
 
     /**
      * value: "ACTIVE"
@@ -212,5 +212,5 @@ ProductDetailsDetails['StatusEnum'] = {
 
 
 
-export default ProductDetailsDetails;
+export default ProductDetails;
 

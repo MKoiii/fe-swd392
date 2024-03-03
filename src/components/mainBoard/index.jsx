@@ -77,10 +77,10 @@ const SidebarContent = ({ onClose, ...rest }) => {
 const NavItem = ({ icon, path, children, ...rest }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [active, setActive] = useState(location?.pathname === path);
+  const [active, setActive] = useState(location.pathname.includes(path));
 
   useEffect(() => {
-    setActive(location.pathname === path);
+    setActive(location.pathname.includes(path));
   }, [location.pathname]);
   return (
     <Box
@@ -124,7 +124,6 @@ const MobileNav = ({ onOpen, ...rest }) => {
   const { auth } = useContext(AuthContext);
   const { userInfo } = auth;
   const navigate = useNavigate();
-  console.log(auth);
   return (
     <Flex
       ml={{ base: 0, md: 60 }}

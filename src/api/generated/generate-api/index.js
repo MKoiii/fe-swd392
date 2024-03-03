@@ -13,58 +13,64 @@
 
 
 import ApiClient from './ApiClient';
+import BasePagingResponseProductInfo from './model/BasePagingResponseProductInfo';
 import BasePagingResponseProductInfoInfo from './model/BasePagingResponseProductInfoInfo';
 import BasePagingResponseUserInfoInfo from './model/BasePagingResponseUserInfoInfo';
-import BaseResponseBasePagingResponseProductInfoInfo from './model/BaseResponseBasePagingResponseProductInfoInfo';
-import BaseResponseBasePagingResponseUserInfoInfo from './model/BaseResponseBasePagingResponseUserInfoInfo';
 import BaseResponseListProductCategoryInfo from './model/BaseResponseListProductCategoryInfo';
 import BaseResponseListProductCategoryInfoInfo from './model/BaseResponseListProductCategoryInfoInfo';
 import BaseResponseListRoleInfoInfo from './model/BaseResponseListRoleInfoInfo';
 import BaseResponseListSkuInfoInfo from './model/BaseResponseListSkuInfoInfo';
 import BaseResponseObject from './model/BaseResponseObject';
+import BaseResponsePreSignUrl from './model/BaseResponsePreSignUrl';
 import BaseResponseProductCategoryInfoDetails from './model/BaseResponseProductCategoryInfoDetails';
+import BaseResponseProductDetails from './model/BaseResponseProductDetails';
 import BaseResponseProductDetailsDetails from './model/BaseResponseProductDetailsDetails';
 import BaseResponseSkuInfoDetails from './model/BaseResponseSkuInfoDetails';
+import BaseResponseUploadResult from './model/BaseResponseUploadResult';
 import BaseResponseUserDetails from './model/BaseResponseUserDetails';
 import BaseResponseUserDetailsDetails from './model/BaseResponseUserDetailsDetails';
 import ChangeOrderProductCategoryRequest from './model/ChangeOrderProductCategoryRequest';
 import CreateProductRequestCreate from './model/CreateProductRequestCreate';
 import CreateSkuRequestCreate from './model/CreateSkuRequestCreate';
 import ErrorResponse from './model/ErrorResponse';
+import PreSignUrl from './model/PreSignUrl';
 import ProductCategoryInfo from './model/ProductCategoryInfo';
 import ProductCategoryInfoCreate from './model/ProductCategoryInfoCreate';
 import ProductCategoryInfoDetails from './model/ProductCategoryInfoDetails';
 import ProductCategoryInfoInfo from './model/ProductCategoryInfoInfo';
 import ProductCategoryInfoUpdate from './model/ProductCategoryInfoUpdate';
+import ProductConfigInfo from './model/ProductConfigInfo';
 import ProductConfigInfoCreate from './model/ProductConfigInfoCreate';
 import ProductConfigInfoDetails from './model/ProductConfigInfoDetails';
 import ProductConfigInfoUpdate from './model/ProductConfigInfoUpdate';
+import ProductDetails from './model/ProductDetails';
 import ProductDetailsDetails from './model/ProductDetailsDetails';
+import ProductInfo from './model/ProductInfo';
 import ProductInfoInfo from './model/ProductInfoInfo';
+import ProductVariantInfo from './model/ProductVariantInfo';
 import ProductVariantInfoCreate from './model/ProductVariantInfoCreate';
 import ProductVariantInfoDetails from './model/ProductVariantInfoDetails';
 import ProductVariantInfoUpdate from './model/ProductVariantInfoUpdate';
 import RegisterUserRequest from './model/RegisterUserRequest';
 import RoleInfoInfo from './model/RoleInfoInfo';
-import SkuConfigInfoCreate from './model/SkuConfigInfoCreate';
-import SkuConfigInfoDetails from './model/SkuConfigInfoDetails';
-import SkuConfigInfoInfo from './model/SkuConfigInfoInfo';
-import SkuConfigInfoUpdate from './model/SkuConfigInfoUpdate';
+import SkuInfo from './model/SkuInfo';
 import SkuInfoDetails from './model/SkuInfoDetails';
 import SkuInfoInfo from './model/SkuInfoInfo';
 import SuccessResponse from './model/SuccessResponse';
 import UpdateProductRequestUpdate from './model/UpdateProductRequestUpdate';
 import UpdateSkuRequestUpdate from './model/UpdateSkuRequestUpdate';
+import UploadResult from './model/UploadResult';
 import UserDetails from './model/UserDetails';
 import UserDetailsCreate from './model/UserDetailsCreate';
 import UserDetailsDetails from './model/UserDetailsDetails';
 import UserDetailsUpdate from './model/UserDetailsUpdate';
 import UserInfoInfo from './model/UserInfoInfo';
 import AppProductCategoryControllerApi from './api/AppProductCategoryControllerApi';
+import AppProductControllerApi from './api/AppProductControllerApi';
 import AppUserControllerApi from './api/AppUserControllerApi';
 import AuthControllerApi from './api/AuthControllerApi';
+import MediaControllerApi from './api/MediaControllerApi';
 import SystemProductCategoryControllerApi from './api/SystemProductCategoryControllerApi';
-import SystemProductControllerApi from './api/SystemProductControllerApi';
 import SystemRoleControllerApi from './api/SystemRoleControllerApi';
 import SystemSkuControllerApi from './api/SystemSkuControllerApi';
 import SystemUserControllerApi from './api/SystemUserControllerApi';
@@ -109,6 +115,12 @@ export {
     ApiClient,
 
     /**
+     * The BasePagingResponseProductInfo model constructor.
+     * @property {module:model/BasePagingResponseProductInfo}
+     */
+    BasePagingResponseProductInfo,
+
+    /**
      * The BasePagingResponseProductInfoInfo model constructor.
      * @property {module:model/BasePagingResponseProductInfoInfo}
      */
@@ -119,18 +131,6 @@ export {
      * @property {module:model/BasePagingResponseUserInfoInfo}
      */
     BasePagingResponseUserInfoInfo,
-
-    /**
-     * The BaseResponseBasePagingResponseProductInfoInfo model constructor.
-     * @property {module:model/BaseResponseBasePagingResponseProductInfoInfo}
-     */
-    BaseResponseBasePagingResponseProductInfoInfo,
-
-    /**
-     * The BaseResponseBasePagingResponseUserInfoInfo model constructor.
-     * @property {module:model/BaseResponseBasePagingResponseUserInfoInfo}
-     */
-    BaseResponseBasePagingResponseUserInfoInfo,
 
     /**
      * The BaseResponseListProductCategoryInfo model constructor.
@@ -163,10 +163,22 @@ export {
     BaseResponseObject,
 
     /**
+     * The BaseResponsePreSignUrl model constructor.
+     * @property {module:model/BaseResponsePreSignUrl}
+     */
+    BaseResponsePreSignUrl,
+
+    /**
      * The BaseResponseProductCategoryInfoDetails model constructor.
      * @property {module:model/BaseResponseProductCategoryInfoDetails}
      */
     BaseResponseProductCategoryInfoDetails,
+
+    /**
+     * The BaseResponseProductDetails model constructor.
+     * @property {module:model/BaseResponseProductDetails}
+     */
+    BaseResponseProductDetails,
 
     /**
      * The BaseResponseProductDetailsDetails model constructor.
@@ -179,6 +191,12 @@ export {
      * @property {module:model/BaseResponseSkuInfoDetails}
      */
     BaseResponseSkuInfoDetails,
+
+    /**
+     * The BaseResponseUploadResult model constructor.
+     * @property {module:model/BaseResponseUploadResult}
+     */
+    BaseResponseUploadResult,
 
     /**
      * The BaseResponseUserDetails model constructor.
@@ -217,6 +235,12 @@ export {
     ErrorResponse,
 
     /**
+     * The PreSignUrl model constructor.
+     * @property {module:model/PreSignUrl}
+     */
+    PreSignUrl,
+
+    /**
      * The ProductCategoryInfo model constructor.
      * @property {module:model/ProductCategoryInfo}
      */
@@ -247,6 +271,12 @@ export {
     ProductCategoryInfoUpdate,
 
     /**
+     * The ProductConfigInfo model constructor.
+     * @property {module:model/ProductConfigInfo}
+     */
+    ProductConfigInfo,
+
+    /**
      * The ProductConfigInfoCreate model constructor.
      * @property {module:model/ProductConfigInfoCreate}
      */
@@ -265,16 +295,34 @@ export {
     ProductConfigInfoUpdate,
 
     /**
+     * The ProductDetails model constructor.
+     * @property {module:model/ProductDetails}
+     */
+    ProductDetails,
+
+    /**
      * The ProductDetailsDetails model constructor.
      * @property {module:model/ProductDetailsDetails}
      */
     ProductDetailsDetails,
 
     /**
+     * The ProductInfo model constructor.
+     * @property {module:model/ProductInfo}
+     */
+    ProductInfo,
+
+    /**
      * The ProductInfoInfo model constructor.
      * @property {module:model/ProductInfoInfo}
      */
     ProductInfoInfo,
+
+    /**
+     * The ProductVariantInfo model constructor.
+     * @property {module:model/ProductVariantInfo}
+     */
+    ProductVariantInfo,
 
     /**
      * The ProductVariantInfoCreate model constructor.
@@ -307,28 +355,10 @@ export {
     RoleInfoInfo,
 
     /**
-     * The SkuConfigInfoCreate model constructor.
-     * @property {module:model/SkuConfigInfoCreate}
+     * The SkuInfo model constructor.
+     * @property {module:model/SkuInfo}
      */
-    SkuConfigInfoCreate,
-
-    /**
-     * The SkuConfigInfoDetails model constructor.
-     * @property {module:model/SkuConfigInfoDetails}
-     */
-    SkuConfigInfoDetails,
-
-    /**
-     * The SkuConfigInfoInfo model constructor.
-     * @property {module:model/SkuConfigInfoInfo}
-     */
-    SkuConfigInfoInfo,
-
-    /**
-     * The SkuConfigInfoUpdate model constructor.
-     * @property {module:model/SkuConfigInfoUpdate}
-     */
-    SkuConfigInfoUpdate,
+    SkuInfo,
 
     /**
      * The SkuInfoDetails model constructor.
@@ -359,6 +389,12 @@ export {
      * @property {module:model/UpdateSkuRequestUpdate}
      */
     UpdateSkuRequestUpdate,
+
+    /**
+     * The UploadResult model constructor.
+     * @property {module:model/UploadResult}
+     */
+    UploadResult,
 
     /**
      * The UserDetails model constructor.
@@ -397,6 +433,12 @@ export {
     AppProductCategoryControllerApi,
 
     /**
+    * The AppProductControllerApi service constructor.
+    * @property {module:api/AppProductControllerApi}
+    */
+    AppProductControllerApi,
+
+    /**
     * The AppUserControllerApi service constructor.
     * @property {module:api/AppUserControllerApi}
     */
@@ -409,16 +451,16 @@ export {
     AuthControllerApi,
 
     /**
+    * The MediaControllerApi service constructor.
+    * @property {module:api/MediaControllerApi}
+    */
+    MediaControllerApi,
+
+    /**
     * The SystemProductCategoryControllerApi service constructor.
     * @property {module:api/SystemProductCategoryControllerApi}
     */
     SystemProductCategoryControllerApi,
-
-    /**
-    * The SystemProductControllerApi service constructor.
-    * @property {module:api/SystemProductControllerApi}
-    */
-    SystemProductControllerApi,
 
     /**
     * The SystemRoleControllerApi service constructor.

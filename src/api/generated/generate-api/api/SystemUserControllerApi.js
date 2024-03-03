@@ -13,7 +13,7 @@
 
 
 import ApiClient from "../ApiClient";
-import BaseResponseBasePagingResponseUserInfoInfo from '../model/BaseResponseBasePagingResponseUserInfoInfo';
+import BasePagingResponseUserInfoInfo from '../model/BasePagingResponseUserInfoInfo';
 import BaseResponseObject from '../model/BaseResponseObject';
 import BaseResponseUserDetails from '../model/BaseResponseUserDetails';
 import BaseResponseUserDetailsDetails from '../model/BaseResponseUserDetailsDetails';
@@ -242,7 +242,7 @@ export default class SystemUserControllerApi {
      * Callback function to receive the result of the systemUserControllerGetInfoPageWithFilter operation.
      * @callback module:api/SystemUserControllerApi~systemUserControllerGetInfoPageWithFilterCallback
      * @param {String} error Error message, if any.
-     * @param {module:model/BaseResponseBasePagingResponseUserInfoInfo} data The data returned by the service call.
+     * @param {module:model/BasePagingResponseUserInfoInfo} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -254,7 +254,7 @@ export default class SystemUserControllerApi {
      * @param {Number} [size = 20)] The size of the page to be returned
      * @param {Array.<String>} [sort] Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.
      * @param {module:api/SystemUserControllerApi~systemUserControllerGetInfoPageWithFilterCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/BaseResponseBasePagingResponseUserInfoInfo}
+     * data is of type: {@link module:model/BasePagingResponseUserInfoInfo}
      */
     systemUserControllerGetInfoPageWithFilter(opts, callback) {
       opts = opts || {};
@@ -277,7 +277,7 @@ export default class SystemUserControllerApi {
       let authNames = ['Authorization'];
       let contentTypes = [];
       let accepts = ['*/*'];
-      let returnType = BaseResponseBasePagingResponseUserInfoInfo;
+      let returnType = BasePagingResponseUserInfoInfo;
       return this.apiClient.callApi(
         '/api/v1/system/user/info/page/filter', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,

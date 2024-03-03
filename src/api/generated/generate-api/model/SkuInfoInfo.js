@@ -12,7 +12,6 @@
  */
 
 import ApiClient from '../ApiClient';
-import SkuConfigInfoInfo from './SkuConfigInfoInfo';
 
 /**
  * The SkuInfoInfo model module.
@@ -72,8 +71,8 @@ class SkuInfoInfo {
             if (data.hasOwnProperty('image')) {
                 obj['image'] = ApiClient.convertToType(data['image'], 'String');
             }
-            if (data.hasOwnProperty('configs')) {
-                obj['configs'] = ApiClient.convertToType(data['configs'], [SkuConfigInfoInfo]);
+            if (data.hasOwnProperty('variantIds')) {
+                obj['variantIds'] = ApiClient.convertToType(data['variantIds'], ['Number']);
             }
         }
         return obj;
@@ -101,15 +100,9 @@ class SkuInfoInfo {
         if (data['image'] && !(typeof data['image'] === 'string' || data['image'] instanceof String)) {
             throw new Error("Expected the field `image` to be a primitive type in the JSON string but got " + data['image']);
         }
-        if (data['configs']) { // data not null
-            // ensure the json data is an array
-            if (!Array.isArray(data['configs'])) {
-                throw new Error("Expected the field `configs` to be an array in the JSON data but got " + data['configs']);
-            }
-            // validate the optional field `configs` (array)
-            for (const item of data['configs']) {
-                SkuConfigInfoInfo.validateJSON(item);
-            };
+        // ensure the json data is an array
+        if (!Array.isArray(data['variantIds'])) {
+            throw new Error("Expected the field `variantIds` to be an array in the JSON data but got " + data['variantIds']);
         }
 
         return true;
@@ -161,9 +154,9 @@ SkuInfoInfo.prototype['quantity'] = undefined;
 SkuInfoInfo.prototype['image'] = undefined;
 
 /**
- * @member {Array.<module:model/SkuConfigInfoInfo>} configs
+ * @member {Array.<Number>} variantIds
  */
-SkuInfoInfo.prototype['configs'] = undefined;
+SkuInfoInfo.prototype['variantIds'] = undefined;
 
 
 
