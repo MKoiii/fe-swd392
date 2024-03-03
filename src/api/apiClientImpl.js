@@ -162,7 +162,7 @@ const ApiClientSingleton = (function () {
   }
 
   function subString(url) {
-    return url.substring(serverUrl.length, url.length);
+    return url.substring(serverUrl?.length, url?.length);
   }
 
   return {

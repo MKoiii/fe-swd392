@@ -598,7 +598,7 @@ class ApiClient {
               'description': "No description provided",
             },
             {
-              'url': "http://192.168.1.12:8080",
+              'url': "https://api.fptsp.xyz",
               'description': "No description provided",
             }
       ];

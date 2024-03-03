@@ -124,25 +124,31 @@ All URIs are relative to *http://localhost:8080*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *Swd392AuctionApi.AppProductCategoryControllerApi* | [**appProductCategoryControllerGetInfoList**](docs/AppProductCategoryControllerApi.md#appProductCategoryControllerGetInfoList) | **GET** /api/v1/app/product-category/public/list | 
+*Swd392AuctionApi.AppProductControllerApi* | [**appProductControllerCreateModel**](docs/AppProductControllerApi.md#appProductControllerCreateModel) | **POST** /api/v1/app/product/create | 
+*Swd392AuctionApi.AppProductControllerApi* | [**appProductControllerDeleteModelById**](docs/AppProductControllerApi.md#appProductControllerDeleteModelById) | **DELETE** /api/v1/app/product/{id}/delete | 
+*Swd392AuctionApi.AppProductControllerApi* | [**appProductControllerGetDetailsById**](docs/AppProductControllerApi.md#appProductControllerGetDetailsById) | **GET** /api/v1/app/product/{id}/details | 
+*Swd392AuctionApi.AppProductControllerApi* | [**appProductControllerGetInfoPageWithFilter**](docs/AppProductControllerApi.md#appProductControllerGetInfoPageWithFilter) | **GET** /api/v1/app/product/info/page/filter | 
+*Swd392AuctionApi.AppProductControllerApi* | [**appProductControllerGetProductDetailsPublic**](docs/AppProductControllerApi.md#appProductControllerGetProductDetailsPublic) | **GET** /api/v1/app/product/public/{id}/details | 
+*Swd392AuctionApi.AppProductControllerApi* | [**appProductControllerGetProductPagePublic**](docs/AppProductControllerApi.md#appProductControllerGetProductPagePublic) | **GET** /api/v1/app/product/public/info/page/filter | 
+*Swd392AuctionApi.AppProductControllerApi* | [**appProductControllerUpdateModel**](docs/AppProductControllerApi.md#appProductControllerUpdateModel) | **PUT** /api/v1/app/product/update | 
 *Swd392AuctionApi.AppUserControllerApi* | [**appUserControllerGetDetailsByContext**](docs/AppUserControllerApi.md#appUserControllerGetDetailsByContext) | **GET** /api/v1/app/user/details/context | 
 *Swd392AuctionApi.AppUserControllerApi* | [**appUserControllerUpdateModel**](docs/AppUserControllerApi.md#appUserControllerUpdateModel) | **PUT** /api/v1/app/user/update | 
 *Swd392AuctionApi.AuthControllerApi* | [**authControllerRegister**](docs/AuthControllerApi.md#authControllerRegister) | **POST** /api/v1/auth/register | 
+*Swd392AuctionApi.MediaControllerApi* | [**mediaControllerGetPreSignDownloadPublic**](docs/MediaControllerApi.md#mediaControllerGetPreSignDownloadPublic) | **GET** /api/v1/media/public/preview/pre-sign-url/{fileType}/{objectName} | Get pre-sign url as string
+*Swd392AuctionApi.MediaControllerApi* | [**mediaControllerPreviewPreSignPublic**](docs/MediaControllerApi.md#mediaControllerPreviewPreSignPublic) | **GET** /api/v1/media/public/preview/pre-sign/{fileType}/{objectName} | Preview file public
+*Swd392AuctionApi.MediaControllerApi* | [**mediaControllerPreviewPubic**](docs/MediaControllerApi.md#mediaControllerPreviewPubic) | **GET** /api/v1/media/public/preview/{fileType}/{objectName} | Preview file public
+*Swd392AuctionApi.MediaControllerApi* | [**mediaControllerUploadPublic**](docs/MediaControllerApi.md#mediaControllerUploadPublic) | **POST** /api/v1/media/public/upload | Upload file public
 *Swd392AuctionApi.SystemProductCategoryControllerApi* | [**systemProductCategoryControllerChangeOrder**](docs/SystemProductCategoryControllerApi.md#systemProductCategoryControllerChangeOrder) | **PUT** /api/v1/system/product-category/changeOrder | 
 *Swd392AuctionApi.SystemProductCategoryControllerApi* | [**systemProductCategoryControllerCreateModel**](docs/SystemProductCategoryControllerApi.md#systemProductCategoryControllerCreateModel) | **POST** /api/v1/system/product-category/create | 
 *Swd392AuctionApi.SystemProductCategoryControllerApi* | [**systemProductCategoryControllerDeleteModelById**](docs/SystemProductCategoryControllerApi.md#systemProductCategoryControllerDeleteModelById) | **DELETE** /api/v1/system/product-category/{id}/delete | 
 *Swd392AuctionApi.SystemProductCategoryControllerApi* | [**systemProductCategoryControllerGetDetailsById**](docs/SystemProductCategoryControllerApi.md#systemProductCategoryControllerGetDetailsById) | **GET** /api/v1/system/product-category/{id}/details | 
 *Swd392AuctionApi.SystemProductCategoryControllerApi* | [**systemProductCategoryControllerGetInfoListWithFilter**](docs/SystemProductCategoryControllerApi.md#systemProductCategoryControllerGetInfoListWithFilter) | **GET** /api/v1/system/product-category/list | 
 *Swd392AuctionApi.SystemProductCategoryControllerApi* | [**systemProductCategoryControllerUpdateModel**](docs/SystemProductCategoryControllerApi.md#systemProductCategoryControllerUpdateModel) | **PUT** /api/v1/system/product-category/update | 
-*Swd392AuctionApi.SystemProductControllerApi* | [**systemProductControllerCreateModel**](docs/SystemProductControllerApi.md#systemProductControllerCreateModel) | **POST** /api/v1/system/product/create | 
-*Swd392AuctionApi.SystemProductControllerApi* | [**systemProductControllerDeleteModelById**](docs/SystemProductControllerApi.md#systemProductControllerDeleteModelById) | **DELETE** /api/v1/system/product/{id}/delete | 
-*Swd392AuctionApi.SystemProductControllerApi* | [**systemProductControllerGetDetailsById**](docs/SystemProductControllerApi.md#systemProductControllerGetDetailsById) | **GET** /api/v1/system/product/{id}/details | 
-*Swd392AuctionApi.SystemProductControllerApi* | [**systemProductControllerGetInfoPageWithFilter**](docs/SystemProductControllerApi.md#systemProductControllerGetInfoPageWithFilter) | **GET** /api/v1/system/product/info/page/filter | 
-*Swd392AuctionApi.SystemProductControllerApi* | [**systemProductControllerUpdateModel**](docs/SystemProductControllerApi.md#systemProductControllerUpdateModel) | **PUT** /api/v1/system/product/update | 
 *Swd392AuctionApi.SystemRoleControllerApi* | [**systemRoleControllerGetInfoList**](docs/SystemRoleControllerApi.md#systemRoleControllerGetInfoList) | **GET** /api/v1/system/role/list | 
-*Swd392AuctionApi.SystemSkuControllerApi* | [**systemSkuControllerCreateModel**](docs/SystemSkuControllerApi.md#systemSkuControllerCreateModel) | **POST** /api/v1/system/product-sku/create | 
-*Swd392AuctionApi.SystemSkuControllerApi* | [**systemSkuControllerDeleteModelById**](docs/SystemSkuControllerApi.md#systemSkuControllerDeleteModelById) | **DELETE** /api/v1/system/product-sku/{id}/delete | 
-*Swd392AuctionApi.SystemSkuControllerApi* | [**systemSkuControllerGetInfoListWithFilter**](docs/SystemSkuControllerApi.md#systemSkuControllerGetInfoListWithFilter) | **GET** /api/v1/system/product-sku/list | 
-*Swd392AuctionApi.SystemSkuControllerApi* | [**systemSkuControllerUpdateModel**](docs/SystemSkuControllerApi.md#systemSkuControllerUpdateModel) | **PUT** /api/v1/system/product-sku/update | 
+*Swd392AuctionApi.SystemSkuControllerApi* | [**appSkuControllerCreateModel**](docs/SystemSkuControllerApi.md#appSkuControllerCreateModel) | **POST** /api/v1/app/product-sku/create | 
+*Swd392AuctionApi.SystemSkuControllerApi* | [**appSkuControllerDeleteModelById**](docs/SystemSkuControllerApi.md#appSkuControllerDeleteModelById) | **DELETE** /api/v1/app/product-sku/{id}/delete | 
+*Swd392AuctionApi.SystemSkuControllerApi* | [**appSkuControllerGetInfoListWithFilter**](docs/SystemSkuControllerApi.md#appSkuControllerGetInfoListWithFilter) | **GET** /api/v1/app/product-sku/list | 
+*Swd392AuctionApi.SystemSkuControllerApi* | [**appSkuControllerUpdateModel**](docs/SystemSkuControllerApi.md#appSkuControllerUpdateModel) | **PUT** /api/v1/app/product-sku/update | 
 *Swd392AuctionApi.SystemUserControllerApi* | [**systemUserControllerCreateAdmin**](docs/SystemUserControllerApi.md#systemUserControllerCreateAdmin) | **POST** /api/v1/system/user/admin/create | 
 *Swd392AuctionApi.SystemUserControllerApi* | [**systemUserControllerCreateModel**](docs/SystemUserControllerApi.md#systemUserControllerCreateModel) | **POST** /api/v1/system/user/create | 
 *Swd392AuctionApi.SystemUserControllerApi* | [**systemUserControllerDeleteModelById**](docs/SystemUserControllerApi.md#systemUserControllerDeleteModelById) | **DELETE** /api/v1/system/user/{id}/delete | 
@@ -154,48 +160,53 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
+ - [Swd392AuctionApi.BasePagingResponseProductInfo](docs/BasePagingResponseProductInfo.md)
  - [Swd392AuctionApi.BasePagingResponseProductInfoInfo](docs/BasePagingResponseProductInfoInfo.md)
  - [Swd392AuctionApi.BasePagingResponseUserInfoInfo](docs/BasePagingResponseUserInfoInfo.md)
- - [Swd392AuctionApi.BaseResponseBasePagingResponseProductInfoInfo](docs/BaseResponseBasePagingResponseProductInfoInfo.md)
- - [Swd392AuctionApi.BaseResponseBasePagingResponseUserInfoInfo](docs/BaseResponseBasePagingResponseUserInfoInfo.md)
  - [Swd392AuctionApi.BaseResponseListProductCategoryInfo](docs/BaseResponseListProductCategoryInfo.md)
  - [Swd392AuctionApi.BaseResponseListProductCategoryInfoInfo](docs/BaseResponseListProductCategoryInfoInfo.md)
  - [Swd392AuctionApi.BaseResponseListRoleInfoInfo](docs/BaseResponseListRoleInfoInfo.md)
  - [Swd392AuctionApi.BaseResponseListSkuInfoInfo](docs/BaseResponseListSkuInfoInfo.md)
  - [Swd392AuctionApi.BaseResponseObject](docs/BaseResponseObject.md)
+ - [Swd392AuctionApi.BaseResponsePreSignUrl](docs/BaseResponsePreSignUrl.md)
  - [Swd392AuctionApi.BaseResponseProductCategoryInfoDetails](docs/BaseResponseProductCategoryInfoDetails.md)
+ - [Swd392AuctionApi.BaseResponseProductDetails](docs/BaseResponseProductDetails.md)
  - [Swd392AuctionApi.BaseResponseProductDetailsDetails](docs/BaseResponseProductDetailsDetails.md)
  - [Swd392AuctionApi.BaseResponseSkuInfoDetails](docs/BaseResponseSkuInfoDetails.md)
+ - [Swd392AuctionApi.BaseResponseUploadResult](docs/BaseResponseUploadResult.md)
  - [Swd392AuctionApi.BaseResponseUserDetails](docs/BaseResponseUserDetails.md)
  - [Swd392AuctionApi.BaseResponseUserDetailsDetails](docs/BaseResponseUserDetailsDetails.md)
  - [Swd392AuctionApi.ChangeOrderProductCategoryRequest](docs/ChangeOrderProductCategoryRequest.md)
  - [Swd392AuctionApi.CreateProductRequestCreate](docs/CreateProductRequestCreate.md)
  - [Swd392AuctionApi.CreateSkuRequestCreate](docs/CreateSkuRequestCreate.md)
  - [Swd392AuctionApi.ErrorResponse](docs/ErrorResponse.md)
+ - [Swd392AuctionApi.PreSignUrl](docs/PreSignUrl.md)
  - [Swd392AuctionApi.ProductCategoryInfo](docs/ProductCategoryInfo.md)
  - [Swd392AuctionApi.ProductCategoryInfoCreate](docs/ProductCategoryInfoCreate.md)
  - [Swd392AuctionApi.ProductCategoryInfoDetails](docs/ProductCategoryInfoDetails.md)
  - [Swd392AuctionApi.ProductCategoryInfoInfo](docs/ProductCategoryInfoInfo.md)
  - [Swd392AuctionApi.ProductCategoryInfoUpdate](docs/ProductCategoryInfoUpdate.md)
+ - [Swd392AuctionApi.ProductConfigInfo](docs/ProductConfigInfo.md)
  - [Swd392AuctionApi.ProductConfigInfoCreate](docs/ProductConfigInfoCreate.md)
  - [Swd392AuctionApi.ProductConfigInfoDetails](docs/ProductConfigInfoDetails.md)
  - [Swd392AuctionApi.ProductConfigInfoUpdate](docs/ProductConfigInfoUpdate.md)
+ - [Swd392AuctionApi.ProductDetails](docs/ProductDetails.md)
  - [Swd392AuctionApi.ProductDetailsDetails](docs/ProductDetailsDetails.md)
+ - [Swd392AuctionApi.ProductInfo](docs/ProductInfo.md)
  - [Swd392AuctionApi.ProductInfoInfo](docs/ProductInfoInfo.md)
+ - [Swd392AuctionApi.ProductVariantInfo](docs/ProductVariantInfo.md)
  - [Swd392AuctionApi.ProductVariantInfoCreate](docs/ProductVariantInfoCreate.md)
  - [Swd392AuctionApi.ProductVariantInfoDetails](docs/ProductVariantInfoDetails.md)
  - [Swd392AuctionApi.ProductVariantInfoUpdate](docs/ProductVariantInfoUpdate.md)
  - [Swd392AuctionApi.RegisterUserRequest](docs/RegisterUserRequest.md)
  - [Swd392AuctionApi.RoleInfoInfo](docs/RoleInfoInfo.md)
- - [Swd392AuctionApi.SkuConfigInfoCreate](docs/SkuConfigInfoCreate.md)
- - [Swd392AuctionApi.SkuConfigInfoDetails](docs/SkuConfigInfoDetails.md)
- - [Swd392AuctionApi.SkuConfigInfoInfo](docs/SkuConfigInfoInfo.md)
- - [Swd392AuctionApi.SkuConfigInfoUpdate](docs/SkuConfigInfoUpdate.md)
+ - [Swd392AuctionApi.SkuInfo](docs/SkuInfo.md)
  - [Swd392AuctionApi.SkuInfoDetails](docs/SkuInfoDetails.md)
  - [Swd392AuctionApi.SkuInfoInfo](docs/SkuInfoInfo.md)
  - [Swd392AuctionApi.SuccessResponse](docs/SuccessResponse.md)
  - [Swd392AuctionApi.UpdateProductRequestUpdate](docs/UpdateProductRequestUpdate.md)
  - [Swd392AuctionApi.UpdateSkuRequestUpdate](docs/UpdateSkuRequestUpdate.md)
+ - [Swd392AuctionApi.UploadResult](docs/UploadResult.md)
  - [Swd392AuctionApi.UserDetails](docs/UserDetails.md)
  - [Swd392AuctionApi.UserDetailsCreate](docs/UserDetailsCreate.md)
  - [Swd392AuctionApi.UserDetailsDetails](docs/UserDetailsDetails.md)

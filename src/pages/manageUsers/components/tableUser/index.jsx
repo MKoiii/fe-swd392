@@ -50,7 +50,7 @@ const TableUsers = ({ title, captions, data }) => {
         },
         (error, data, response) => {
           const res = data?.data;
-          setUsers(res?.data);
+          setUsers(res);
           setTotalPage(res?.totalPages);
         }
       );

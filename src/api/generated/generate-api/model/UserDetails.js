@@ -215,7 +215,13 @@ UserDetails['RoleKindEnum'] = {
      * value: "USER"
      * @const
      */
-    "USER": "USER"
+    "USER": "USER",
+
+    /**
+     * value: "MERCHANT"
+     * @const
+     */
+    "MERCHANT": "MERCHANT"
 };
 
 

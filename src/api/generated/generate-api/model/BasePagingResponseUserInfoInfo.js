@@ -51,9 +51,6 @@ class BasePagingResponseUserInfoInfo {
             if (data.hasOwnProperty('success')) {
                 obj['success'] = ApiClient.convertToType(data['success'], 'Boolean');
             }
-            if (data.hasOwnProperty('data')) {
-                obj['data'] = ApiClient.convertToType(data['data'], [UserInfoInfo]);
-            }
             if (data.hasOwnProperty('pageNumber')) {
                 obj['pageNumber'] = ApiClient.convertToType(data['pageNumber'], 'Number');
             }
@@ -65,6 +62,9 @@ class BasePagingResponseUserInfoInfo {
             }
             if (data.hasOwnProperty('totalPages')) {
                 obj['totalPages'] = ApiClient.convertToType(data['totalPages'], 'Number');
+            }
+            if (data.hasOwnProperty('data')) {
+                obj['data'] = ApiClient.convertToType(data['data'], [UserInfoInfo]);
             }
         }
         return obj;
@@ -101,11 +101,6 @@ class BasePagingResponseUserInfoInfo {
 BasePagingResponseUserInfoInfo.prototype['success'] = undefined;
 
 /**
- * @member {Array.<module:model/UserInfoInfo>} data
- */
-BasePagingResponseUserInfoInfo.prototype['data'] = undefined;
-
-/**
  * @member {Number} pageNumber
  */
 BasePagingResponseUserInfoInfo.prototype['pageNumber'] = undefined;
@@ -124,6 +119,11 @@ BasePagingResponseUserInfoInfo.prototype['totalElements'] = undefined;
  * @member {Number} totalPages
  */
 BasePagingResponseUserInfoInfo.prototype['totalPages'] = undefined;
+
+/**
+ * @member {Array.<module:model/UserInfoInfo>} data
+ */
+BasePagingResponseUserInfoInfo.prototype['data'] = undefined;
 
 
 

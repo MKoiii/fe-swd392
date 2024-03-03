@@ -14,19 +14,18 @@
 import ApiClient from '../ApiClient';
 
 /**
- * The UpdateSkuRequestUpdate model module.
- * @module model/UpdateSkuRequestUpdate
+ * The SkuInfo model module.
+ * @module model/SkuInfo
  * @version 1.0.0
  */
-class UpdateSkuRequestUpdate {
+class SkuInfo {
     /**
-     * Constructs a new <code>UpdateSkuRequestUpdate</code>.
-     * @alias module:model/UpdateSkuRequestUpdate
-     * @param id {String} 
+     * Constructs a new <code>SkuInfo</code>.
+     * @alias module:model/SkuInfo
      */
-    constructor(id) { 
+    constructor() { 
         
-        UpdateSkuRequestUpdate.initialize(this, id);
+        SkuInfo.initialize(this);
     }
 
     /**
@@ -34,21 +33,32 @@ class UpdateSkuRequestUpdate {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, id) { 
-        obj['id'] = id;
+    static initialize(obj) { 
     }
 
     /**
-     * Constructs a <code>UpdateSkuRequestUpdate</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>SkuInfo</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/UpdateSkuRequestUpdate} obj Optional instance to populate.
-     * @return {module:model/UpdateSkuRequestUpdate} The populated <code>UpdateSkuRequestUpdate</code> instance.
+     * @param {module:model/SkuInfo} obj Optional instance to populate.
+     * @return {module:model/SkuInfo} The populated <code>SkuInfo</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new UpdateSkuRequestUpdate();
+            obj = obj || new SkuInfo();
 
+            if (data.hasOwnProperty('createdBy')) {
+                obj['createdBy'] = ApiClient.convertToType(data['createdBy'], 'String');
+            }
+            if (data.hasOwnProperty('createdDate')) {
+                obj['createdDate'] = ApiClient.convertToType(data['createdDate'], 'Date');
+            }
+            if (data.hasOwnProperty('lastModifiedBy')) {
+                obj['lastModifiedBy'] = ApiClient.convertToType(data['lastModifiedBy'], 'String');
+            }
+            if (data.hasOwnProperty('lastModifiedDate')) {
+                obj['lastModifiedDate'] = ApiClient.convertToType(data['lastModifiedDate'], 'Date');
+            }
             if (data.hasOwnProperty('id')) {
                 obj['id'] = ApiClient.convertToType(data['id'], 'String');
             }
@@ -69,16 +79,18 @@ class UpdateSkuRequestUpdate {
     }
 
     /**
-     * Validates the JSON data with respect to <code>UpdateSkuRequestUpdate</code>.
+     * Validates the JSON data with respect to <code>SkuInfo</code>.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>UpdateSkuRequestUpdate</code>.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>SkuInfo</code>.
      */
     static validateJSON(data) {
-        // check to make sure all required properties are present in the JSON string
-        for (const property of UpdateSkuRequestUpdate.RequiredProperties) {
-            if (!data.hasOwnProperty(property)) {
-                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
-            }
+        // ensure the json data is a string
+        if (data['createdBy'] && !(typeof data['createdBy'] === 'string' || data['createdBy'] instanceof String)) {
+            throw new Error("Expected the field `createdBy` to be a primitive type in the JSON string but got " + data['createdBy']);
+        }
+        // ensure the json data is a string
+        if (data['lastModifiedBy'] && !(typeof data['lastModifiedBy'] === 'string' || data['lastModifiedBy'] instanceof String)) {
+            throw new Error("Expected the field `lastModifiedBy` to be a primitive type in the JSON string but got " + data['lastModifiedBy']);
         }
         // ensure the json data is a string
         if (data['id'] && !(typeof data['id'] === 'string' || data['id'] instanceof String)) {
@@ -99,37 +111,57 @@ class UpdateSkuRequestUpdate {
 
 }
 
-UpdateSkuRequestUpdate.RequiredProperties = ["id"];
+
+
+/**
+ * @member {String} createdBy
+ */
+SkuInfo.prototype['createdBy'] = undefined;
+
+/**
+ * @member {Date} createdDate
+ */
+SkuInfo.prototype['createdDate'] = undefined;
+
+/**
+ * @member {String} lastModifiedBy
+ */
+SkuInfo.prototype['lastModifiedBy'] = undefined;
+
+/**
+ * @member {Date} lastModifiedDate
+ */
+SkuInfo.prototype['lastModifiedDate'] = undefined;
 
 /**
  * @member {String} id
  */
-UpdateSkuRequestUpdate.prototype['id'] = undefined;
+SkuInfo.prototype['id'] = undefined;
 
 /**
  * @member {Number} price
  */
-UpdateSkuRequestUpdate.prototype['price'] = undefined;
+SkuInfo.prototype['price'] = undefined;
 
 /**
  * @member {Number} quantity
  */
-UpdateSkuRequestUpdate.prototype['quantity'] = undefined;
+SkuInfo.prototype['quantity'] = undefined;
 
 /**
  * @member {String} image
  */
-UpdateSkuRequestUpdate.prototype['image'] = undefined;
+SkuInfo.prototype['image'] = undefined;
 
 /**
  * @member {Array.<Number>} variantIds
  */
-UpdateSkuRequestUpdate.prototype['variantIds'] = undefined;
+SkuInfo.prototype['variantIds'] = undefined;
 
 
 
 
 
 
-export default UpdateSkuRequestUpdate;
+export default SkuInfo;
 

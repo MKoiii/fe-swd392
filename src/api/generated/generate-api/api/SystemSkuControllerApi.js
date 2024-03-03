@@ -40,8 +40,8 @@ export default class SystemSkuControllerApi {
 
 
     /**
-     * Callback function to receive the result of the systemSkuControllerCreateModel operation.
-     * @callback module:api/SystemSkuControllerApi~systemSkuControllerCreateModelCallback
+     * Callback function to receive the result of the appSkuControllerCreateModel operation.
+     * @callback module:api/SystemSkuControllerApi~appSkuControllerCreateModelCallback
      * @param {String} error Error message, if any.
      * @param {module:model/BaseResponseSkuInfoDetails} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -49,14 +49,14 @@ export default class SystemSkuControllerApi {
 
     /**
      * @param {module:model/CreateSkuRequestCreate} createSkuRequestCreate 
-     * @param {module:api/SystemSkuControllerApi~systemSkuControllerCreateModelCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/SystemSkuControllerApi~appSkuControllerCreateModelCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/BaseResponseSkuInfoDetails}
      */
-    systemSkuControllerCreateModel(createSkuRequestCreate, callback) {
+    appSkuControllerCreateModel(createSkuRequestCreate, callback) {
       let postBody = createSkuRequestCreate;
       // verify the required parameter 'createSkuRequestCreate' is set
       if (createSkuRequestCreate === undefined || createSkuRequestCreate === null) {
-        throw new Error("Missing the required parameter 'createSkuRequestCreate' when calling systemSkuControllerCreateModel");
+        throw new Error("Missing the required parameter 'createSkuRequestCreate' when calling appSkuControllerCreateModel");
       }
 
       let pathParams = {
@@ -73,15 +73,15 @@ export default class SystemSkuControllerApi {
       let accepts = ['*/*'];
       let returnType = BaseResponseSkuInfoDetails;
       return this.apiClient.callApi(
-        '/api/v1/system/product-sku/create', 'POST',
+        '/api/v1/app/product-sku/create', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );
     }
 
     /**
-     * Callback function to receive the result of the systemSkuControllerDeleteModelById operation.
-     * @callback module:api/SystemSkuControllerApi~systemSkuControllerDeleteModelByIdCallback
+     * Callback function to receive the result of the appSkuControllerDeleteModelById operation.
+     * @callback module:api/SystemSkuControllerApi~appSkuControllerDeleteModelByIdCallback
      * @param {String} error Error message, if any.
      * @param {module:model/BaseResponseObject} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -89,14 +89,14 @@ export default class SystemSkuControllerApi {
 
     /**
      * @param {String} id 
-     * @param {module:api/SystemSkuControllerApi~systemSkuControllerDeleteModelByIdCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/SystemSkuControllerApi~appSkuControllerDeleteModelByIdCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/BaseResponseObject}
      */
-    systemSkuControllerDeleteModelById(id, callback) {
+    appSkuControllerDeleteModelById(id, callback) {
       let postBody = null;
       // verify the required parameter 'id' is set
       if (id === undefined || id === null) {
-        throw new Error("Missing the required parameter 'id' when calling systemSkuControllerDeleteModelById");
+        throw new Error("Missing the required parameter 'id' when calling appSkuControllerDeleteModelById");
       }
 
       let pathParams = {
@@ -114,30 +114,36 @@ export default class SystemSkuControllerApi {
       let accepts = ['*/*'];
       let returnType = BaseResponseObject;
       return this.apiClient.callApi(
-        '/api/v1/system/product-sku/{id}/delete', 'DELETE',
+        '/api/v1/app/product-sku/{id}/delete', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );
     }
 
     /**
-     * Callback function to receive the result of the systemSkuControllerGetInfoListWithFilter operation.
-     * @callback module:api/SystemSkuControllerApi~systemSkuControllerGetInfoListWithFilterCallback
+     * Callback function to receive the result of the appSkuControllerGetInfoListWithFilter operation.
+     * @callback module:api/SystemSkuControllerApi~appSkuControllerGetInfoListWithFilterCallback
      * @param {String} error Error message, if any.
      * @param {module:model/BaseResponseListSkuInfoInfo} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
     /**
-     * @param {module:api/SystemSkuControllerApi~systemSkuControllerGetInfoListWithFilterCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {Number} productId 
+     * @param {module:api/SystemSkuControllerApi~appSkuControllerGetInfoListWithFilterCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/BaseResponseListSkuInfoInfo}
      */
-    systemSkuControllerGetInfoListWithFilter(callback) {
+    appSkuControllerGetInfoListWithFilter(productId, callback) {
       let postBody = null;
+      // verify the required parameter 'productId' is set
+      if (productId === undefined || productId === null) {
+        throw new Error("Missing the required parameter 'productId' when calling appSkuControllerGetInfoListWithFilter");
+      }
 
       let pathParams = {
       };
       let queryParams = {
+        'productId': productId
       };
       let headerParams = {
       };
@@ -149,15 +155,15 @@ export default class SystemSkuControllerApi {
       let accepts = ['*/*'];
       let returnType = BaseResponseListSkuInfoInfo;
       return this.apiClient.callApi(
-        '/api/v1/system/product-sku/list', 'GET',
+        '/api/v1/app/product-sku/list', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );
     }
 
     /**
-     * Callback function to receive the result of the systemSkuControllerUpdateModel operation.
-     * @callback module:api/SystemSkuControllerApi~systemSkuControllerUpdateModelCallback
+     * Callback function to receive the result of the appSkuControllerUpdateModel operation.
+     * @callback module:api/SystemSkuControllerApi~appSkuControllerUpdateModelCallback
      * @param {String} error Error message, if any.
      * @param {module:model/BaseResponseSkuInfoDetails} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -165,14 +171,14 @@ export default class SystemSkuControllerApi {
 
     /**
      * @param {module:model/UpdateSkuRequestUpdate} updateSkuRequestUpdate 
-     * @param {module:api/SystemSkuControllerApi~systemSkuControllerUpdateModelCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/SystemSkuControllerApi~appSkuControllerUpdateModelCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/BaseResponseSkuInfoDetails}
      */
-    systemSkuControllerUpdateModel(updateSkuRequestUpdate, callback) {
+    appSkuControllerUpdateModel(updateSkuRequestUpdate, callback) {
       let postBody = updateSkuRequestUpdate;
       // verify the required parameter 'updateSkuRequestUpdate' is set
       if (updateSkuRequestUpdate === undefined || updateSkuRequestUpdate === null) {
-        throw new Error("Missing the required parameter 'updateSkuRequestUpdate' when calling systemSkuControllerUpdateModel");
+        throw new Error("Missing the required parameter 'updateSkuRequestUpdate' when calling appSkuControllerUpdateModel");
       }
 
       let pathParams = {
@@ -189,7 +195,7 @@ export default class SystemSkuControllerApi {
       let accepts = ['*/*'];
       let returnType = BaseResponseSkuInfoDetails;
       return this.apiClient.callApi(
-        '/api/v1/system/product-sku/update', 'PUT',
+        '/api/v1/app/product-sku/update', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );

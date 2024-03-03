@@ -12,21 +12,21 @@
  */
 
 import ApiClient from '../ApiClient';
-import ProductInfoInfo from './ProductInfoInfo';
+import ProductInfo from './ProductInfo';
 
 /**
- * The BasePagingResponseProductInfoInfo model module.
- * @module model/BasePagingResponseProductInfoInfo
+ * The BasePagingResponseProductInfo model module.
+ * @module model/BasePagingResponseProductInfo
  * @version 1.0.0
  */
-class BasePagingResponseProductInfoInfo {
+class BasePagingResponseProductInfo {
     /**
-     * Constructs a new <code>BasePagingResponseProductInfoInfo</code>.
-     * @alias module:model/BasePagingResponseProductInfoInfo
+     * Constructs a new <code>BasePagingResponseProductInfo</code>.
+     * @alias module:model/BasePagingResponseProductInfo
      */
     constructor() { 
         
-        BasePagingResponseProductInfoInfo.initialize(this);
+        BasePagingResponseProductInfo.initialize(this);
     }
 
     /**
@@ -38,15 +38,15 @@ class BasePagingResponseProductInfoInfo {
     }
 
     /**
-     * Constructs a <code>BasePagingResponseProductInfoInfo</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>BasePagingResponseProductInfo</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/BasePagingResponseProductInfoInfo} obj Optional instance to populate.
-     * @return {module:model/BasePagingResponseProductInfoInfo} The populated <code>BasePagingResponseProductInfoInfo</code> instance.
+     * @param {module:model/BasePagingResponseProductInfo} obj Optional instance to populate.
+     * @return {module:model/BasePagingResponseProductInfo} The populated <code>BasePagingResponseProductInfo</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new BasePagingResponseProductInfoInfo();
+            obj = obj || new BasePagingResponseProductInfo();
 
             if (data.hasOwnProperty('success')) {
                 obj['success'] = ApiClient.convertToType(data['success'], 'Boolean');
@@ -64,16 +64,16 @@ class BasePagingResponseProductInfoInfo {
                 obj['totalPages'] = ApiClient.convertToType(data['totalPages'], 'Number');
             }
             if (data.hasOwnProperty('data')) {
-                obj['data'] = ApiClient.convertToType(data['data'], [ProductInfoInfo]);
+                obj['data'] = ApiClient.convertToType(data['data'], [ProductInfo]);
             }
         }
         return obj;
     }
 
     /**
-     * Validates the JSON data with respect to <code>BasePagingResponseProductInfoInfo</code>.
+     * Validates the JSON data with respect to <code>BasePagingResponseProductInfo</code>.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>BasePagingResponseProductInfoInfo</code>.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>BasePagingResponseProductInfo</code>.
      */
     static validateJSON(data) {
         if (data['data']) { // data not null
@@ -83,7 +83,7 @@ class BasePagingResponseProductInfoInfo {
             }
             // validate the optional field `data` (array)
             for (const item of data['data']) {
-                ProductInfoInfo.validateJSON(item);
+                ProductInfo.validateJSON(item);
             };
         }
 
@@ -98,37 +98,37 @@ class BasePagingResponseProductInfoInfo {
 /**
  * @member {Boolean} success
  */
-BasePagingResponseProductInfoInfo.prototype['success'] = undefined;
+BasePagingResponseProductInfo.prototype['success'] = undefined;
 
 /**
  * @member {Number} pageNumber
  */
-BasePagingResponseProductInfoInfo.prototype['pageNumber'] = undefined;
+BasePagingResponseProductInfo.prototype['pageNumber'] = undefined;
 
 /**
  * @member {Number} pageSize
  */
-BasePagingResponseProductInfoInfo.prototype['pageSize'] = undefined;
+BasePagingResponseProductInfo.prototype['pageSize'] = undefined;
 
 /**
  * @member {Number} totalElements
  */
-BasePagingResponseProductInfoInfo.prototype['totalElements'] = undefined;
+BasePagingResponseProductInfo.prototype['totalElements'] = undefined;
 
 /**
  * @member {Number} totalPages
  */
-BasePagingResponseProductInfoInfo.prototype['totalPages'] = undefined;
+BasePagingResponseProductInfo.prototype['totalPages'] = undefined;
 
 /**
- * @member {Array.<module:model/ProductInfoInfo>} data
+ * @member {Array.<module:model/ProductInfo>} data
  */
-BasePagingResponseProductInfoInfo.prototype['data'] = undefined;
+BasePagingResponseProductInfo.prototype['data'] = undefined;
 
 
 
 
 
 
-export default BasePagingResponseProductInfoInfo;
+export default BasePagingResponseProductInfo;
 

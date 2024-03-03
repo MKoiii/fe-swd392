@@ -39,7 +39,9 @@ const Login = () => {
         const roles = decoded?.resource_access?.auction?.roles;
         console.log(res.user);
         const isCms =
-          roles.includes(ROLE.CMS) || roles.includes(ROLE.SUPER_ADMIN);
+          roles.includes(ROLE.CMS) ||
+          roles.includes(ROLE.SUPER_ADMIN) ||
+          roles.includes(ROLE.MERCHANT);
         const isUser = roles.includes(ROLE.USER);
         updateAuth({
           isLogin: true,
