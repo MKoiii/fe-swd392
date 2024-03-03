@@ -17,11 +17,13 @@ import ApiClientSingleton from "../../../../api/apiClientImpl";
 import ModalCategory from "../modalCategory";
 import { STATUS_STR, TOAST } from "../../../../constant";
 import { CategoryContext } from "../tableCategory";
+import { useNavigate } from "react-router-dom";
 
 const categoryApi = new SystemProductCategoryControllerApi(
   ApiClientSingleton.getInstance()
 );
-function TableRowDataCategory({ category, categories }) {
+function TableRowDataCategory({ category, categories, parent }) {
+  const navigate = useNavigate();
   const toast = useToast();
   const { id, name, ordering, icon, description, status, parentId, children } =
     category;
@@ -76,7 +78,12 @@ function TableRowDataCategory({ category, categories }) {
         </Td>
         <Td textAlign={"center"}>
           <Flex justifyContent={"center"} gap={"8px"}>
-            <Button p="0px" bg="transparent" variant="no-hover">
+            <Button
+              p="0px"
+              bg="transparent"
+              variant="no-hover"
+              onClick={() => navigate(`/manage-categories/${id}`)}
+            >
               <Tag size={"lg"} variant="outline" colorScheme="gray">
                 <TagLabel>Chi tiết</TagLabel>
               </Tag>
@@ -86,10 +93,13 @@ function TableRowDataCategory({ category, categories }) {
               bg="transparent"
               variant="no-hover"
               onClick={() => {
-                categoryApi.getDetailsById1(id, (err, data, response) => {
-                  setCategorySelect(data?.data);
-                  setIsOpenUpdate(true);
-                });
+                categoryApi.systemProductCategoryControllerGetDetailsById(
+                  id,
+                  (err, data, response) => {
+                    setCategorySelect(data?.data);
+                    setIsOpenUpdate(true);
+                  }
+                );
               }}
             >
               <Tag size={"lg"} variant="outline" colorScheme="blue">
@@ -101,14 +111,21 @@ function TableRowDataCategory({ category, categories }) {
               bg="transparent"
               variant="no-hover"
               onClick={() => {
-                categoryApi.deleteModelById1(id, (err, data, response) => {
-                  if (data) {
-                    setReload(!reload);
-                    TOAST.success(toast, "Category", "Xoá category thành công");
-                  } else {
-                    TOAST.success(toast, "Category", "Xoá category thất bại");
+                categoryApi.systemProductCategoryControllerDeleteModelById(
+                  id,
+                  (err, data, response) => {
+                    if (data) {
+                      setReload(!reload);
+                      TOAST.success(
+                        toast,
+                        "Category",
+                        "Xoá category thành công"
+                      );
+                    } else {
+                      TOAST.success(toast, "Category", "Xoá category thất bại");
+                    }
                   }
-                });
+                );
               }}
             >
               <Tag size={"lg"} variant="outline" colorScheme="red">
@@ -125,9 +142,10 @@ function TableRowDataCategory({ category, categories }) {
         category={categorySelect}
         setCategory={setCategorySelect}
         parentCategories={categories}
+        parent={parent}
         onFinish={() => {
           categoryApi.systemProductCategoryControllerUpdateModel(
-            categorySelect,
+            { ...categorySelect, parentId: parent?.id },
             (err, data, response) => {
               if (data) {
                 setIsOpenUpdate(false);
