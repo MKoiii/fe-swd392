@@ -26,6 +26,7 @@ const ModalCategory = ({
   setCategory,
   onFinish,
   parentCategories,
+  parent,
 }) => {
   const toast = useToast();
   const onClose = () => {
@@ -77,22 +78,26 @@ const ModalCategory = ({
               </Select>
             </FormControl>
 
-            <FormControl mt={4}>
-              <FormLabel>Category nguồn</FormLabel>
-              <Select
-                placeholder="Category nguồn"
-                value={category?.parentId}
-                onChange={(e) =>
-                  setCategory({ ...category, parentId: e.target.value })
-                }
-              >
-                {parentCategories
-                  ?.filter((c) => !c?.parentId && c?.id != category?.id)
-                  ?.map((c) => {
-                    return <option value={c?.id}>{c?.name}</option>;
-                  })}
-              </Select>
-            </FormControl>
+            {parent ? (
+              <></>
+            ) : (
+              <FormControl mt={4}>
+                <FormLabel>Category nguồn</FormLabel>
+                <Select
+                  placeholder="Category nguồn"
+                  value={category?.parentId}
+                  onChange={(e) =>
+                    setCategory({ ...category, parentId: e.target.value })
+                  }
+                >
+                  {parentCategories
+                    ?.filter((c) => !c?.parentId && c?.id != category?.id)
+                    ?.map((c) => {
+                      return <option value={c?.id}>{c?.name}</option>;
+                    })}
+                </Select>
+              </FormControl>
+            )}
           </ModalBody>
 
           <ModalFooter>
