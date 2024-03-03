@@ -15,7 +15,10 @@ import AdminPrivateRouter from "./router/AdminPrivateRouter";
 import CommonPrivateRouter from "./router/CommonPrivateRouter";
 import UserPrivateRouter from "./router/UserPrivateRouter";
 import { createContext, useState } from "react";
-import ManageCategories from "./pages/categories";
+import ManageCategories from "./pages/categories/Categories";
+import CategoryDetail from "./pages/categories/CategoryDetail";
+import ManageProducts from "./pages/manageProducts/Products";
+import AddProduct from "./pages/manageProducts/AddProduct";
 
 const AuthContext = createContext(null);
 const initialValue = {
@@ -43,7 +46,16 @@ function App() {
         <Route element={<AdminPrivateRouter />}>
           <Route path="/manage-users" element={<ManageUsers />} />
           <Route path="/manage-categories" element={<ManageCategories />} />
+          <Route
+            path="/manage-categories/:categoryId"
+            element={<CategoryDetail />}
+          />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/manage-products">
+            <Route path="" element={<ManageProducts />} />
+            <Route path="add" element={<AddProduct />} />
+            <Route path="update/:productId" element={<AddProduct />} />
+          </Route>
         </Route>
         <Route element={<CommonPrivateRouter />}>
           <Route path="/my-profile" element={<Profile />} />

@@ -49,9 +49,10 @@ const TOAST = {
 };
 
 const ROLE = {
-  SUPER_ADMIN: "ROLE_SUPER_ADMIN",
-  CMS: "ROLE_CMS",
-  USER: "ROLE_USER",
+  SUPER_ADMIN: "SUPER_ADMIN",
+  CMS: "CMS",
+  USER: "USER",
+  MERCHANT: "MERCHANT",
 };
 
 const DEFAULE_PAGE_SIZE = 10;
@@ -70,6 +71,15 @@ const GENDER = {
   FEMALE: "FEMALE",
 };
 
+const CHOOSE_KIND = {
+  SINGLE_CHOICE: "SINGLE_CHOICE",
+  MULTIPLE_CHOICE: "MULTIPLE_CHOICE",
+};
+
+const IMAGES = {
+  getImage: (url) => ENV.API_URL + url,
+};
+
 export {
   TOKEN,
   ENV,
@@ -79,4 +89,6 @@ export {
   STATUS,
   GENDER,
   STATUS_STR,
+  CHOOSE_KIND,
+  IMAGES,
 };
