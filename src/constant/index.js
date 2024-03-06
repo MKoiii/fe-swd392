@@ -1,13 +1,71 @@
+import { jwtDecode } from "jwt-decode";
+
 const TOKEN = {
   setAccessToken: (accessToken) =>
     localStorage.setItem("access-token", accessToken),
   setRefreshToken: (refreshToken) =>
     localStorage.setItem("refresh-token", refreshToken),
+  setUser: (user) => {
+    if (user) {
+      const data = {
+        displayName: user?.displayName,
+        email: user?.email,
+        emailVerified: user?.emailVerified,
+        phoneNumber: user?.phoneNumber,
+        photoURL: user?.photoURL,
+      };
+      localStorage.setItem("user-auction", JSON.stringify(data));
+    }
+  },
   getAccessToken: () => localStorage.getItem("access-token"),
   getRefreshToken: () => localStorage.getItem("refresh-token"),
+  getUserInfo: () => {
+    const data = localStorage.getItem("user-auction");
+    if (data) {
+      return JSON.parse(data);
+    }
+    return undefined;
+  },
   clear: () => {
     localStorage.removeItem("access-token");
     localStorage.removeItem("refresh-token");
+    localStorage.removeItem("user-auction");
+  },
+  getRoles: () => {
+    const token = localStorage.getItem("access-token");
+    if (token) {
+      const decoded = jwtDecode(token);
+      const roles = decoded?.resource_access?.auction?.roles;
+      return roles;
+    }
+    return [];
+  },
+  isMerchant: () => {
+    const token = localStorage.getItem("access-token");
+    if (token) {
+      const decoded = jwtDecode(token);
+      const roles = decoded?.resource_access?.auction?.roles;
+      return roles?.includes(ROLE.MERCHANT);
+    }
+    return false;
+  },
+  isUser: () => {
+    const token = localStorage.getItem("access-token");
+    if (token) {
+      const decoded = jwtDecode(token);
+      const roles = decoded?.resource_access?.auction?.roles;
+      return roles?.includes(ROLE.USER);
+    }
+    return false;
+  },
+  isCMS: () => {
+    const token = localStorage.getItem("access-token");
+    if (token) {
+      const decoded = jwtDecode(token);
+      const roles = decoded?.resource_access?.auction?.roles;
+      return roles?.includes(ROLE.CMS) || roles?.includes(ROLE.SUPER_ADMIN);
+    }
+    return false;
   },
 };
 
@@ -71,13 +129,17 @@ const GENDER = {
   FEMALE: "FEMALE",
 };
 
-const CHOOSE_KIND = {
+const CHOICE_KIND = {
   SINGLE_CHOICE: "SINGLE_CHOICE",
   MULTIPLE_CHOICE: "MULTIPLE_CHOICE",
 };
 
 const IMAGES = {
-  getImage: (url) => ENV.API_URL + url,
+  getImage: (url) => {
+    if (url) {
+      return ENV.API_URL + url;
+    }
+  },
 };
 
 export {
@@ -89,6 +151,6 @@ export {
   STATUS,
   GENDER,
   STATUS_STR,
-  CHOOSE_KIND,
+  CHOICE_KIND,
   IMAGES,
 };

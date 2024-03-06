@@ -15,11 +15,11 @@
 import ApiClient from "../ApiClient";
 import BasePagingResponseProductInfo from '../model/BasePagingResponseProductInfo';
 import BasePagingResponseProductInfoInfo from '../model/BasePagingResponseProductInfoInfo';
-import BaseResponseObject from '../model/BaseResponseObject';
 import BaseResponseProductDetails from '../model/BaseResponseProductDetails';
 import BaseResponseProductDetailsDetails from '../model/BaseResponseProductDetailsDetails';
 import CreateProductRequestCreate from '../model/CreateProductRequestCreate';
 import ErrorResponse from '../model/ErrorResponse';
+import SuccessResponse from '../model/SuccessResponse';
 import UpdateProductRequestUpdate from '../model/UpdateProductRequestUpdate';
 
 /**
@@ -85,14 +85,14 @@ export default class AppProductControllerApi {
      * Callback function to receive the result of the appProductControllerDeleteModelById operation.
      * @callback module:api/AppProductControllerApi~appProductControllerDeleteModelByIdCallback
      * @param {String} error Error message, if any.
-     * @param {module:model/BaseResponseObject} data The data returned by the service call.
+     * @param {module:model/SuccessResponse} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
     /**
      * @param {Number} id 
      * @param {module:api/AppProductControllerApi~appProductControllerDeleteModelByIdCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/BaseResponseObject}
+     * data is of type: {@link module:model/SuccessResponse}
      */
     appProductControllerDeleteModelById(id, callback) {
       let postBody = null;
@@ -114,7 +114,7 @@ export default class AppProductControllerApi {
       let authNames = ['Authorization'];
       let contentTypes = [];
       let accepts = ['*/*'];
-      let returnType = BaseResponseObject;
+      let returnType = SuccessResponse;
       return this.apiClient.callApi(
         '/api/v1/app/product/{id}/delete', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,

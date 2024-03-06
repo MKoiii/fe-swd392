@@ -13,26 +13,40 @@
 
 
 import ApiClient from './ApiClient';
+import AppChangeStatusMerchantRequest from './model/AppChangeStatusMerchantRequest';
+import AppCreateMerchantRequestCreate from './model/AppCreateMerchantRequestCreate';
+import AppUpdateMerchantRequestUpdate from './model/AppUpdateMerchantRequestUpdate';
+import BasePagingResponseMerchantInfoInfo from './model/BasePagingResponseMerchantInfoInfo';
 import BasePagingResponseProductInfo from './model/BasePagingResponseProductInfo';
 import BasePagingResponseProductInfoInfo from './model/BasePagingResponseProductInfoInfo';
 import BasePagingResponseUserInfoInfo from './model/BasePagingResponseUserInfoInfo';
+import BaseResponseListLocationInfoInfo from './model/BaseResponseListLocationInfoInfo';
 import BaseResponseListProductCategoryInfo from './model/BaseResponseListProductCategoryInfo';
 import BaseResponseListProductCategoryInfoInfo from './model/BaseResponseListProductCategoryInfoInfo';
 import BaseResponseListRoleInfoInfo from './model/BaseResponseListRoleInfoInfo';
 import BaseResponseListSkuInfoInfo from './model/BaseResponseListSkuInfoInfo';
-import BaseResponseObject from './model/BaseResponseObject';
+import BaseResponseListUserAddressInfoInfo from './model/BaseResponseListUserAddressInfoInfo';
+import BaseResponseMerchantDetails from './model/BaseResponseMerchantDetails';
+import BaseResponseMerchantDetailsDetails from './model/BaseResponseMerchantDetailsDetails';
+import BaseResponseMerchantInfoInfo from './model/BaseResponseMerchantInfoInfo';
 import BaseResponsePreSignUrl from './model/BaseResponsePreSignUrl';
 import BaseResponseProductCategoryInfoDetails from './model/BaseResponseProductCategoryInfoDetails';
 import BaseResponseProductDetails from './model/BaseResponseProductDetails';
 import BaseResponseProductDetailsDetails from './model/BaseResponseProductDetailsDetails';
 import BaseResponseSkuInfoDetails from './model/BaseResponseSkuInfoDetails';
 import BaseResponseUploadResult from './model/BaseResponseUploadResult';
+import BaseResponseUserAddressInfoDetails from './model/BaseResponseUserAddressInfoDetails';
 import BaseResponseUserDetails from './model/BaseResponseUserDetails';
 import BaseResponseUserDetailsDetails from './model/BaseResponseUserDetailsDetails';
 import ChangeOrderProductCategoryRequest from './model/ChangeOrderProductCategoryRequest';
 import CreateProductRequestCreate from './model/CreateProductRequestCreate';
 import CreateSkuRequestCreate from './model/CreateSkuRequestCreate';
+import CreateUserAddressRequestCreate from './model/CreateUserAddressRequestCreate';
 import ErrorResponse from './model/ErrorResponse';
+import LocationInfoInfo from './model/LocationInfoInfo';
+import MerchantDetails from './model/MerchantDetails';
+import MerchantDetailsDetails from './model/MerchantDetailsDetails';
+import MerchantInfoInfo from './model/MerchantInfoInfo';
 import PreSignUrl from './model/PreSignUrl';
 import ProductCategoryInfo from './model/ProductCategoryInfo';
 import ProductCategoryInfoCreate from './model/ProductCategoryInfoCreate';
@@ -50,6 +64,7 @@ import ProductInfoInfo from './model/ProductInfoInfo';
 import ProductVariantInfo from './model/ProductVariantInfo';
 import ProductVariantInfoCreate from './model/ProductVariantInfoCreate';
 import ProductVariantInfoDetails from './model/ProductVariantInfoDetails';
+import ProductVariantInfoInfo from './model/ProductVariantInfoInfo';
 import ProductVariantInfoUpdate from './model/ProductVariantInfoUpdate';
 import RegisterUserRequest from './model/RegisterUserRequest';
 import RoleInfoInfo from './model/RoleInfoInfo';
@@ -57,19 +72,27 @@ import SkuInfo from './model/SkuInfo';
 import SkuInfoDetails from './model/SkuInfoDetails';
 import SkuInfoInfo from './model/SkuInfoInfo';
 import SuccessResponse from './model/SuccessResponse';
+import SystemApproveOrRejectMerchantRequest from './model/SystemApproveOrRejectMerchantRequest';
 import UpdateProductRequestUpdate from './model/UpdateProductRequestUpdate';
 import UpdateSkuRequestUpdate from './model/UpdateSkuRequestUpdate';
+import UpdateUserAddressRequestUpdate from './model/UpdateUserAddressRequestUpdate';
 import UploadResult from './model/UploadResult';
+import UserAddressInfoDetails from './model/UserAddressInfoDetails';
+import UserAddressInfoInfo from './model/UserAddressInfoInfo';
 import UserDetails from './model/UserDetails';
 import UserDetailsCreate from './model/UserDetailsCreate';
 import UserDetailsDetails from './model/UserDetailsDetails';
 import UserDetailsUpdate from './model/UserDetailsUpdate';
 import UserInfoInfo from './model/UserInfoInfo';
+import AppMerchantControllerApi from './api/AppMerchantControllerApi';
 import AppProductCategoryControllerApi from './api/AppProductCategoryControllerApi';
 import AppProductControllerApi from './api/AppProductControllerApi';
+import AppUserAddressControllerApi from './api/AppUserAddressControllerApi';
 import AppUserControllerApi from './api/AppUserControllerApi';
 import AuthControllerApi from './api/AuthControllerApi';
+import LocationControllerApi from './api/LocationControllerApi';
 import MediaControllerApi from './api/MediaControllerApi';
+import SystemMerchantControllerApi from './api/SystemMerchantControllerApi';
 import SystemProductCategoryControllerApi from './api/SystemProductCategoryControllerApi';
 import SystemRoleControllerApi from './api/SystemRoleControllerApi';
 import SystemSkuControllerApi from './api/SystemSkuControllerApi';
@@ -115,6 +138,30 @@ export {
     ApiClient,
 
     /**
+     * The AppChangeStatusMerchantRequest model constructor.
+     * @property {module:model/AppChangeStatusMerchantRequest}
+     */
+    AppChangeStatusMerchantRequest,
+
+    /**
+     * The AppCreateMerchantRequestCreate model constructor.
+     * @property {module:model/AppCreateMerchantRequestCreate}
+     */
+    AppCreateMerchantRequestCreate,
+
+    /**
+     * The AppUpdateMerchantRequestUpdate model constructor.
+     * @property {module:model/AppUpdateMerchantRequestUpdate}
+     */
+    AppUpdateMerchantRequestUpdate,
+
+    /**
+     * The BasePagingResponseMerchantInfoInfo model constructor.
+     * @property {module:model/BasePagingResponseMerchantInfoInfo}
+     */
+    BasePagingResponseMerchantInfoInfo,
+
+    /**
      * The BasePagingResponseProductInfo model constructor.
      * @property {module:model/BasePagingResponseProductInfo}
      */
@@ -131,6 +178,12 @@ export {
      * @property {module:model/BasePagingResponseUserInfoInfo}
      */
     BasePagingResponseUserInfoInfo,
+
+    /**
+     * The BaseResponseListLocationInfoInfo model constructor.
+     * @property {module:model/BaseResponseListLocationInfoInfo}
+     */
+    BaseResponseListLocationInfoInfo,
 
     /**
      * The BaseResponseListProductCategoryInfo model constructor.
@@ -157,10 +210,28 @@ export {
     BaseResponseListSkuInfoInfo,
 
     /**
-     * The BaseResponseObject model constructor.
-     * @property {module:model/BaseResponseObject}
+     * The BaseResponseListUserAddressInfoInfo model constructor.
+     * @property {module:model/BaseResponseListUserAddressInfoInfo}
      */
-    BaseResponseObject,
+    BaseResponseListUserAddressInfoInfo,
+
+    /**
+     * The BaseResponseMerchantDetails model constructor.
+     * @property {module:model/BaseResponseMerchantDetails}
+     */
+    BaseResponseMerchantDetails,
+
+    /**
+     * The BaseResponseMerchantDetailsDetails model constructor.
+     * @property {module:model/BaseResponseMerchantDetailsDetails}
+     */
+    BaseResponseMerchantDetailsDetails,
+
+    /**
+     * The BaseResponseMerchantInfoInfo model constructor.
+     * @property {module:model/BaseResponseMerchantInfoInfo}
+     */
+    BaseResponseMerchantInfoInfo,
 
     /**
      * The BaseResponsePreSignUrl model constructor.
@@ -199,6 +270,12 @@ export {
     BaseResponseUploadResult,
 
     /**
+     * The BaseResponseUserAddressInfoDetails model constructor.
+     * @property {module:model/BaseResponseUserAddressInfoDetails}
+     */
+    BaseResponseUserAddressInfoDetails,
+
+    /**
      * The BaseResponseUserDetails model constructor.
      * @property {module:model/BaseResponseUserDetails}
      */
@@ -229,10 +306,40 @@ export {
     CreateSkuRequestCreate,
 
     /**
+     * The CreateUserAddressRequestCreate model constructor.
+     * @property {module:model/CreateUserAddressRequestCreate}
+     */
+    CreateUserAddressRequestCreate,
+
+    /**
      * The ErrorResponse model constructor.
      * @property {module:model/ErrorResponse}
      */
     ErrorResponse,
+
+    /**
+     * The LocationInfoInfo model constructor.
+     * @property {module:model/LocationInfoInfo}
+     */
+    LocationInfoInfo,
+
+    /**
+     * The MerchantDetails model constructor.
+     * @property {module:model/MerchantDetails}
+     */
+    MerchantDetails,
+
+    /**
+     * The MerchantDetailsDetails model constructor.
+     * @property {module:model/MerchantDetailsDetails}
+     */
+    MerchantDetailsDetails,
+
+    /**
+     * The MerchantInfoInfo model constructor.
+     * @property {module:model/MerchantInfoInfo}
+     */
+    MerchantInfoInfo,
 
     /**
      * The PreSignUrl model constructor.
@@ -337,6 +444,12 @@ export {
     ProductVariantInfoDetails,
 
     /**
+     * The ProductVariantInfoInfo model constructor.
+     * @property {module:model/ProductVariantInfoInfo}
+     */
+    ProductVariantInfoInfo,
+
+    /**
      * The ProductVariantInfoUpdate model constructor.
      * @property {module:model/ProductVariantInfoUpdate}
      */
@@ -379,6 +492,12 @@ export {
     SuccessResponse,
 
     /**
+     * The SystemApproveOrRejectMerchantRequest model constructor.
+     * @property {module:model/SystemApproveOrRejectMerchantRequest}
+     */
+    SystemApproveOrRejectMerchantRequest,
+
+    /**
      * The UpdateProductRequestUpdate model constructor.
      * @property {module:model/UpdateProductRequestUpdate}
      */
@@ -391,10 +510,28 @@ export {
     UpdateSkuRequestUpdate,
 
     /**
+     * The UpdateUserAddressRequestUpdate model constructor.
+     * @property {module:model/UpdateUserAddressRequestUpdate}
+     */
+    UpdateUserAddressRequestUpdate,
+
+    /**
      * The UploadResult model constructor.
      * @property {module:model/UploadResult}
      */
     UploadResult,
+
+    /**
+     * The UserAddressInfoDetails model constructor.
+     * @property {module:model/UserAddressInfoDetails}
+     */
+    UserAddressInfoDetails,
+
+    /**
+     * The UserAddressInfoInfo model constructor.
+     * @property {module:model/UserAddressInfoInfo}
+     */
+    UserAddressInfoInfo,
 
     /**
      * The UserDetails model constructor.
@@ -427,6 +564,12 @@ export {
     UserInfoInfo,
 
     /**
+    * The AppMerchantControllerApi service constructor.
+    * @property {module:api/AppMerchantControllerApi}
+    */
+    AppMerchantControllerApi,
+
+    /**
     * The AppProductCategoryControllerApi service constructor.
     * @property {module:api/AppProductCategoryControllerApi}
     */
@@ -437,6 +580,12 @@ export {
     * @property {module:api/AppProductControllerApi}
     */
     AppProductControllerApi,
+
+    /**
+    * The AppUserAddressControllerApi service constructor.
+    * @property {module:api/AppUserAddressControllerApi}
+    */
+    AppUserAddressControllerApi,
 
     /**
     * The AppUserControllerApi service constructor.
@@ -451,10 +600,22 @@ export {
     AuthControllerApi,
 
     /**
+    * The LocationControllerApi service constructor.
+    * @property {module:api/LocationControllerApi}
+    */
+    LocationControllerApi,
+
+    /**
     * The MediaControllerApi service constructor.
     * @property {module:api/MediaControllerApi}
     */
     MediaControllerApi,
+
+    /**
+    * The SystemMerchantControllerApi service constructor.
+    * @property {module:api/SystemMerchantControllerApi}
+    */
+    SystemMerchantControllerApi,
 
     /**
     * The SystemProductCategoryControllerApi service constructor.

@@ -24,12 +24,11 @@ class ProductConfigInfoUpdate {
      * Constructs a new <code>ProductConfigInfoUpdate</code>.
      * @alias module:model/ProductConfigInfoUpdate
      * @param name {String} 
-     * @param choiceKind {module:model/ProductConfigInfoUpdate.ChoiceKindEnum} 
      * @param variants {Array.<module:model/ProductVariantInfoUpdate>} 
      */
-    constructor(name, choiceKind, variants) { 
+    constructor(name, variants) { 
         
-        ProductConfigInfoUpdate.initialize(this, name, choiceKind, variants);
+        ProductConfigInfoUpdate.initialize(this, name, variants);
     }
 
     /**
@@ -37,9 +36,8 @@ class ProductConfigInfoUpdate {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, name, choiceKind, variants) { 
+    static initialize(obj, name, variants) { 
         obj['name'] = name;
-        obj['choiceKind'] = choiceKind;
         obj['variants'] = variants;
     }
 
@@ -110,7 +108,7 @@ class ProductConfigInfoUpdate {
 
 }
 
-ProductConfigInfoUpdate.RequiredProperties = ["name", "choiceKind", "variants"];
+ProductConfigInfoUpdate.RequiredProperties = ["name", "variants"];
 
 /**
  * @member {Number} id
