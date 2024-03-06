@@ -98,6 +98,7 @@ const refreshToken = async () => {
   const res = await auth.currentUser?.getIdToken(true);
   if (res) {
     TOKEN.setAccessToken(res);
+    return res;
   }
 };
 
