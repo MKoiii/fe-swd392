@@ -10,10 +10,7 @@ const AdminPrivateRouter = () => {
   }
   const decoded = jwtDecode(accessToken);
   const roles = decoded?.resource_access?.auction?.roles;
-  const isAuthen =
-    roles.includes(ROLE.SUPER_ADMIN) ||
-    roles.includes(ROLE.CMS) ||
-    roles.includes(ROLE.MERCHANT);
+  const isAuthen = roles.includes(ROLE.SUPER_ADMIN) || roles.includes(ROLE.CMS);
   if (accessToken && isAuthen) {
     return <Outlet />;
   }

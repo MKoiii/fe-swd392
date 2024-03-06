@@ -19,6 +19,11 @@ import ManageCategories from "./pages/categories/Categories";
 import CategoryDetail from "./pages/categories/CategoryDetail";
 import ManageProducts from "./pages/manageProducts/Products";
 import AddProduct from "./pages/manageProducts/AddProduct";
+import ManageProductDetail from "./pages/manageProducts/ProductDetails";
+import SettingSku from "./pages/manageProducts/SettingSku";
+import MerchantPrivateRouter from "./router/MerchantPrivateRouter";
+import AdminAndMerchantPrivateRouter from "./router/AdminAndMerchantPrivateRouter";
+import RegisterMerchant from "./pages/registerMerchant";
 
 const AuthContext = createContext(null);
 const initialValue = {
@@ -42,6 +47,7 @@ function App() {
         <Route path="/product-detail" element={<ProductDetail />} />
         <Route element={<UserPrivateRouter />}>
           <Route path="/products" element={<Products />} />
+          <Route path="/register-merchant" element={<RegisterMerchant />} />
         </Route>
         <Route element={<AdminPrivateRouter />}>
           <Route path="/manage-users" element={<ManageUsers />} />
@@ -50,15 +56,25 @@ function App() {
             path="/manage-categories/:categoryId"
             element={<CategoryDetail />}
           />
-          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+        <Route element={<CommonPrivateRouter />}>
+          <Route path="/my-profile" element={<Profile />} />
+        </Route>
+        <Route element={<MerchantPrivateRouter />}>
           <Route path="/manage-products">
             <Route path="" element={<ManageProducts />} />
             <Route path="add" element={<AddProduct />} />
             <Route path="update/:productId" element={<AddProduct />} />
+            <Route path="detail/:productId" element={<ManageProductDetail />} />
+            <Route path="setting-sku/:productId" element={<SettingSku />} />
+            <Route
+              path="update-sku/:productId/:skuId"
+              element={<SettingSku />}
+            />
           </Route>
         </Route>
-        <Route element={<CommonPrivateRouter />}>
-          <Route path="/my-profile" element={<Profile />} />
+        <Route element={<AdminAndMerchantPrivateRouter />}>
+          <Route path="/dashboard" element={<Dashboard />} />
         </Route>
       </Routes>
     </AuthContext.Provider>

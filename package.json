@@ -10,6 +10,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "chakra-react-select": "^4.7.6",
     "dotenv": "^16.4.5",
     "firebase": "^10.8.0",
     "framer-motion": "^11.0.5",
@@ -34,7 +35,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "openapi": "npx openapi-generator-cli generate -i https://api.fptsp.xyz/auction/v3/api-docs -o ./src/api/generated -g javascript --additional-properties=supportsES6=true,useSingleRequestParameter=true,sourceFolder=generate-api"
+    "openapi": "npx openapi-generator-cli generate -i http://192.168.1.12:8080/v3/api-docs -o ./src/api/generated -g javascript --additional-properties=supportsES6=true,useSingleRequestParameter=true,sourceFolder=generate-api"
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.7.0"
