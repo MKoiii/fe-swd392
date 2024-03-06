@@ -17,9 +17,9 @@ import DynamicFormVariant from "../dynamicFormVariant";
 import { CiCircleRemove } from "react-icons/ci";
 import FileUpload from "../../../../components/upload";
 import { ProductContext } from "../../AddProduct";
-import { CHOOSE_KIND } from "../../../../constant";
+import { CHOICE_KIND } from "../../../../constant";
 
-const DynamicFormSetting = () => {
+const DynamicFormSetting = ({ isDetail }) => {
   const textColor = useColorModeValue("gray.700", "white");
   // const [formFields, setFormFields] = useState([]);
   const { addProduct, setAddProduct, addSku, setAddSku } =
@@ -31,7 +31,7 @@ const DynamicFormSetting = () => {
         ? addProduct?.productConfigs.length + 1
         : 1,
       name: "",
-      choiceKind: CHOOSE_KIND.SINGLE_CHOICE,
+      choiceKind: CHOICE_KIND.SINGLE_CHOICE,
       variants: [],
       required: true,
     };
@@ -83,6 +83,8 @@ const DynamicFormSetting = () => {
                 handleFieldChange(field?.index, "name", e.target.value)
               }
               value={field?.name}
+              disabled={isDetail}
+              opacity={"1 !important"}
             />
             <FormErrorMessage>Nhập tên cài đặt</FormErrorMessage>
           </FormControl>
@@ -93,14 +95,16 @@ const DynamicFormSetting = () => {
             >
               <FormLabel>Loại lựa chọn</FormLabel>
               <Select
-                defaultValue={CHOOSE_KIND.SINGLE_CHOICE}
+                defaultValue={CHOICE_KIND.SINGLE_CHOICE}
                 onChange={(e) =>
                   handleFieldChange(field?.index, "choiceKind", e.target.value)
                 }
                 value={field?.choiceKind}
+                disabled={isDetail}
+                opacity={"1 !important"}
               >
-                <option value={CHOOSE_KIND.SINGLE_CHOICE}>Chọn một</option>
-                <option value={CHOOSE_KIND.MULTIPLE_CHOICE}>Chọn nhiều</option>
+                <option value={CHOICE_KIND.SINGLE_CHOICE}>Chọn một</option>
+                <option value={CHOICE_KIND.MULTIPLE_CHOICE}>Chọn nhiều</option>
               </Select>
               <FormErrorMessage>Chọn loại lựa chọn</FormErrorMessage>
             </FormControl>
@@ -112,6 +116,8 @@ const DynamicFormSetting = () => {
                   handleFieldChange(field?.index, "required", e.target.value)
                 }
                 value={field?.required}
+                disabled={isDetail}
+                opacity={"1 !important"}
               >
                 <option value={true}>Có</option>
                 <option value={false}>Không</option>
@@ -128,54 +134,34 @@ const DynamicFormSetting = () => {
             <Text fontSize="xl" color={textColor} fontWeight="bold">
               Cài đặt phiên bản sản phẩm
             </Text>
-            <DynamicFormVariant configIndex={field?.index} />
+            <DynamicFormVariant
+              configIndex={field?.index}
+              isDetail={isDetail}
+            />
           </Flex>
-          <Button
-            leftIcon={<CiCircleRemove size={"24px"} />}
-            variant="outline"
-            colorScheme="red"
-            onClick={() => removeField(field.index)}
-          >
-            Xoá
-          </Button>
-          {/* {addProduct?.productConfigs?.length > 0 ? (
-            <Flex
-              flexDirection={"column"}
-              border={"1px solid #eee"}
-              borderRadius={"6px"}
-              p="16px 32px"
-              gap={"16px"}
+          {!isDetail ? (
+            <Button
+              leftIcon={<CiCircleRemove size={"24px"} />}
+              variant="outline"
+              colorScheme="red"
+              onClick={() => removeField(field.index)}
             >
-              <Text fontSize="xl" color={textColor} fontWeight="bold">
-                Cài đặt số lượng sản phẩm
-              </Text>
-              <FormControl isRequired>
-                <FormLabel>Giá sản phẩm</FormLabel>
-                <NumberInput>
-                  <NumberInputField placeholder="Giá sản phẩm" />
-                </NumberInput>
-              </FormControl>
-              <FormControl isRequired>
-                <FormLabel>Số lượng sản phẩm</FormLabel>
-                <NumberInput>
-                  <NumberInputField placeholder="Số lượng sản phẩm" />
-                </NumberInput>
-              </FormControl>
-              <FileUpload isMultiple={false} />
-            </Flex>
+              Xoá
+            </Button>
           ) : (
             <></>
-          )} */}
+          )}
         </Flex>
       ))}
-      <Flex alignItems={"center"} gap={"16px"}>
-        <Button variant="outline" colorScheme="green" onClick={addField}>
-          Thêm cài đặt
-        </Button>
-        {/* <Button variant="outline" colorScheme="blue" onClick={handleSubmit}>
-          Lưu
-        </Button> */}
-      </Flex>
+      {!isDetail ? (
+        <Flex alignItems={"center"} gap={"16px"}>
+          <Button variant="outline" colorScheme="green" onClick={addField}>
+            Thêm cài đặt
+          </Button>
+        </Flex>
+      ) : (
+        <></>
+      )}
     </Flex>
   );
 };

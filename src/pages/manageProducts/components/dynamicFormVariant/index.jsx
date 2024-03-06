@@ -12,7 +12,7 @@ import {
 import { CiCircleRemove } from "react-icons/ci";
 import { ProductContext } from "../../AddProduct";
 
-const DynamicFormVariant = ({ configIndex }) => {
+const DynamicFormVariant = ({ configIndex, isDetail }) => {
   const { addProduct, setAddProduct } = useContext(ProductContext);
   // const [formFields, setFormFields] = useState([
   //   { index: 1, name: "", value: "" },
@@ -96,6 +96,8 @@ const DynamicFormVariant = ({ configIndex }) => {
                 handleFieldChange(field?.index, "name", e.target.value)
               }
               value={field?.name}
+              disabled={isDetail}
+              opacity={"1 !important"}
             />
             <FormErrorMessage>Nhập tên phiên bản</FormErrorMessage>
           </FormControl>
@@ -109,30 +111,37 @@ const DynamicFormVariant = ({ configIndex }) => {
                 handleFieldChange(field?.index, "", e.target.value)
               }
               value={field?.isSoldOut}
+              disabled={isDetail}
+              opacity={"1 !important"}
             >
               <option value={true}>Còn hàng</option>
               <option value={false}>Hết hàng</option>
             </Select>
             <FormErrorMessage>Chọn trạng thái</FormErrorMessage>
           </FormControl>
-          <Button
-            leftIcon={<CiCircleRemove size={"24px"} />}
-            variant="outline"
-            colorScheme="red"
-            onClick={() => removeField(field.index)}
-          >
-            Xoá
-          </Button>
+          {!isDetail ? (
+            <Button
+              leftIcon={<CiCircleRemove size={"24px"} />}
+              variant="outline"
+              colorScheme="red"
+              onClick={() => removeField(field.index)}
+            >
+              Xoá
+            </Button>
+          ) : (
+            <></>
+          )}
         </Flex>
       ))}
-      <Flex alignItems={"center"} gap={"16px"}>
-        <Button variant="outline" colorScheme="green" onClick={addField}>
-          Thêm cài đặt
-        </Button>
-        {/* <Button variant="outline" colorScheme="blue" onClick={handleSubmit}>
-          Lưu
-        </Button> */}
-      </Flex>
+      {!isDetail ? (
+        <Flex alignItems={"center"} gap={"16px"}>
+          <Button variant="outline" colorScheme="green" onClick={addField}>
+            Thêm cài đặt
+          </Button>
+        </Flex>
+      ) : (
+        <></>
+      )}
     </Flex>
   );
 };

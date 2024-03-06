@@ -27,6 +27,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { Select as ReactSelect } from "chakra-react-select";
 import MainBoard from "../../components/mainBoard";
 import BreadcrumbCustom from "../../components/breadcrumb";
 import { FiFile } from "react-icons/fi";
@@ -38,12 +39,11 @@ import {
   MediaControllerApi,
 } from "../../api/generated/generate-api";
 import ApiClientSingleton from "../../api/apiClientImpl";
-import { IMAGES, STATUS_STR, TOAST } from "../../constant";
+import { CHOICE_KIND, IMAGES, STATUS_STR, TOAST } from "../../constant";
 import { useParams } from "react-router-dom";
 import { ProductContext } from "./AddProduct";
 import DynamicFormSku from "./components/dynamicFormSku";
 import TableProductConfigs from "./components/tableProductConfig";
-import TableSku from "./components/tableSku";
 const categoryApi = new AppProductCategoryControllerApi(
   ApiClientSingleton.getInstance()
 );
@@ -51,20 +51,24 @@ const productApi = new AppProductControllerApi(
   ApiClientSingleton.getInstance()
 );
 const mediaApi = new MediaControllerApi(ApiClientSingleton.getInstance());
-const ProductDetailContent = () => {
+const SettingSkuContent = () => {
+  const { productId, skuId } = useParams();
   const links = [
     { link: "/dashboard", name: "Trang chủ" },
     { link: "/manage-products", name: "Quản lý sản phẩm" },
-    { link: "#", name: "Chi tiết sản phẩm" },
+    {
+      link: `/manage-products/detail/${productId}`,
+      name: "Chi tiêt lý sản phẩm",
+    },
+    { link: "#", name: "Cài đặt SKU" },
   ];
-  const { addProduct, setAddProduct, reload, setReload } =
+  const { addProduct, setAddProduct, skus, setSkus } =
     useContext(ProductContext);
-  const { productId } = useParams();
   const toast = useToast();
   const textColor = useColorModeValue("gray.700", "white");
   const [categories, setCategories] = useState([]);
   const [previewUrls, setPriviewUrls] = useState([]);
-  const [skus, setSkus] = useState([]);
+  const [skuSelect, setSkuSelect] = useState();
 
   useEffect(() => {
     categoryApi.appProductCategoryControllerGetInfoList((err, data, res) => {
@@ -90,19 +94,18 @@ const ProductDetailContent = () => {
           if (data) {
             const res = data?.data;
             setAddProduct(res);
-            setSkus(res?.skus);
-            setPriviewUrls([...previewUrls, res?.image]);
+            setSkuSelect(...res?.skus?.filter((s) => s?.id === skuId));
           }
         }
       );
     }
-  }, [reload]);
+  }, [productId, skuId]);
 
   return (
     <Flex flexDirection={"column"} gap={"16px"}>
       <BreadcrumbCustom links={links} />
       <Text fontSize="xl" color={textColor} fontWeight="bold">
-        Chi tiết sản phẩm
+        Cài đặt SKU
       </Text>
       <Flex alignItems={"start"} gap={"32px"}>
         <Flex flex={1}>
@@ -184,31 +187,7 @@ const ProductDetailContent = () => {
               p="16px 32px"
               gap={"16px"}
             >
-              <TableProductConfigs
-                title={"Bảng cài đặt sản phẩm"}
-                captions={["Tên", "Loại lựa chọn", "Trạng thái yêu cầu"]}
-                productId={productId}
-                data={addProduct?.productConfigs}
-              />
-            </Flex>
-            <Flex
-              flexDirection={"column"}
-              border={"1px solid #eee"}
-              borderRadius={"6px"}
-              p="16px 32px"
-              gap={"16px"}
-            >
-              <TableSku
-                title={"Bảng thông tin SKU"}
-                captions={[
-                  "Ảnh",
-                  "Tổ hợp cài đặt",
-                  "Giá (VNĐ)",
-                  "Số lượng",
-                  "Hành động",
-                ]}
-                data={skus}
-              />
+              <DynamicFormSku product={addProduct} defaultSku={skuSelect} />
             </Flex>
           </Flex>
         </Flex>
@@ -216,17 +195,16 @@ const ProductDetailContent = () => {
     </Flex>
   );
 };
-const ManageProductDetail = () => {
+const SettingSku = () => {
   const [addProduct, setAddProduct] = useState();
   const [skus, setSkus] = useState([]);
-  const [reload, setReload] = useState(false);
   return (
     <ProductContext.Provider
-      value={{ addProduct, setAddProduct, skus, setSkus, reload, setReload }}
+      value={{ addProduct, setAddProduct, skus, setSkus }}
     >
-      <MainBoard children={<ProductDetailContent />} />
+      <MainBoard children={<SettingSkuContent />} />
     </ProductContext.Provider>
   );
 };
 
-export default ManageProductDetail;
+export default SettingSku;
