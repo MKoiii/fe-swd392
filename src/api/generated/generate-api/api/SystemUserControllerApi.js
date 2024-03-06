@@ -14,10 +14,10 @@
 
 import ApiClient from "../ApiClient";
 import BasePagingResponseUserInfoInfo from '../model/BasePagingResponseUserInfoInfo';
-import BaseResponseObject from '../model/BaseResponseObject';
 import BaseResponseUserDetails from '../model/BaseResponseUserDetails';
 import BaseResponseUserDetailsDetails from '../model/BaseResponseUserDetailsDetails';
 import ErrorResponse from '../model/ErrorResponse';
+import SuccessResponse from '../model/SuccessResponse';
 import UserDetails from '../model/UserDetails';
 import UserDetailsCreate from '../model/UserDetailsCreate';
 import UserDetailsUpdate from '../model/UserDetailsUpdate';
@@ -125,14 +125,14 @@ export default class SystemUserControllerApi {
      * Callback function to receive the result of the systemUserControllerDeleteModelById operation.
      * @callback module:api/SystemUserControllerApi~systemUserControllerDeleteModelByIdCallback
      * @param {String} error Error message, if any.
-     * @param {module:model/BaseResponseObject} data The data returned by the service call.
+     * @param {module:model/SuccessResponse} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
     /**
      * @param {String} id 
      * @param {module:api/SystemUserControllerApi~systemUserControllerDeleteModelByIdCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/BaseResponseObject}
+     * data is of type: {@link module:model/SuccessResponse}
      */
     systemUserControllerDeleteModelById(id, callback) {
       let postBody = null;
@@ -154,7 +154,7 @@ export default class SystemUserControllerApi {
       let authNames = ['Authorization'];
       let contentTypes = [];
       let accepts = ['*/*'];
-      let returnType = BaseResponseObject;
+      let returnType = SuccessResponse;
       return this.apiClient.callApi(
         '/api/v1/system/user/{id}/delete', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,

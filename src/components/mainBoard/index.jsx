@@ -36,18 +36,47 @@ import { MdOutlineSell } from "react-icons/md";
 import { IconType } from "react-icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import { TOKEN } from "../../constant";
+import { ROLE, TOKEN } from "../../constant";
 import { AuthContext } from "../../App";
 
 const LinkItems = [
-  { name: "Home", icon: FiHome, path: "/dashboard" },
-  { name: "Users", icon: FiUsers, path: "/manage-users" },
-  { name: "Categories", icon: BiCategory, path: "/manage-categories" },
-  { name: "Products", icon: MdOutlineSell, path: "/manage-products" },
-  { name: "Settings", icon: FiSettings },
+  {
+    name: "Home",
+    icon: FiHome,
+    path: "/dashboard",
+    roles: [ROLE.MERCHANT, ROLE.CMS, ROLE.SUPER_ADMIN],
+  },
+  {
+    name: "Users",
+    icon: FiUsers,
+    path: "/manage-users",
+    roles: [ROLE.CMS, ROLE.SUPER_ADMIN],
+  },
+  {
+    name: "Categories",
+    icon: BiCategory,
+    path: "/manage-categories",
+    roles: [ROLE.CMS, ROLE.SUPER_ADMIN],
+  },
+  {
+    name: "Products",
+    icon: MdOutlineSell,
+    path: "/manage-products",
+    roles: [ROLE.MERCHANT],
+  },
 ];
 
+const checkRole = (userRoles, roles) => {
+  for (let role of userRoles) {
+    if (roles?.includes(role)) {
+      return true;
+    }
+  }
+  return false;
+};
+
 const SidebarContent = ({ onClose, ...rest }) => {
+  const navigate = useNavigate();
   return (
     <Box
       transition="3s ease"
@@ -60,16 +89,32 @@ const SidebarContent = ({ onClose, ...rest }) => {
       {...rest}
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
+        <Text
+          fontSize="2xl"
+          fontFamily="monospace"
+          fontWeight="bold"
+          cursor={"pointer"}
+          onClick={() => {
+            if (TOKEN.isCMS()) {
+              navigate("/dashboard");
+            } else {
+              navigate("/home");
+            }
+          }}
+        >
           Logo
         </Text>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
-      {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} path={link?.path}>
-          {link.name}
-        </NavItem>
-      ))}
+      {LinkItems.map((link) => {
+        if (checkRole(TOKEN.getRoles(), link?.roles)) {
+          return (
+            <NavItem key={link.name} icon={link.icon} path={link?.path}>
+              {link.name}
+            </NavItem>
+          );
+        }
+      })}
     </Box>
   );
 };

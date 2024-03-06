@@ -14,7 +14,6 @@
 
 import ApiClient from "../ApiClient";
 import BaseResponseListProductCategoryInfoInfo from '../model/BaseResponseListProductCategoryInfoInfo';
-import BaseResponseObject from '../model/BaseResponseObject';
 import BaseResponseProductCategoryInfoDetails from '../model/BaseResponseProductCategoryInfoDetails';
 import ChangeOrderProductCategoryRequest from '../model/ChangeOrderProductCategoryRequest';
 import ErrorResponse from '../model/ErrorResponse';
@@ -125,14 +124,14 @@ export default class SystemProductCategoryControllerApi {
      * Callback function to receive the result of the systemProductCategoryControllerDeleteModelById operation.
      * @callback module:api/SystemProductCategoryControllerApi~systemProductCategoryControllerDeleteModelByIdCallback
      * @param {String} error Error message, if any.
-     * @param {module:model/BaseResponseObject} data The data returned by the service call.
+     * @param {module:model/SuccessResponse} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
     /**
      * @param {Number} id 
      * @param {module:api/SystemProductCategoryControllerApi~systemProductCategoryControllerDeleteModelByIdCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/BaseResponseObject}
+     * data is of type: {@link module:model/SuccessResponse}
      */
     systemProductCategoryControllerDeleteModelById(id, callback) {
       let postBody = null;
@@ -154,7 +153,7 @@ export default class SystemProductCategoryControllerApi {
       let authNames = ['Authorization'];
       let contentTypes = [];
       let accepts = ['*/*'];
-      let returnType = BaseResponseObject;
+      let returnType = SuccessResponse;
       return this.apiClient.callApi(
         '/api/v1/system/product-category/{id}/delete', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,

@@ -35,14 +35,13 @@ const Login = () => {
         const accessToken = res?.user?.accessToken;
         TOKEN.setAccessToken(accessToken);
         TOKEN.setRefreshToken(res?.user?.refreshToken);
+        TOKEN.setUser(res?.user);
         const decoded = jwtDecode(accessToken);
         const roles = decoded?.resource_access?.auction?.roles;
-        console.log(res.user);
         const isCms =
-          roles.includes(ROLE.CMS) ||
-          roles.includes(ROLE.SUPER_ADMIN) ||
-          roles.includes(ROLE.MERCHANT);
-        const isUser = roles.includes(ROLE.USER);
+          roles?.includes(ROLE.CMS) || roles?.includes(ROLE.SUPER_ADMIN);
+        const isUser =
+          roles?.includes(ROLE.USER) || roles?.includes(ROLE.MERCHANT);
         updateAuth({
           isLogin: true,
           userInfo: res.user,

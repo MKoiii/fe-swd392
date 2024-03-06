@@ -14,10 +14,10 @@
 
 import ApiClient from "../ApiClient";
 import BaseResponseListSkuInfoInfo from '../model/BaseResponseListSkuInfoInfo';
-import BaseResponseObject from '../model/BaseResponseObject';
 import BaseResponseSkuInfoDetails from '../model/BaseResponseSkuInfoDetails';
 import CreateSkuRequestCreate from '../model/CreateSkuRequestCreate';
 import ErrorResponse from '../model/ErrorResponse';
+import SuccessResponse from '../model/SuccessResponse';
 import UpdateSkuRequestUpdate from '../model/UpdateSkuRequestUpdate';
 
 /**
@@ -83,14 +83,14 @@ export default class SystemSkuControllerApi {
      * Callback function to receive the result of the appSkuControllerDeleteModelById operation.
      * @callback module:api/SystemSkuControllerApi~appSkuControllerDeleteModelByIdCallback
      * @param {String} error Error message, if any.
-     * @param {module:model/BaseResponseObject} data The data returned by the service call.
+     * @param {module:model/SuccessResponse} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
     /**
      * @param {String} id 
      * @param {module:api/SystemSkuControllerApi~appSkuControllerDeleteModelByIdCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/BaseResponseObject}
+     * data is of type: {@link module:model/SuccessResponse}
      */
     appSkuControllerDeleteModelById(id, callback) {
       let postBody = null;
@@ -112,7 +112,7 @@ export default class SystemSkuControllerApi {
       let authNames = ['Authorization'];
       let contentTypes = [];
       let accepts = ['*/*'];
-      let returnType = BaseResponseObject;
+      let returnType = SuccessResponse;
       return this.apiClient.callApi(
         '/api/v1/app/product-sku/{id}/delete', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,

@@ -10,7 +10,6 @@ const ApiClientSingleton = (function () {
   const serverUrl = ENV.API_URL;
 
   function createInstance() {
-    console.log(serverUrl);
     var object = new ApiClient(serverUrl);
     object.applyAuthToRequest = (request, authNames) => {
       if (!apiNoAuth.includes(subString(request.url))) {
@@ -125,19 +124,21 @@ const ApiClientSingleton = (function () {
 
       request.end(async (error, response) => {
         while (response?.status === 401) {
-          await refreshToken();
-          request.set({ Authorization: "Bearer " + TOKEN.getAccessToken() });
-          request.retry(1, (error, response) => {
-            try {
-              data = object.deserialize(response, returnType);
-              if (object.enableCookies && typeof window === "undefined") {
-                object.agent._saveCookies(response);
+          const newToken = await refreshToken();
+          TOKEN.setAccessToken(newToken);
+          request
+            .set({ Authorization: "Bearer " + newToken })
+            .retry(1, (error, response) => {
+              try {
+                data = object.deserialize(response, returnType);
+                if (object.enableCookies && typeof window === "undefined") {
+                  object.agent._saveCookies(response);
+                }
+              } catch (err) {
+                error = err;
               }
-            } catch (err) {
-              error = err;
-            }
-            callback(error, data, response);
-          });
+              callback(error, data, response);
+            });
         }
         if (callback) {
           var data = null;
