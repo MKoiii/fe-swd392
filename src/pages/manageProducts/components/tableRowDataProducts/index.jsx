@@ -82,7 +82,12 @@ function TableRowDataProducts({ product }) {
         </Td>
         <Td textAlign={"center"}>
           <Flex justifyContent={"center"} gap={"8px"}>
-            <Button p="0px" bg="transparent" variant="no-hover">
+            <Button
+              p="0px"
+              bg="transparent"
+              variant="no-hover"
+              onClick={() => navigate(`/manage-products/detail/${id}`)}
+            >
               <Tag size={"lg"} variant="outline" colorScheme="gray">
                 <TagLabel>Chi tiết</TagLabel>
               </Tag>

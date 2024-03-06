@@ -48,12 +48,13 @@ const productApi = new AppProductControllerApi(
 );
 const mediaApi = new MediaControllerApi(ApiClientSingleton.getInstance());
 const AddProductContent = () => {
+  const { productId } = useParams();
+
   const links = [
     { link: "/dashboard", name: "Trang chủ" },
     { link: "/manage-products", name: "Quản lý sản phẩm" },
-    { link: "#", name: "Thêm sản phẩm" },
+    { link: "#", name: productId ? "Cập nhật sản phẩm" : "Thêm sản phẩm" },
   ];
-  const { productId } = useParams();
   const toast = useToast();
   const textColor = useColorModeValue("gray.700", "white");
   const { addProduct, setAddProduct } = useContext(ProductContext);
@@ -133,11 +134,13 @@ const AddProductContent = () => {
             />
 
             {previewUrls?.map((url, index) => {
-              return (
-                <Box position={"relative"}>
-                  <Image src={IMAGES.getImage(url)} boxSize="180px" />
-                </Box>
-              );
+              if (url) {
+                return (
+                  <Box position={"relative"}>
+                    <Image src={IMAGES.getImage(url)} boxSize="180px" />
+                  </Box>
+                );
+              }
             })}
             <FormControl
               isRequired
