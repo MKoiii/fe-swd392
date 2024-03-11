@@ -12,7 +12,11 @@ const ApiClientSingleton = (function () {
   function createInstance() {
     var object = new ApiClient(serverUrl);
     object.applyAuthToRequest = (request, authNames) => {
-      if (!apiNoAuth.includes(subString(request.url))) {
+      const url = subString(request.url);
+      if (
+        !apiNoAuth.includes(subString(request.url)) &&
+        !subString(request.url)?.includes("public")
+      ) {
         request.set({ Authorization: "Bearer " + TOKEN.getAccessToken() });
       }
     };
@@ -122,23 +126,32 @@ const ApiClientSingleton = (function () {
         }
       }
 
+      var count = 0;
       request.end(async (error, response) => {
         while (response?.status === 401) {
+          if (count === 5) {
+            return;
+          }
+          count++;
           const newToken = await refreshToken();
-          TOKEN.setAccessToken(newToken);
-          request
-            .set({ Authorization: "Bearer " + newToken })
-            .retry(1, (error, response) => {
-              try {
-                data = object.deserialize(response, returnType);
-                if (object.enableCookies && typeof window === "undefined") {
-                  object.agent._saveCookies(response);
+          if (newToken) {
+            TOKEN.setAccessToken(newToken);
+            request
+              .set({ Authorization: "Bearer " + newToken })
+              .retry(1, (error, response) => {
+                try {
+                  data = object.deserialize(response, returnType);
+                  if (object.enableCookies && typeof window === "undefined") {
+                    object.agent._saveCookies(response);
+                  }
+                } catch (err) {
+                  error = err;
                 }
-              } catch (err) {
-                error = err;
-              }
-              callback(error, data, response);
-            });
+                callback(error, data, response);
+              });
+          } else {
+            window.open("/login");
+          }
         }
         if (callback) {
           var data = null;

@@ -16,7 +16,7 @@ import ModalUser from "../modalUser";
 import { SystemUserControllerApi } from "../../../../api/generated/generate-api";
 import ApiClientSingleton from "../../../../api/apiClientImpl";
 import { UserContext } from "../..";
-import { TOAST } from "../../../../constant";
+import { ROLE, TOAST, TOKEN } from "../../../../constant";
 
 const userApi = new SystemUserControllerApi(ApiClientSingleton.getInstance());
 function TableRowDataUsers({ userInfo, roles }) {
@@ -90,11 +90,6 @@ function TableRowDataUsers({ userInfo, roles }) {
         </Td>
         <Td>
           <Flex justifyContent={"center"} gap={"8px"}>
-            <Button p="0px" bg="transparent" variant="no-hover">
-              <Tag size={"lg"} variant="outline" colorScheme="gray">
-                <TagLabel>Chi tiết</TagLabel>
-              </Tag>
-            </Button>
             <Button
               p="0px"
               bg="transparent"
@@ -114,16 +109,20 @@ function TableRowDataUsers({ userInfo, roles }) {
                 <TagLabel>Cập nhật</TagLabel>
               </Tag>
             </Button>
-            <Button
-              p="0px"
-              bg="transparent"
-              variant="no-hover"
-              onClick={() => {}}
-            >
-              <Tag size={"lg"} variant="outline" colorScheme="red">
-                <TagLabel>Xoá</TagLabel>
-              </Tag>
-            </Button>
+            {TOKEN.getRoles()?.includes(ROLE.SUPER_ADMIN) ? (
+              <Button
+                p="0px"
+                bg="transparent"
+                variant="no-hover"
+                onClick={() => {}}
+              >
+                <Tag size={"lg"} variant="outline" colorScheme="red">
+                  <TagLabel>Xoá</TagLabel>
+                </Tag>
+              </Button>
+            ) : (
+              <></>
+            )}
           </Flex>
         </Td>
       </Tr>

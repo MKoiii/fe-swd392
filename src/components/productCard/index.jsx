@@ -51,7 +51,7 @@ function Rating({ rating, numReviews }) {
   );
 }
 
-function ProductCart() {
+function ProductCart({ product }) {
   const navigate = useNavigate();
   return (
     <Flex w="full" alignItems="center" justifyContent="center">
@@ -63,30 +63,23 @@ function ProductCart() {
         shadow="lg"
         position="relative"
       >
-        {data.isNew && (
-          <Circle
-            size="10px"
-            position="absolute"
-            top={2}
-            right={2}
-            bg="red.200"
-          />
-        )}
-        <Box cursor={"pointer"} onClick={() => navigate("/product-detail")}>
+        <Box
+          cursor={"pointer"}
+          onClick={() => navigate(`/product-detail/${product?.id}`)}
+        >
           <Image
-            src={data.imageURL}
-            alt={`Picture of ${data.name}`}
+            width={"280px"}
+            height={"200px"}
+            src={product?.image}
+            alt={`Picture of ${product?.name}`}
             roundedTop="lg"
           />
         </Box>
-
         <Box p="6">
           <Box display="flex" alignItems="baseline">
-            {data.isNew && (
-              <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="red">
-                New
-              </Badge>
-            )}
+            <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="red">
+              New
+            </Badge>
           </Box>
           <Flex mt="1" justifyContent="space-between" alignContent="center">
             <Box
@@ -96,7 +89,7 @@ function ProductCart() {
               lineHeight="tight"
               isTruncated
             >
-              {data.name}
+              {product.name}
             </Box>
             <Tooltip
               label="Add to cart"
@@ -111,14 +104,18 @@ function ProductCart() {
             </Tooltip>
           </Flex>
 
-          <Flex justifyContent="space-between" alignContent="center">
-            <Rating rating={data.rating} numReviews={data.numReviews} />
-            <Box fontSize="2xl" color={useColorModeValue("gray.800", "white")}>
+          <Flex
+            justifyContent="space-between"
+            alignContent="center"
+            direction={"column"}
+          >
+            <Box fontSize="xl" color={useColorModeValue("gray.800", "white")}>
+              {`${product?.fromPrice?.toLocaleString()} - ${product?.toPrice?.toLocaleString()}`}
               <Box as="span" color={"gray.600"} fontSize="lg">
-                £
+                VNĐ
               </Box>
-              {data.price.toFixed(2)}
             </Box>
+            <Rating rating={data.rating} numReviews={data.numReviews} />
           </Flex>
         </Box>
       </Box>

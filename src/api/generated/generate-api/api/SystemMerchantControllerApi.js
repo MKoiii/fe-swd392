@@ -72,7 +72,7 @@ export default class SystemMerchantControllerApi {
       let accepts = ['*/*'];
       let returnType = SuccessResponse;
       return this.apiClient.callApi(
-        '/api/v1/system/merchant/approval', 'POST',
+        '/api/v1/system/merchant/change-status', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );

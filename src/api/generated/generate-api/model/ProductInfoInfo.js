@@ -65,6 +65,15 @@ class ProductInfoInfo {
             if (data.hasOwnProperty('categoryName')) {
                 obj['categoryName'] = ApiClient.convertToType(data['categoryName'], 'String');
             }
+            if (data.hasOwnProperty('fromPrice')) {
+                obj['fromPrice'] = ApiClient.convertToType(data['fromPrice'], 'Number');
+            }
+            if (data.hasOwnProperty('toPrice')) {
+                obj['toPrice'] = ApiClient.convertToType(data['toPrice'], 'Number');
+            }
+            if (data.hasOwnProperty('merchantId')) {
+                obj['merchantId'] = ApiClient.convertToType(data['merchantId'], 'Number');
+            }
         }
         return obj;
     }
@@ -129,6 +138,21 @@ ProductInfoInfo.prototype['categoryId'] = undefined;
  * @member {String} categoryName
  */
 ProductInfoInfo.prototype['categoryName'] = undefined;
+
+/**
+ * @member {Number} fromPrice
+ */
+ProductInfoInfo.prototype['fromPrice'] = undefined;
+
+/**
+ * @member {Number} toPrice
+ */
+ProductInfoInfo.prototype['toPrice'] = undefined;
+
+/**
+ * @member {Number} merchantId
+ */
+ProductInfoInfo.prototype['merchantId'] = undefined;
 
 
 

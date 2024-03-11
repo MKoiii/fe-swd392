@@ -98,8 +98,12 @@ const TableCateogries = ({ title, captions, data, parent }) => {
           parentCategories={data}
           setCategory={setCategoryCreate}
           onFinish={() => {
+            var data = categoryCreate;
+            if (parent) {
+              data = { ...categoryCreate, parentId: parent?.id };
+            }
             categoryApi.systemProductCategoryControllerCreateModel(
-              { ...categoryCreate, parentId: parent?.id },
+              data,
               (err, data, response) => {
                 if (data) {
                   setIsOpenCreate(false);

@@ -94,7 +94,9 @@ const SettingSkuContent = () => {
           if (data) {
             const res = data?.data;
             setAddProduct(res);
-            setSkuSelect(...res?.skus?.filter((s) => s?.id === skuId));
+            if (res?.skus) {
+              setSkuSelect(...res?.skus?.filter((s) => s?.id === skuId));
+            }
           }
         }
       );

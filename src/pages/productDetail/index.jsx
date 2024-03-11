@@ -1,10 +1,26 @@
-import React, { useState } from "react";
-import { Box, Button, Flex, IconButton, Image, Text } from "@chakra-ui/react";
+import React, { useContext, useEffect, useState } from "react";
+import {
+  Box,
+  Button,
+  Flex,
+  IconButton,
+  Image,
+  Text,
+  useToast,
+} from "@chakra-ui/react";
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 import { RiSubtractFill } from "react-icons/ri";
 import { BiPlus } from "react-icons/bi";
 import Header from "../landingPage/components/Header";
 import Footer from "../landingPage/components/Footer";
+import {
+  AppMerchantControllerApi,
+  AppProductControllerApi,
+} from "../../api/generated/generate-api";
+import ApiClientSingleton from "../../api/apiClientImpl";
+import { useParams } from "react-router-dom";
+import { CART, TOAST } from "../../constant";
+import { GlobalContext } from "../../App";
 
 function Rating({ rating, numReviews }) {
   return (
@@ -34,52 +50,221 @@ function Rating({ rating, numReviews }) {
   );
 }
 
-const Product = () => {
-  const [quantity, setQuantity] = useState(0);
+const Variant = ({ variant, chooseVariantId, onClick, disable }) => {
+  return (
+    <>
+      <Flex
+        border={"1px solid"}
+        borderColor={variant?.id === chooseVariantId ? "blue.400" : "#cecece"}
+        align={"center"}
+        justifyContent={"center"}
+        p={"6px 12px"}
+        color={variant?.id === chooseVariantId ? "blue.400" : "gray.700"}
+        borderRadius={"4px"}
+        cursor={disable ? "default" : "pointer"}
+        onClick={() => {
+          if (onClick) {
+            if (!disable) {
+              onClick();
+            }
+          }
+        }}
+        opacity={disable ? 0.35 : 1}
+      >
+        <Text>{variant?.name}</Text>
+      </Flex>
+    </>
+  );
+};
+
+const merchantApi = new AppMerchantControllerApi(
+  ApiClientSingleton.getInstance()
+);
+const Product = ({ product, item, setItem }) => {
+  const [totalquantity, setTotalQuantity] = useState(0);
+  const [merchant, setMerchant] = useState({});
+  const [price, setPrice] = useState(0);
+  const [suggestVariantIds, setSuggestVariantIds] = useState([]);
+  const [variantIdsSelect, setVariantIdsSelect] = useState({});
+  const toast = useToast();
+  const { reload, setReload } = useContext(GlobalContext);
+
+  const handleFieldChange = (configId, variantId) => {
+    if (variantIdsSelect) {
+      const tmp = { ...variantIdsSelect, [configId]: variantId };
+      setVariantIdsSelect(tmp);
+    }
+  };
+
+  const checkAvailableVariant = (variantId) => {
+    if (product && product?.skus) {
+      for (let sku of product?.skus) {
+        if (sku?.variantIds?.includes(variantId)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+
+  const getSuggestVariants = () => {
+    var rs = [];
+    const variantIds = product?.productConfigs
+      ?.filter((c) => c?.id in variantIdsSelect && variantIdsSelect[c?.id])
+      ?.map((c) => {
+        if (c?.id in variantIdsSelect) {
+          return variantIdsSelect[c?.id];
+        }
+      });
+    if (product?.skus) {
+      for (let sku of product?.skus) {
+        var count = 0;
+        for (let id of variantIds) {
+          if (sku?.variantIds?.includes(id)) {
+            count++;
+          }
+        }
+        if (count === variantIds?.length) {
+          rs = [...rs, ...sku?.variantIds];
+        }
+      }
+    }
+    setSuggestVariantIds(rs);
+  };
+
+  const getCurrentPrice = () => {
+    if (product && product?.skus) {
+      let variantIds = Object.values(variantIdsSelect);
+      let checker = (arr, target) =>
+        target.every((v) => arr.includes(v)) && arr?.length === target?.length;
+      for (let sku of product?.skus) {
+        if (checker(sku?.variantIds, variantIds)) {
+          setPrice(sku?.price);
+          setTotalQuantity(sku?.quantity);
+          setItem({ ...item, sku: sku });
+          return;
+        }
+      }
+      var totalQuantity = 0;
+      product?.skus?.forEach((s) => {
+        totalQuantity += s?.quantity;
+      });
+      setTotalQuantity(totalQuantity);
+      setPrice(product?.fromPrice);
+    }
+  };
+
+  const getMerchantInfo = (merchantId) => {
+    merchantApi.appMerchantControllerGetInfoById(merchantId, (err, data) => {
+      if (data) {
+        setMerchant(data?.data);
+      }
+    });
+  };
+
+  useEffect(() => {
+    getSuggestVariants();
+    getCurrentPrice();
+  }, [variantIdsSelect]);
+
+  useEffect(() => {
+    if (product) {
+      var totalQuantity = 0;
+      product?.skus?.forEach((s) => {
+        totalQuantity += s?.quantity;
+      });
+      setTotalQuantity(totalQuantity);
+      setPrice(product?.fromPrice);
+      getMerchantInfo(product?.merchantId);
+    }
+  }, [product]);
   return (
     <Flex flexDirection={"column"} gap={4}>
       <Rating rating={4} numReviews={12} />
-      <Text fontSize={"2xl"}>Product name</Text>
+      <Text fontSize={"2xl"}>{product?.name}</Text>
       <Flex>
-        <Text>Price: 100$</Text>
+        <Text>Giá: {price.toLocaleString()}VNĐ</Text>
       </Flex>
-      <Text>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus ipsam
-        sapiente quis et corrupti facilis laborum magnam architecto molestias
-        nostrum maxime, impedit id quam a distinctio eaque earum quos similique.
-      </Text>
-      <Text>Quantity:</Text>
-      <Flex
-        alignItems={"center"}
-        gap={6}
-        p={"8px"}
-        border={"1px solid #eee"}
-        width={"fit-content"}
-        borderRadius={"8px"}
-      >
-        <IconButton
-          onClick={() => {
-            if (quantity > 0) {
-              setQuantity(quantity - 1);
-            }
-          }}
-          icon={<RiSubtractFill />}
-        />
-        <Text>{quantity}</Text>
-        <IconButton
-          onClick={() => {
-            setQuantity(quantity + 1);
-          }}
-          icon={<BiPlus />}
-        />
+      <Text>Mô tả: {product?.description}</Text>
+      {product?.productConfigs?.map((config) => {
+        return (
+          <Flex gap={"8px"} align={"center"}>
+            <Text>{config?.name}:</Text>
+            {config?.variants?.map((v) => {
+              return (
+                <Variant
+                  disable={
+                    !checkAvailableVariant(v?.id) ||
+                    (suggestVariantIds?.length > 0 &&
+                      !suggestVariantIds?.includes(v?.id))
+                  }
+                  variant={v}
+                  chooseVariantId={variantIdsSelect[config?.id]}
+                  onClick={() => {
+                    if (
+                      config?.id in variantIdsSelect &&
+                      variantIdsSelect[config?.id] === v?.id
+                    ) {
+                      handleFieldChange(config?.id, undefined);
+                    } else {
+                      handleFieldChange(config?.id, v?.id);
+                    }
+                  }}
+                />
+              );
+            })}
+          </Flex>
+        );
+      })}
+      <Text>Số lượng:</Text>
+      <Flex align={"center"} gap={"16px"}>
+        <Flex
+          alignItems={"center"}
+          gap={6}
+          p={"8px"}
+          border={"1px solid #eee"}
+          width={"fit-content"}
+          borderRadius={"8px"}
+        >
+          <IconButton
+            onClick={() => {
+              if (item?.quantity > 0) {
+                const quantity = item?.quantity;
+                setItem({ ...item, quantity: quantity - 1 });
+              }
+            }}
+            icon={<RiSubtractFill />}
+          />
+          <Text>{item?.quantity}</Text>
+          <IconButton
+            onClick={() => {
+              const quantity = item?.quantity;
+              setItem({ ...item, quantity: quantity + 1 });
+            }}
+            icon={<BiPlus />}
+          />
+        </Flex>
+        <Text>{totalquantity} sản phẩm sẵn có</Text>
       </Flex>
       <Button
         _hover={{ bg: "rgba(66,153,255,0.8)" }}
         w={"80%"}
         bg={"blue.400"}
         color={"#fff"}
+        isDisabled={!item || !item?.sku || item?.quantity === 0}
+        onClick={() => {
+          const success = CART.addToCart({
+            ...item,
+            merchant: merchant,
+            product: product,
+          });
+          if (success) {
+            TOAST.success(toast, "Mua hàng", "Thêm sản phẩm thành công");
+            setReload(!reload);
+          }
+        }}
       >
-        Add to card
+        Thêm vào giỏ hàng
       </Button>
     </Flex>
   );
@@ -180,7 +365,30 @@ const Carousel = () => {
   );
 };
 
+const productApi = new AppProductControllerApi(
+  ApiClientSingleton.getInstance()
+);
 const ProductDetail = (props) => {
+  const { id } = useParams();
+  const [product, setProduct] = useState();
+  const [item, setItem] = useState({ sku: undefined, quantity: 0 });
+
+  const getProductDetail = (productId) => {
+    productApi.appProductControllerGetProductDetailsPublic(
+      productId,
+      (err, data) => {
+        if (data) {
+          setProduct(data?.data);
+        }
+      }
+    );
+  };
+
+  useEffect(() => {
+    if (id) {
+      getProductDetail(id);
+    }
+  }, [id]);
   return (
     <>
       <Flex
@@ -203,7 +411,7 @@ const ProductDetail = (props) => {
         <Box>
           <Flex flexWrap="wrap" justifyContent="space-between" gap={"8px"}>
             <Box w="50%">
-              <Product />
+              <Product product={product} item={item} setItem={setItem} />
             </Box>
             <Box w="48%">
               <Carousel />

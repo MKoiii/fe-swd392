@@ -125,8 +125,14 @@ const STATUS_STR = {
 };
 
 const GENDER = {
-  MALE: "MALE",
-  FEMALE: "FEMALE",
+  MALE: {
+    value: "MALE",
+    name: "Nam",
+  },
+  FEMALE: {
+    value: "FEMALE",
+    name: "Nữ",
+  },
 };
 
 const CHOICE_KIND = {
@@ -142,6 +148,132 @@ const IMAGES = {
   },
 };
 
+const LOCATION_KIND = {
+  PROVINCE: "PROVINCE",
+  WARD: "WARD",
+  DISTRICT: "DISTRICT",
+};
+
+const MERCHANT_STATUS = {
+  DRAFT: {
+    value: "DRAFT",
+    name: "Nháp",
+    color: "gray.400",
+  },
+  IN_REVIEW: {
+    value: "IN_REVIEW",
+    name: "Chờ kiểm duyệt",
+    color: "blue.400",
+  },
+  ACTIVE: {
+    value: "ACTIVE",
+    name: "Hoạt động",
+    color: "green.400",
+  },
+  INACTIVE: {
+    value: "INACTIVE",
+    name: "Vô hiệu hoá",
+    color: "yellow.400",
+  },
+  LOCK: {
+    value: "LOCK",
+    name: "Khoá",
+    color: "red.400",
+  },
+};
+
+const CART = {
+  addToCart: (item) => {
+    try {
+      var items = localStorage.getItem("auction_cart")
+        ? JSON.parse(localStorage.getItem("auction_cart"))
+        : [];
+      const isExist =
+        items?.filter((i) => i?.sku?.id === item?.sku?.id)?.length > 0;
+      if (!isExist) {
+        items.push(item);
+      } else {
+        items = items?.map((i) =>
+          i?.sku?.id === item?.sku?.id
+            ? { ...i, quantity: i?.quantity + item?.quantity }
+            : i
+        );
+      }
+      localStorage.setItem("auction_cart", JSON.stringify(items));
+      return true;
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
+  },
+  removeItem: (item) => {
+    try {
+      var items = localStorage.getItem("auction_cart")
+        ? JSON.parse(localStorage.getItem("auction_cart"))
+        : [];
+      items = items?.filter((i) => i?.sku?.id !== item?.sku?.id);
+      localStorage.setItem("auction_cart", JSON.stringify(items));
+    } catch (err) {}
+  },
+  getNumberOfItems: () => {
+    try {
+      const items = localStorage.getItem("auction_cart")
+        ? JSON.parse(localStorage.getItem("auction_cart"))
+        : [];
+
+      return items?.length;
+    } catch (err) {
+      return 0;
+    }
+  },
+  getItems: () => {
+    try {
+      const items = localStorage.getItem("auction_cart")
+        ? JSON.parse(localStorage.getItem("auction_cart"))
+        : [];
+
+      return items;
+    } catch (err) {
+      return [];
+    }
+  },
+  setItemPayment: (itemPayment) => {
+    try {
+      localStorage.setItem("auction_item_payment", JSON.stringify(itemPayment));
+    } catch (err) {}
+  },
+  getItemPayment: () => {
+    try {
+      const items = localStorage.getItem("auction_item_payment")
+        ? JSON.parse(localStorage.getItem("auction_item_payment"))
+        : [];
+
+      return items;
+    } catch (err) {
+      return [];
+    }
+  },
+};
+
+const ORDER_STATE = {
+  NEW: {
+    value: "NEW",
+    name: "Chờ thanh toán",
+  },
+  PAID: {
+    value: "PAID",
+    name: "Chờ giao hàng",
+  },
+  DELIVERED: {
+    value: "DELIVERED",
+    name: "Đã giao hàng",
+  },
+  COMPLETED: {
+    value: "COMPLETED",
+    name: "Hoàn thành",
+  },
+};
+
 export {
   TOKEN,
   ENV,
@@ -153,4 +285,8 @@ export {
   STATUS_STR,
   CHOICE_KIND,
   IMAGES,
+  LOCATION_KIND,
+  MERCHANT_STATUS,
+  CART,
+  ORDER_STATE,
 };

@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/modal";
 import { Select } from "@chakra-ui/select";
 import { Tag } from "@chakra-ui/tag";
-import { GENDER, ROLE, STATUS, TOAST } from "../../../../constant";
+import { GENDER, ROLE, STATUS, TOAST, TOKEN } from "../../../../constant";
 import moment from "moment";
 
 const ModalUser = ({
@@ -101,8 +101,12 @@ const ModalUser = ({
                       setUser({ ...user, gender: e.target.value });
                     }}
                   >
-                    <option value={GENDER.MALE}>Nam</option>
-                    <option value={GENDER.FEMALE}>Nữ</option>
+                    <option value={GENDER.MALE.value}>
+                      {GENDER.MALE.name}
+                    </option>
+                    <option value={GENDER.FEMALE.name}>
+                      {GENDER.FEMALE.value}
+                    </option>
                   </Select>
                 </Box>
                 <Box w={"48%"}>
@@ -136,12 +140,16 @@ const ModalUser = ({
               >
                 {isCreate
                   ? roles
-                      ?.filter((r) => `ROLE_${r?.kind}` !== ROLE.SUPER_ADMIN)
+                      ?.filter((r) => `${r?.kind}` !== ROLE.SUPER_ADMIN)
                       ?.map((r) => {
                         return <option value={r?.id}>{r?.kind}</option>;
                       })
                   : roles?.map((r) => {
-                      return <option value={r?.id}>{r?.kind}</option>;
+                      if (TOKEN.getRoles()?.includes(ROLE.SUPER_ADMIN)) {
+                        return <option value={r?.id}>{r?.kind}</option>;
+                      } else if (r?.kind !== ROLE.SUPER_ADMIN) {
+                        return <option value={r?.id}>{r?.kind}</option>;
+                      }
                     })}
               </Select>
             </FormControl>

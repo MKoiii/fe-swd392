@@ -23,12 +23,11 @@ class SystemApproveOrRejectMerchantRequest {
      * Constructs a new <code>SystemApproveOrRejectMerchantRequest</code>.
      * @alias module:model/SystemApproveOrRejectMerchantRequest
      * @param merchantId {Number} 
-     * @param approve {Boolean} 
-     * @param reason {String} 
+     * @param status {module:model/SystemApproveOrRejectMerchantRequest.StatusEnum} 
      */
-    constructor(merchantId, approve, reason) { 
+    constructor(merchantId, status) { 
         
-        SystemApproveOrRejectMerchantRequest.initialize(this, merchantId, approve, reason);
+        SystemApproveOrRejectMerchantRequest.initialize(this, merchantId, status);
     }
 
     /**
@@ -36,10 +35,9 @@ class SystemApproveOrRejectMerchantRequest {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, merchantId, approve, reason) { 
+    static initialize(obj, merchantId, status) { 
         obj['merchantId'] = merchantId;
-        obj['approve'] = approve;
-        obj['reason'] = reason;
+        obj['status'] = status;
     }
 
     /**
@@ -56,8 +54,8 @@ class SystemApproveOrRejectMerchantRequest {
             if (data.hasOwnProperty('merchantId')) {
                 obj['merchantId'] = ApiClient.convertToType(data['merchantId'], 'Number');
             }
-            if (data.hasOwnProperty('approve')) {
-                obj['approve'] = ApiClient.convertToType(data['approve'], 'Boolean');
+            if (data.hasOwnProperty('status')) {
+                obj['status'] = ApiClient.convertToType(data['status'], 'String');
             }
             if (data.hasOwnProperty('reason')) {
                 obj['reason'] = ApiClient.convertToType(data['reason'], 'String');
@@ -79,6 +77,10 @@ class SystemApproveOrRejectMerchantRequest {
             }
         }
         // ensure the json data is a string
+        if (data['status'] && !(typeof data['status'] === 'string' || data['status'] instanceof String)) {
+            throw new Error("Expected the field `status` to be a primitive type in the JSON string but got " + data['status']);
+        }
+        // ensure the json data is a string
         if (data['reason'] && !(typeof data['reason'] === 'string' || data['reason'] instanceof String)) {
             throw new Error("Expected the field `reason` to be a primitive type in the JSON string but got " + data['reason']);
         }
@@ -89,7 +91,7 @@ class SystemApproveOrRejectMerchantRequest {
 
 }
 
-SystemApproveOrRejectMerchantRequest.RequiredProperties = ["merchantId", "approve", "reason"];
+SystemApproveOrRejectMerchantRequest.RequiredProperties = ["merchantId", "status"];
 
 /**
  * @member {Number} merchantId
@@ -97,9 +99,9 @@ SystemApproveOrRejectMerchantRequest.RequiredProperties = ["merchantId", "approv
 SystemApproveOrRejectMerchantRequest.prototype['merchantId'] = undefined;
 
 /**
- * @member {Boolean} approve
+ * @member {module:model/SystemApproveOrRejectMerchantRequest.StatusEnum} status
  */
-SystemApproveOrRejectMerchantRequest.prototype['approve'] = undefined;
+SystemApproveOrRejectMerchantRequest.prototype['status'] = undefined;
 
 /**
  * @member {String} reason
@@ -108,6 +110,45 @@ SystemApproveOrRejectMerchantRequest.prototype['reason'] = undefined;
 
 
 
+
+
+/**
+ * Allowed values for the <code>status</code> property.
+ * @enum {String}
+ * @readonly
+ */
+SystemApproveOrRejectMerchantRequest['StatusEnum'] = {
+
+    /**
+     * value: "DRAFT"
+     * @const
+     */
+    "DRAFT": "DRAFT",
+
+    /**
+     * value: "IN_REVIEW"
+     * @const
+     */
+    "IN_REVIEW": "IN_REVIEW",
+
+    /**
+     * value: "ACTIVE"
+     * @const
+     */
+    "ACTIVE": "ACTIVE",
+
+    /**
+     * value: "INACTIVE"
+     * @const
+     */
+    "INACTIVE": "INACTIVE",
+
+    /**
+     * value: "LOCK"
+     * @const
+     */
+    "LOCK": "LOCK"
+};
 
 
 

@@ -262,7 +262,9 @@ export default class AppProductControllerApi {
     /**
      * @param {Object} opts Optional parameters
      * @param {String} [name] 
-     * @param {Number} [categoryId] 
+     * @param {Array.<Number>} [categoryIds] 
+     * @param {Number} [fromPrice] 
+     * @param {Number} [toPrice] 
      * @param {Number} [page = 0)] Zero-based page index (0..N)
      * @param {Number} [size = 20)] The size of the page to be returned
      * @param {Array.<String>} [sort] Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.
@@ -277,7 +279,9 @@ export default class AppProductControllerApi {
       };
       let queryParams = {
         'name': opts['name'],
-        'categoryId': opts['categoryId'],
+        'categoryIds': this.apiClient.buildCollectionParam(opts['categoryIds'], 'multi'),
+        'fromPrice': opts['fromPrice'],
+        'toPrice': opts['toPrice'],
         'page': opts['page'],
         'size': opts['size'],
         'sort': this.apiClient.buildCollectionParam(opts['sort'], 'multi')
