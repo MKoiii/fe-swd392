@@ -69,16 +69,18 @@ const Products = (props) => {
       if (data) {
         const res = data?.data;
         var tmp = [];
-        for (let category of res) {
-          if (category) {
-            if (category?.children) {
-              tmp = [...tmp, ...category?.children];
-            } else {
-              tmp = [...tmp, category];
+        if (res) {
+          for (let category of res) {
+            if (category) {
+              if (category?.children) {
+                tmp = [...tmp, ...category?.children];
+              } else {
+                tmp = [...tmp, category];
+              }
             }
           }
+          console.log(tmp);
         }
-        console.log(tmp);
         setCategories(tmp);
       }
     });

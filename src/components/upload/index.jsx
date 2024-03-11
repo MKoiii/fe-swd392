@@ -32,10 +32,14 @@ const FileUpload = ({
     if (isValid) {
       if (isMultiple) {
         setSelectedFiles([...selectedFiles, ...newSelectedFiles]);
-        onReview([...selectedFiles, ...newSelectedFiles]);
+        if (onReview) {
+          onReview([...selectedFiles, ...newSelectedFiles]);
+        }
       } else {
         setSelectedFiles([...newSelectedFiles]);
-        onReview([...newSelectedFiles]);
+        if (onReview) {
+          onReview([...newSelectedFiles]);
+        }
       }
       setErrorMessage("");
     }
