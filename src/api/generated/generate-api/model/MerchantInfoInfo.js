@@ -92,6 +92,9 @@ class MerchantInfoInfo {
             if (data.hasOwnProperty('status')) {
                 obj['status'] = ApiClient.convertToType(data['status'], 'String');
             }
+            if (data.hasOwnProperty('representativeName')) {
+                obj['representativeName'] = ApiClient.convertToType(data['representativeName'], 'String');
+            }
             if (data.hasOwnProperty('facebook')) {
                 obj['facebook'] = ApiClient.convertToType(data['facebook'], 'String');
             }
@@ -157,6 +160,10 @@ class MerchantInfoInfo {
         // ensure the json data is a string
         if (data['status'] && !(typeof data['status'] === 'string' || data['status'] instanceof String)) {
             throw new Error("Expected the field `status` to be a primitive type in the JSON string but got " + data['status']);
+        }
+        // ensure the json data is a string
+        if (data['representativeName'] && !(typeof data['representativeName'] === 'string' || data['representativeName'] instanceof String)) {
+            throw new Error("Expected the field `representativeName` to be a primitive type in the JSON string but got " + data['representativeName']);
         }
         // ensure the json data is a string
         if (data['facebook'] && !(typeof data['facebook'] === 'string' || data['facebook'] instanceof String)) {
@@ -257,6 +264,11 @@ MerchantInfoInfo.prototype['addressNote'] = undefined;
  * @member {module:model/MerchantInfoInfo.StatusEnum} status
  */
 MerchantInfoInfo.prototype['status'] = undefined;
+
+/**
+ * @member {String} representativeName
+ */
+MerchantInfoInfo.prototype['representativeName'] = undefined;
 
 /**
  * @member {String} facebook

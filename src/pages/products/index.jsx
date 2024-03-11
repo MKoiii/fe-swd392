@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -26,29 +26,71 @@ import Header from "../landingPage/components/Header";
 import ProductCart from "../../components/productCard";
 import Paginate from "../../components/paginate";
 import Footer from "../landingPage/components/Footer";
+import {
+  AppProductCategoryControllerApi,
+  AppProductControllerApi,
+} from "../../api/generated/generate-api";
+import ApiClientSingleton from "../../api/apiClientImpl";
 
+const productApi = new AppProductControllerApi(
+  ApiClientSingleton.getInstance()
+);
+const categoryApi = new AppProductCategoryControllerApi(
+  ApiClientSingleton.getInstance()
+);
+const MAX_PRICE = 99999999;
 const Products = (props) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   // Giả sử danh sách các danh mục sản phẩm
-  const categories = [
-    { id: 1, name: "Thời trang nam" },
-    { id: 2, name: "Thời trang nữ" },
-    { id: 3, name: "Điện thoại di động" },
-    // Thêm các danh mục khác nếu cần
-  ];
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [filter, setFilter] = useState({
+    fromPrice: 0,
+    toPrice: MAX_PRICE,
+    categoryIds: [],
+  });
+  const getProducts = () => {
+    productApi.appProductControllerGetProductPagePublic(
+      {
+        ...filter,
+        page: currentPage - 1,
+        size: 12,
+      },
+      (err, data) => {
+        setProducts(data?.data);
+        setTotalPages(data?.totalPages);
+      }
+    );
+  };
+
+  useEffect(() => {
+    categoryApi.appProductCategoryControllerGetInfoList((err, data) => {
+      if (data) {
+        const res = data?.data;
+        var tmp = [];
+        for (let category of res) {
+          if (category) {
+            if (category?.children) {
+              tmp = [...tmp, ...category?.children];
+            } else {
+              tmp = [...tmp, category];
+            }
+          }
+        }
+        console.log(tmp);
+        setCategories(tmp);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    getProducts();
+  }, [currentPage]);
 
   return (
     <>
-      <Flex
-        direction="column"
-        align="center"
-        maxW={{ xl: "1200px" }}
-        m="0 auto"
-        {...props}
-      >
-        <Header />
-      </Flex>
-      <Flex gap={"16px"}>
+      <Flex gap={"32px"} my={"16px"} w={"100vw"}>
         <Box
           rowSpan={2}
           colSpan={1}
@@ -57,33 +99,65 @@ const Products = (props) => {
           alignItems={"center"}
           flexDirection={"column"}
           gap={6}
-          flex={"0 0 16%"}
+          flex={0.16}
           borderRight={"1px solid #cecece"}
         >
           <Flex flexDirection={"column"} width={"80%"} gap={4}>
             <Text fontSize={"2xl"}>Categories</Text>
-            <Checkbox value="naruto">Naruto</Checkbox>
-            <Checkbox value="sasuke">Sasuke</Checkbox>
-            <Checkbox value="kakashi">Kakashi</Checkbox>
+            {categories?.map((c) => {
+              return (
+                <Checkbox
+                  value={c?.id}
+                  onChange={(e) => {
+                    var tmp = filter?.categoryIds;
+                    if (e.target.checked) {
+                      tmp = [...tmp, e.target.value];
+                    } else {
+                      tmp = tmp?.filter((id) => id != e.target.value);
+                    }
+                    setFilter({ ...filter, categoryIds: tmp });
+                  }}
+                >
+                  {c?.name}
+                </Checkbox>
+              );
+            })}
           </Flex>
           <Flex flexDirection={"column"} width={"80%"} gap={4}>
             <Text fontSize={"2xl"}>Price</Text>
-            <RangeSlider aria-label={["min", "max"]} defaultValue={[10, 30]}>
+            <RangeSlider
+              aria-label={["min", "max"]}
+              defaultValue={[filter?.fromPrice, filter?.toPrice]}
+              max={MAX_PRICE}
+              onChange={(value) => {
+                setFilter({
+                  ...filter,
+                  fromPrice: value[0],
+                  toPrice: value[1],
+                });
+              }}
+            >
               <RangeSliderTrack>
                 <RangeSliderFilledTrack />
               </RangeSliderTrack>
               <RangeSliderThumb index={0} />
               <RangeSliderThumb index={1} />
             </RangeSlider>
-            <Flex alignItems={"center"} gap={6}>
-              <NumberInput>
+            <Flex alignItems={"center"} gap={6} direction={"column"}>
+              <NumberInput
+                value={filter?.fromPrice?.toLocaleString()}
+                max={MAX_PRICE}
+              >
                 <NumberInputField />
                 <NumberInputStepper>
                   <NumberIncrementStepper />
                   <NumberDecrementStepper />
                 </NumberInputStepper>
               </NumberInput>
-              <NumberInput>
+              <NumberInput
+                value={filter?.toPrice?.toLocaleString()}
+                max={MAX_PRICE}
+              >
                 <NumberInputField />
                 <NumberInputStepper>
                   <NumberIncrementStepper />
@@ -97,57 +171,34 @@ const Products = (props) => {
             bg={"blue.400"}
             color={"#fff"}
             _hover={{ bg: "blue.300" }}
+            onClick={getProducts}
           >
-            Filter
+            Lọc
           </Button>
         </Box>
-        <Box flex={"0 0 80%"}>
+        <Box flex={0.85}>
           <Flex flexDirection={"column"}>
-            <Grid templateColumns="repeat(4, 1fr)" gap={6}>
-              <GridItem>
-                <ProductCart />
-              </GridItem>
-              <GridItem>
-                <ProductCart />
-              </GridItem>
-              <GridItem>
-                <ProductCart />
-              </GridItem>
-              <GridItem>
-                <ProductCart />
-              </GridItem>
-              <GridItem>
-                <ProductCart />
-              </GridItem>
-              <GridItem>
-                <ProductCart />
-              </GridItem>
-              <GridItem>
-                <ProductCart />
-              </GridItem>
-              <GridItem>
-                <ProductCart />
-              </GridItem>
-            </Grid>
+            <Flex alignItems={"center"} flexWrap={"wrap"} gap={"12px"}>
+              {products?.map((p) => {
+                return (
+                  <>
+                    <Flex key={p?.id}>
+                      <ProductCart product={p} />
+                    </Flex>
+                  </>
+                );
+              })}
+            </Flex>
             <Paginate
               isTable={false}
               currentPage={currentPage}
-              totalPages={10}
+              totalPages={totalPages}
               onPageChange={(curr) => {
                 setCurrentPage(curr);
               }}
             />
           </Flex>
         </Box>
-      </Flex>
-      <Flex
-        direction="column"
-        align="center"
-        maxW={{ xl: "1200px" }}
-        m="0 auto"
-        {...props}
-      >
-        <Footer />
       </Flex>
     </>
   );

@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { Box, Button, Flex, Image, Text, VStack } from "@chakra-ui/react";
-import { MdClose, MdCloudUpload } from "react-icons/md"; // Import the cloud upload icon
+import { MdClose, MdCloudUpload } from "react-icons/md";
 
-const FileUpload = ({ isMultiple, onFilesSelect }) => {
+const FileUpload = ({
+  isMultiple,
+  onReview,
+  onFilesSelect,
+  disabledReview,
+}) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -27,8 +32,10 @@ const FileUpload = ({ isMultiple, onFilesSelect }) => {
     if (isValid) {
       if (isMultiple) {
         setSelectedFiles([...selectedFiles, ...newSelectedFiles]);
+        onReview([...selectedFiles, ...newSelectedFiles]);
       } else {
         setSelectedFiles([...newSelectedFiles]);
+        onReview([...newSelectedFiles]);
       }
       setErrorMessage("");
     }
@@ -39,6 +46,7 @@ const FileUpload = ({ isMultiple, onFilesSelect }) => {
     newSelectedFiles.splice(index, 1);
     setSelectedFiles(newSelectedFiles);
   };
+
   const handleUpload = () => {
     onFilesSelect(selectedFiles);
     setSelectedFiles([]);
@@ -52,10 +60,9 @@ const FileUpload = ({ isMultiple, onFilesSelect }) => {
             type="file"
             onChange={handleFileChange}
             style={{ display: "none" }}
-            id="file-input"
             multiple={isMultiple}
           />
-          <label htmlFor="file-input">
+          <label>
             <Button
               as="span"
               colorScheme="blue"
@@ -65,6 +72,12 @@ const FileUpload = ({ isMultiple, onFilesSelect }) => {
             >
               Chọn Files
             </Button>
+            <input
+              type="file"
+              onChange={handleFileChange}
+              style={{ display: "none" }}
+              multiple={isMultiple}
+            />
           </label>
           <Button
             h={"48px"}
@@ -78,29 +91,25 @@ const FileUpload = ({ isMultiple, onFilesSelect }) => {
 
         {errorMessage && <Text color="red.500">{errorMessage}</Text>}
       </Flex>
-
-      {selectedFiles.length > 0 && (
+      {!disabledReview && selectedFiles.length > 0 && (
         <Flex alignItems={"center"} gap={"16px"} flexWrap={"wrap"}>
-          {selectedFiles.map((file, index) => {
-            console.log(window.URL.createObjectURL(file));
-            return (
-              <Box position={"relative"}>
-                <Image src={window.URL.createObjectURL(file)} boxSize="180px" />
-                <Button
-                  colorScheme="red"
-                  size="sm"
-                  onClick={() => handleRemoveFile(index)}
-                  borderRadius={"50%"}
-                  p={"4px"}
-                  position={"absolute"}
-                  top={0}
-                  right={0}
-                >
-                  <MdClose />
-                </Button>
-              </Box>
-            );
-          })}
+          {selectedFiles.map((file, index) => (
+            <Box key={index} position={"relative"}>
+              <Image src={window.URL.createObjectURL(file)} boxSize="180px" />
+              <Button
+                colorScheme="red"
+                size="sm"
+                onClick={() => handleRemoveFile(index)}
+                borderRadius={"50%"}
+                p={"4px"}
+                position={"absolute"}
+                top={0}
+                right={0}
+              >
+                <MdClose />
+              </Button>
+            </Box>
+          ))}
         </Flex>
       )}
     </VStack>

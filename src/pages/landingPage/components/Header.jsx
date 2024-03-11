@@ -19,9 +19,10 @@ import {
 } from "@chakra-ui/react";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import Logo from "./Logo";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FiBell, FiChevronDown, FiShoppingCart } from "react-icons/fi";
-import { TOKEN } from "../../../constant";
+import { CART, TOKEN } from "../../../constant";
+import { GlobalContext } from "../../../App";
 
 const MenuItem = (props) => {
   const { children, isLast, to = "/", ...rest } = props;
@@ -40,6 +41,12 @@ const MenuItem = (props) => {
 const Header = (props) => {
   const userInfo = TOKEN.getUserInfo();
   const navigate = useNavigate();
+  const [numberOfItems, setNumberOfItems] = useState(0);
+  const { reload } = useContext(GlobalContext);
+
+  useEffect(() => {
+    setNumberOfItems(CART.getNumberOfItems());
+  }, [reload]);
   return (
     <>
       <Flex
@@ -106,7 +113,7 @@ const Header = (props) => {
                 </MenuItem>
               </>
             )}
-            <MenuItem to="#">
+            <MenuItem to="/cart">
               <Box
                 position={"relative"}
                 w={"40px"}
@@ -118,8 +125,15 @@ const Header = (props) => {
                 }}
               >
                 <Icon as={FiShoppingCart} h={7} w={7} alignSelf={"center"} />
-                <Text position={"absolute"} top={-4} right={-2}>
-                  0
+                <Text
+                  position={"absolute"}
+                  top={-4}
+                  right={-2}
+                  border={"1px #cecece solid"}
+                  borderRadius={"50%"}
+                  px={"6px"}
+                >
+                  {numberOfItems}
                 </Text>
               </Box>
             </MenuItem>
@@ -175,7 +189,7 @@ const Header = (props) => {
                       backgroundColor: "rgba(134, 134, 134, 0.3)",
                     }}
                     m={"0 !important"}
-                    onClick={() => navigate("/my-profile")}
+                    onClick={() => navigate("/user-profile")}
                   >
                     Thông tin cá nhân
                   </MenuItem>
@@ -185,6 +199,7 @@ const Header = (props) => {
                       backgroundColor: "rgba(134, 134, 134, 0.3)",
                     }}
                     m={"0 !important"}
+                    onClick={() => navigate("/my-order")}
                   >
                     Đơn hàng
                   </MenuItem>

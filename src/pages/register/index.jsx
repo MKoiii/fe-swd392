@@ -12,14 +12,48 @@ import {
   Heading,
   Text,
   useColorModeValue,
+  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
+import {
+  logInWithEmailAndPassword,
+  registerWithEmailAndPassword,
+} from "../../utils/firebase";
+import { TOAST, TOKEN } from "../../constant";
+import AuthControllerApi from "../../api/generated/generate-api/api/AuthControllerApi";
+import ApiClientSingleton from "../../api/apiClientImpl";
 
 export default function Register() {
+  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [password, setPassword] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+  const toast = useToast();
+
+  const authApi = new AuthControllerApi(ApiClientSingleton.getInstance());
+  const hanldeRegister = () => {
+    if (password?.password !== password?.confirm) {
+      TOAST.error(toast, "Đăng ký", "Mặt khẩu không khớp");
+      return;
+    }
+    console.log(email);
+    registerWithEmailAndPassword(
+      `${firstName} ${lastName}`,
+      email,
+      password?.password
+    ).then((res) => {
+      console.log(res);
+    });
+    // if (res) {
+    //   TOAST.success(toast, "Đăng ký", "Đăng ký thành công");
+    // } else {
+    //   TOAST.error(toast, "Đăng ký", "Đăng ký không thành công");
+    // }
+  };
 
   return (
     <Flex
@@ -48,19 +82,34 @@ export default function Register() {
               <Box>
                 <FormControl id="firstName" isRequired>
                   <FormLabel>Họ & Tên đệm</FormLabel>
-                  <Input type="text" placeholder="Họ & Tên đệm" />
+                  <Input
+                    type="text"
+                    placeholder="Họ & Tên đệm"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
                 </FormControl>
               </Box>
               <Box>
                 <FormControl id="lastName">
                   <FormLabel>Tên</FormLabel>
-                  <Input type="text" placeholder="Tên" />
+                  <Input
+                    type="text"
+                    placeholder="Tên"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                  />
                 </FormControl>
               </Box>
             </HStack>
             <FormControl id="email" isRequired>
               <FormLabel>Email</FormLabel>
-              <Input type="email" placeholder="Email" />
+              <Input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </FormControl>
             <FormControl id="password" isRequired>
               <FormLabel>Mật khẩu</FormLabel>
@@ -68,6 +117,10 @@ export default function Register() {
                 <Input
                   type={showPassword ? "text" : "password"}
                   placeholder="Mật khẩu"
+                  value={password?.password}
+                  onChange={(e) =>
+                    setPassword({ ...password, password: e.target.value })
+                  }
                 />
                 <InputRightElement h={"full"}>
                   <Button
@@ -87,6 +140,10 @@ export default function Register() {
                 <Input
                   type={showPasswordConfirm ? "text" : "password"}
                   placeholder="Mật khẩu xác nhận"
+                  value={password?.confirm}
+                  onChange={(e) =>
+                    setPassword({ ...password, confirm: e.target.value })
+                  }
                 />
                 <InputRightElement h={"full"}>
                   <Button
@@ -111,6 +168,7 @@ export default function Register() {
                 _hover={{
                   bg: "blue.500",
                 }}
+                onClick={hanldeRegister}
               >
                 Đăng ký
               </Button>

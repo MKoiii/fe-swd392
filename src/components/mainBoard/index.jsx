@@ -38,6 +38,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { ROLE, TOKEN } from "../../constant";
 import { AuthContext } from "../../App";
+import { FaUserTag } from "react-icons/fa";
 
 const LinkItems = [
   {
@@ -63,6 +64,12 @@ const LinkItems = [
     icon: MdOutlineSell,
     path: "/manage-products",
     roles: [ROLE.MERCHANT],
+  },
+  {
+    name: "Merchants",
+    icon: FaUserTag,
+    path: "/manage-merchants",
+    roles: [ROLE.CMS, ROLE.SUPER_ADMIN],
   },
 ];
 

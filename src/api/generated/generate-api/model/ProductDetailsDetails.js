@@ -67,6 +67,15 @@ class ProductDetailsDetails {
             if (data.hasOwnProperty('categoryName')) {
                 obj['categoryName'] = ApiClient.convertToType(data['categoryName'], 'String');
             }
+            if (data.hasOwnProperty('fromPrice')) {
+                obj['fromPrice'] = ApiClient.convertToType(data['fromPrice'], 'Number');
+            }
+            if (data.hasOwnProperty('toPrice')) {
+                obj['toPrice'] = ApiClient.convertToType(data['toPrice'], 'Number');
+            }
+            if (data.hasOwnProperty('merchantId')) {
+                obj['merchantId'] = ApiClient.convertToType(data['merchantId'], 'Number');
+            }
             if (data.hasOwnProperty('description')) {
                 obj['description'] = ApiClient.convertToType(data['description'], 'String');
             }
@@ -164,6 +173,21 @@ ProductDetailsDetails.prototype['categoryId'] = undefined;
  * @member {String} categoryName
  */
 ProductDetailsDetails.prototype['categoryName'] = undefined;
+
+/**
+ * @member {Number} fromPrice
+ */
+ProductDetailsDetails.prototype['fromPrice'] = undefined;
+
+/**
+ * @member {Number} toPrice
+ */
+ProductDetailsDetails.prototype['toPrice'] = undefined;
+
+/**
+ * @member {Number} merchantId
+ */
+ProductDetailsDetails.prototype['merchantId'] = undefined;
 
 /**
  * @member {String} description

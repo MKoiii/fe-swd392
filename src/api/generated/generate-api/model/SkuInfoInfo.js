@@ -72,6 +72,9 @@ class SkuInfoInfo {
             if (data.hasOwnProperty('image')) {
                 obj['image'] = ApiClient.convertToType(data['image'], 'String');
             }
+            if (data.hasOwnProperty('variantIds')) {
+                obj['variantIds'] = ApiClient.convertToType(data['variantIds'], ['Number']);
+            }
             if (data.hasOwnProperty('variants')) {
                 obj['variants'] = ApiClient.convertToType(data['variants'], [ProductVariantInfoInfo]);
             }
@@ -100,6 +103,10 @@ class SkuInfoInfo {
         // ensure the json data is a string
         if (data['image'] && !(typeof data['image'] === 'string' || data['image'] instanceof String)) {
             throw new Error("Expected the field `image` to be a primitive type in the JSON string but got " + data['image']);
+        }
+        // ensure the json data is an array
+        if (!Array.isArray(data['variantIds'])) {
+            throw new Error("Expected the field `variantIds` to be an array in the JSON data but got " + data['variantIds']);
         }
         if (data['variants']) { // data not null
             // ensure the json data is an array
@@ -159,6 +166,11 @@ SkuInfoInfo.prototype['quantity'] = undefined;
  * @member {String} image
  */
 SkuInfoInfo.prototype['image'] = undefined;
+
+/**
+ * @member {Array.<Number>} variantIds
+ */
+SkuInfoInfo.prototype['variantIds'] = undefined;
 
 /**
  * @member {Array.<module:model/ProductVariantInfoInfo>} variants

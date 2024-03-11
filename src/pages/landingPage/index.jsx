@@ -2,14 +2,20 @@ import { Box, Button, Flex } from "@chakra-ui/react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import ImageSlider from "../../components/imageSilder";
 import ProductCards from "./components/ProductCards";
 import { Link, useNavigate } from "react-router-dom";
 import Newsletter from "../../components/newsletter";
+import { AppProductControllerApi } from "../../api/generated/generate-api";
+import ApiClientSingleton from "../../api/apiClientImpl";
 
+const productApi = new AppProductControllerApi(
+  ApiClientSingleton.getInstance()
+);
 export default function LandingPage(props) {
   const navigate = useNavigate();
+  const [products, setProducts] = useState([]);
   const images = useMemo(
     () => [
       "https://images.unsplash.com/photo-1516796181074-bf453fbfa3e6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDV8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60",
@@ -30,6 +36,19 @@ export default function LandingPage(props) {
     ],
     []
   );
+
+  useEffect(() => {
+    productApi.appProductControllerGetProductPagePublic(
+      {
+        page: 0,
+        size: 20,
+      },
+      (err, data) => {
+        console.log(data?.data);
+        setProducts(data?.data);
+      }
+    );
+  }, []);
 
   return (
     <>
@@ -60,7 +79,7 @@ export default function LandingPage(props) {
           py={12}
           position={"relative"}
         >
-          <ProductCards />
+          <ProductCards products={products} />
           <div style={{ position: "absolute", top: "6px", right: 0 }}>
             <Button
               colorScheme="green" // Chọn màu cho nút

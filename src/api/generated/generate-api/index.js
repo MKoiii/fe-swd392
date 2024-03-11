@@ -17,9 +17,11 @@ import AppChangeStatusMerchantRequest from './model/AppChangeStatusMerchantReque
 import AppCreateMerchantRequestCreate from './model/AppCreateMerchantRequestCreate';
 import AppUpdateMerchantRequestUpdate from './model/AppUpdateMerchantRequestUpdate';
 import BasePagingResponseMerchantInfoInfo from './model/BasePagingResponseMerchantInfoInfo';
+import BasePagingResponseOrderInfoInfo from './model/BasePagingResponseOrderInfoInfo';
 import BasePagingResponseProductInfo from './model/BasePagingResponseProductInfo';
 import BasePagingResponseProductInfoInfo from './model/BasePagingResponseProductInfoInfo';
 import BasePagingResponseUserInfoInfo from './model/BasePagingResponseUserInfoInfo';
+import BaseResponseCreateOrderResponse from './model/BaseResponseCreateOrderResponse';
 import BaseResponseListLocationInfoInfo from './model/BaseResponseListLocationInfoInfo';
 import BaseResponseListProductCategoryInfo from './model/BaseResponseListProductCategoryInfo';
 import BaseResponseListProductCategoryInfoInfo from './model/BaseResponseListProductCategoryInfoInfo';
@@ -39,6 +41,9 @@ import BaseResponseUserAddressInfoDetails from './model/BaseResponseUserAddressI
 import BaseResponseUserDetails from './model/BaseResponseUserDetails';
 import BaseResponseUserDetailsDetails from './model/BaseResponseUserDetailsDetails';
 import ChangeOrderProductCategoryRequest from './model/ChangeOrderProductCategoryRequest';
+import CreateOrderItemRequest from './model/CreateOrderItemRequest';
+import CreateOrderRequest from './model/CreateOrderRequest';
+import CreateOrderResponse from './model/CreateOrderResponse';
 import CreateProductRequestCreate from './model/CreateProductRequestCreate';
 import CreateSkuRequestCreate from './model/CreateSkuRequestCreate';
 import CreateUserAddressRequestCreate from './model/CreateUserAddressRequestCreate';
@@ -47,6 +52,9 @@ import LocationInfoInfo from './model/LocationInfoInfo';
 import MerchantDetails from './model/MerchantDetails';
 import MerchantDetailsDetails from './model/MerchantDetailsDetails';
 import MerchantInfoInfo from './model/MerchantInfoInfo';
+import OrderExtraVariantInfo from './model/OrderExtraVariantInfo';
+import OrderInfoInfo from './model/OrderInfoInfo';
+import OrderItemInfoInfo from './model/OrderItemInfoInfo';
 import PreSignUrl from './model/PreSignUrl';
 import ProductCategoryInfo from './model/ProductCategoryInfo';
 import ProductCategoryInfoCreate from './model/ProductCategoryInfoCreate';
@@ -85,6 +93,7 @@ import UserDetailsDetails from './model/UserDetailsDetails';
 import UserDetailsUpdate from './model/UserDetailsUpdate';
 import UserInfoInfo from './model/UserInfoInfo';
 import AppMerchantControllerApi from './api/AppMerchantControllerApi';
+import AppOrderControllerApi from './api/AppOrderControllerApi';
 import AppProductCategoryControllerApi from './api/AppProductCategoryControllerApi';
 import AppProductControllerApi from './api/AppProductControllerApi';
 import AppUserAddressControllerApi from './api/AppUserAddressControllerApi';
@@ -92,6 +101,7 @@ import AppUserControllerApi from './api/AppUserControllerApi';
 import AuthControllerApi from './api/AuthControllerApi';
 import LocationControllerApi from './api/LocationControllerApi';
 import MediaControllerApi from './api/MediaControllerApi';
+import PaymentControllerApi from './api/PaymentControllerApi';
 import SystemMerchantControllerApi from './api/SystemMerchantControllerApi';
 import SystemProductCategoryControllerApi from './api/SystemProductCategoryControllerApi';
 import SystemRoleControllerApi from './api/SystemRoleControllerApi';
@@ -162,6 +172,12 @@ export {
     BasePagingResponseMerchantInfoInfo,
 
     /**
+     * The BasePagingResponseOrderInfoInfo model constructor.
+     * @property {module:model/BasePagingResponseOrderInfoInfo}
+     */
+    BasePagingResponseOrderInfoInfo,
+
+    /**
      * The BasePagingResponseProductInfo model constructor.
      * @property {module:model/BasePagingResponseProductInfo}
      */
@@ -178,6 +194,12 @@ export {
      * @property {module:model/BasePagingResponseUserInfoInfo}
      */
     BasePagingResponseUserInfoInfo,
+
+    /**
+     * The BaseResponseCreateOrderResponse model constructor.
+     * @property {module:model/BaseResponseCreateOrderResponse}
+     */
+    BaseResponseCreateOrderResponse,
 
     /**
      * The BaseResponseListLocationInfoInfo model constructor.
@@ -294,6 +316,24 @@ export {
     ChangeOrderProductCategoryRequest,
 
     /**
+     * The CreateOrderItemRequest model constructor.
+     * @property {module:model/CreateOrderItemRequest}
+     */
+    CreateOrderItemRequest,
+
+    /**
+     * The CreateOrderRequest model constructor.
+     * @property {module:model/CreateOrderRequest}
+     */
+    CreateOrderRequest,
+
+    /**
+     * The CreateOrderResponse model constructor.
+     * @property {module:model/CreateOrderResponse}
+     */
+    CreateOrderResponse,
+
+    /**
      * The CreateProductRequestCreate model constructor.
      * @property {module:model/CreateProductRequestCreate}
      */
@@ -340,6 +380,24 @@ export {
      * @property {module:model/MerchantInfoInfo}
      */
     MerchantInfoInfo,
+
+    /**
+     * The OrderExtraVariantInfo model constructor.
+     * @property {module:model/OrderExtraVariantInfo}
+     */
+    OrderExtraVariantInfo,
+
+    /**
+     * The OrderInfoInfo model constructor.
+     * @property {module:model/OrderInfoInfo}
+     */
+    OrderInfoInfo,
+
+    /**
+     * The OrderItemInfoInfo model constructor.
+     * @property {module:model/OrderItemInfoInfo}
+     */
+    OrderItemInfoInfo,
 
     /**
      * The PreSignUrl model constructor.
@@ -570,6 +628,12 @@ export {
     AppMerchantControllerApi,
 
     /**
+    * The AppOrderControllerApi service constructor.
+    * @property {module:api/AppOrderControllerApi}
+    */
+    AppOrderControllerApi,
+
+    /**
     * The AppProductCategoryControllerApi service constructor.
     * @property {module:api/AppProductCategoryControllerApi}
     */
@@ -610,6 +674,12 @@ export {
     * @property {module:api/MediaControllerApi}
     */
     MediaControllerApi,
+
+    /**
+    * The PaymentControllerApi service constructor.
+    * @property {module:api/PaymentControllerApi}
+    */
+    PaymentControllerApi,
 
     /**
     * The SystemMerchantControllerApi service constructor.
