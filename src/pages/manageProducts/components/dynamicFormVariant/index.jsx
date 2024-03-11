@@ -108,14 +108,14 @@ const DynamicFormVariant = ({ configIndex, isDetail }) => {
             <FormLabel>Trạng thái</FormLabel>
             <Select
               onChange={(e) =>
-                handleFieldChange(field?.index, "", e.target.value)
+                handleFieldChange(field?.index, "isSoldOut", e.target.value)
               }
               value={field?.isSoldOut}
               disabled={isDetail}
               opacity={"1 !important"}
             >
-              <option value={true}>Còn hàng</option>
-              <option value={false}>Hết hàng</option>
+              <option value={false}>Còn hàng</option>
+              <option value={true}>Hết hàng</option>
             </Select>
             <FormErrorMessage>Chọn trạng thái</FormErrorMessage>
           </FormControl>
