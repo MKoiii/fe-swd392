@@ -68,17 +68,20 @@ const registerWithEmailAndPassword = async (name, email, password) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
-    await addDoc(collection(db, "users"), {
-      uid: user.uid,
-      name,
-      authProvider: "local",
-      email,
-    });
     return user;
   } catch (err) {
     console.error(err);
     return undefined;
   }
+};
+
+const addUserDoc = async (userId, name, provider, email) => {
+  await addDoc(collection(db, "users"), {
+    uid: userId,
+    name,
+    authProvider: provider,
+    email,
+  });
 };
 
 const sendPasswordReset = async (email) => {
@@ -112,4 +115,5 @@ export {
   registerWithEmailAndPassword,
   sendPasswordReset,
   signInWithGoogle,
+  addUserDoc,
 };

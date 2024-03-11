@@ -18,6 +18,7 @@ import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import {
+  addUserDoc,
   logInWithEmailAndPassword,
   registerWithEmailAndPassword,
 } from "../../utils/firebase";
@@ -46,13 +47,16 @@ export default function Register() {
       email,
       password?.password
     ).then((res) => {
-      console.log(res);
+      TOKEN.setAccessToken(res.accessToken);
+      authApi.authControllerRegister({}, (err, data) => {
+        if (data) {
+          TOAST.success(toast, "Đăng ký", "Đăng ký thành công");
+          addUserDoc(res?.uid, `${firstName} ${lastName}`, "local", email);
+        } else {
+          TOAST.error(toast, "Đăng ký", "Đăng ký không thành công");
+        }
+      });
     });
-    // if (res) {
-    //   TOAST.success(toast, "Đăng ký", "Đăng ký thành công");
-    // } else {
-    //   TOAST.error(toast, "Đăng ký", "Đăng ký không thành công");
-    // }
   };
 
   return (
