@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AppOrderControllerApi } from "../../api/generated/generate-api";
 import ApiClientSingleton from "../../api/apiClientImpl";
 import {
@@ -13,11 +13,14 @@ import {
 } from "@chakra-ui/react";
 import MyOrderDetail from "./MyOrderDetail";
 import { ORDER_STATE } from "../../constant";
+import { GlobalContext } from "../../App";
 
 const orderApi = new AppOrderControllerApi(ApiClientSingleton.getInstance());
 const MyOrder = () => {
   const [orderState, setOrderState] = useState(ORDER_STATE.NEW.value);
   const [orders, setOrders] = useState([]);
+
+  const { reload, setReload } = useContext(GlobalContext);
   useEffect(() => {
     orderApi.appOrderControllerGetInfoPageWithFilter(
       { status: orderState, page: 0, size: 9999 },
@@ -28,7 +31,7 @@ const MyOrder = () => {
         }
       }
     );
-  }, [orderState]);
+  }, [orderState, reload]);
   return (
     <Box w={{ xl: "1200px", lg: "900px" }} mb={"32px"}>
       <Tabs>

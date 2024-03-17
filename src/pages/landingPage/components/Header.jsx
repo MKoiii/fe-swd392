@@ -70,10 +70,9 @@ const Header = (props) => {
             direction={["column", "row", "row", "row"]}
             pt={[4, 4, 0, 0]}
           >
-            <MenuItem to="/home">Home</MenuItem>
-            <MenuItem to="/how">How It works </MenuItem>
-            <MenuItem to="/faetures">Features </MenuItem>
-            <MenuItem to="/pricing">Pricing </MenuItem>
+            <MenuItem to="/home">Trang chủ</MenuItem>
+            <MenuItem to="#products">Sản phẩm </MenuItem>
+            <MenuItem to="#about">Giới thiệu </MenuItem>
             {userInfo ? (
               <></>
             ) : (
@@ -91,7 +90,7 @@ const Header = (props) => {
                       ],
                     }}
                   >
-                    Create Account
+                    Đăng ký
                   </Button>
                 </MenuItem>
                 <MenuItem to="/login">
@@ -108,7 +107,7 @@ const Header = (props) => {
                       ],
                     }}
                   >
-                    Login
+                    Đăng nhập
                   </Button>
                 </MenuItem>
               </>
@@ -211,6 +210,20 @@ const Header = (props) => {
                         onClick={() => navigate("/manage-products")}
                       >
                         Quản lí quản phẩm
+                      </MenuItem>
+                    ) : (
+                      <></>
+                    )}
+                    {TOKEN.isMerchant() ? (
+                      <MenuItem
+                        p={"4px 24px"}
+                        _hover={{
+                          backgroundColor: "rgba(134, 134, 134, 0.3)",
+                        }}
+                        m={"0 !important"}
+                        onClick={() => navigate("/manage-orders")}
+                      >
+                        Quản lí đơn hàng
                       </MenuItem>
                     ) : (
                       <></>

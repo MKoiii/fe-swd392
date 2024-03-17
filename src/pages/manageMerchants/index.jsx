@@ -62,7 +62,7 @@ const ManageMerchants = () => {
   const [reload, setReload] = useState();
   return (
     <>
-      <MainBoard children={<ManageMerchantsContent />} />
+      <ManageMerchantsContent />
     </>
   );
 };

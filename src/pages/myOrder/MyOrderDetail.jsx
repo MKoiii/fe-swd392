@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Box,
   Button,
@@ -11,20 +11,26 @@ import {
   TabPanels,
   Tabs,
   Text,
+  useToast,
 } from "@chakra-ui/react";
-import { IMAGES, ORDER_STATE } from "../../constant";
+import { IMAGES, ORDER_STATE, TOAST } from "../../constant";
 import { AppOrderControllerApi } from "../../api/generated/generate-api";
 import ApiClientSingleton from "../../api/apiClientImpl";
+import { GlobalContext } from "../../App";
 
 const orderApi = new AppOrderControllerApi(ApiClientSingleton.getInstance());
 const MyOrderDetail = ({ orders, orderState }) => {
   const getJoinVariantsName = (item) => {
     const names = [];
-    for (let i of item) {
-      names?.push(i?.name);
+    if (item) {
+      for (let i of item) {
+        names?.push(i?.name);
+      }
     }
     return names?.join(", ");
   };
+  const toast = useToast();
+  const { reload, setReload } = useContext(GlobalContext);
   const handlePayment = (paymentId) => {
     orderApi.appOrderControllerGetPaymentUrl(paymentId, (err, data) => {
       if (data) {
@@ -103,7 +109,34 @@ const MyOrderDetail = ({ orders, orderState }) => {
                           Thanh toán
                         </Button>
                       ) : orderState === ORDER_STATE.DELIVERED.value ? (
-                        <Button>Đã nhận hàng</Button>
+                        <Button
+                          onClick={() => {
+                            orderApi.appOrderControllerChangeStatus(
+                              {
+                                id: order?.id,
+                                status: ORDER_STATE.COMPLETED.value,
+                              },
+                              (err, data) => {
+                                if (data) {
+                                  TOAST.success(
+                                    toast,
+                                    "Đơn hàng",
+                                    "Cập nhật đơn hàng thành công"
+                                  );
+                                  setReload(!reload);
+                                } else {
+                                  TOAST.error(
+                                    toast,
+                                    "Đơn hàng",
+                                    "Cập nhật đơn hàng không thành công"
+                                  );
+                                }
+                              }
+                            );
+                          }}
+                        >
+                          Đã nhận hàng
+                        </Button>
                       ) : (
                         <></>
                       )}

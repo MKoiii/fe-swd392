@@ -355,7 +355,7 @@ const MerchantDetail = () => {
   const [reload, setReload] = useState();
   return (
     <MerchantContext.Provider value={{ reload, setReload }}>
-      <MainBoard children={<MerchantDetailContent />} />
+      <MerchantDetailContent />
     </MerchantContext.Provider>
   );
 };

@@ -259,18 +259,37 @@ const ORDER_STATE = {
   NEW: {
     value: "NEW",
     name: "Chờ thanh toán",
+    color: "gray.400",
   },
   PAID: {
     value: "PAID",
     name: "Chờ giao hàng",
+    color: "blue.400",
   },
   DELIVERED: {
     value: "DELIVERED",
     name: "Đã giao hàng",
+    color: "yellow.400",
   },
   COMPLETED: {
     value: "COMPLETED",
     name: "Hoàn thành",
+    color: "green.400",
+  },
+};
+
+const PAYMENT_METHOD = {
+  E_WALLET_PAYPAL: {
+    value: "E_WALLET_PAYPAL",
+    name: "PAYPAL",
+  },
+  COD: {
+    value: "COD",
+    name: "COD",
+  },
+  CARD: {
+    value: "CARD",
+    name: "CARD",
   },
 };
 
@@ -289,4 +308,5 @@ export {
   MERCHANT_STATUS,
   CART,
   ORDER_STATE,
+  PAYMENT_METHOD,
 };

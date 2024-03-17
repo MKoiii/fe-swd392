@@ -22,6 +22,8 @@ import BasePagingResponseProductInfo from './model/BasePagingResponseProductInfo
 import BasePagingResponseProductInfoInfo from './model/BasePagingResponseProductInfoInfo';
 import BasePagingResponseUserInfoInfo from './model/BasePagingResponseUserInfoInfo';
 import BaseResponseCreateOrderResponse from './model/BaseResponseCreateOrderResponse';
+import BaseResponseIBusinessPerformanceProjection from './model/BaseResponseIBusinessPerformanceProjection';
+import BaseResponseListIRevenueThisAndLastMonthProjection from './model/BaseResponseListIRevenueThisAndLastMonthProjection';
 import BaseResponseListLocationInfoInfo from './model/BaseResponseListLocationInfoInfo';
 import BaseResponseListProductCategoryInfo from './model/BaseResponseListProductCategoryInfo';
 import BaseResponseListProductCategoryInfoInfo from './model/BaseResponseListProductCategoryInfoInfo';
@@ -31,6 +33,7 @@ import BaseResponseListUserAddressInfoInfo from './model/BaseResponseListUserAdd
 import BaseResponseMerchantDetails from './model/BaseResponseMerchantDetails';
 import BaseResponseMerchantDetailsDetails from './model/BaseResponseMerchantDetailsDetails';
 import BaseResponseMerchantInfoInfo from './model/BaseResponseMerchantInfoInfo';
+import BaseResponseOrderDetailsDetails from './model/BaseResponseOrderDetailsDetails';
 import BaseResponsePreSignUrl from './model/BaseResponsePreSignUrl';
 import BaseResponseProductCategoryInfoDetails from './model/BaseResponseProductCategoryInfoDetails';
 import BaseResponseProductDetails from './model/BaseResponseProductDetails';
@@ -41,6 +44,8 @@ import BaseResponseUserAddressInfoDetails from './model/BaseResponseUserAddressI
 import BaseResponseUserDetails from './model/BaseResponseUserDetails';
 import BaseResponseUserDetailsDetails from './model/BaseResponseUserDetailsDetails';
 import ChangeOrderProductCategoryRequest from './model/ChangeOrderProductCategoryRequest';
+import ChangeOrderStatusRequest from './model/ChangeOrderStatusRequest';
+import ChangeUserStatusRequest from './model/ChangeUserStatusRequest';
 import CreateOrderItemRequest from './model/CreateOrderItemRequest';
 import CreateOrderRequest from './model/CreateOrderRequest';
 import CreateOrderResponse from './model/CreateOrderResponse';
@@ -48,12 +53,17 @@ import CreateProductRequestCreate from './model/CreateProductRequestCreate';
 import CreateSkuRequestCreate from './model/CreateSkuRequestCreate';
 import CreateUserAddressRequestCreate from './model/CreateUserAddressRequestCreate';
 import ErrorResponse from './model/ErrorResponse';
+import IBusinessPerformanceProjection from './model/IBusinessPerformanceProjection';
+import IRevenueThisAndLastMonthProjection from './model/IRevenueThisAndLastMonthProjection';
 import LocationInfoInfo from './model/LocationInfoInfo';
 import MerchantDetails from './model/MerchantDetails';
 import MerchantDetailsDetails from './model/MerchantDetailsDetails';
 import MerchantInfoInfo from './model/MerchantInfoInfo';
+import OrderDetailsDetails from './model/OrderDetailsDetails';
+import OrderExtraVariantDetails from './model/OrderExtraVariantDetails';
 import OrderExtraVariantInfo from './model/OrderExtraVariantInfo';
 import OrderInfoInfo from './model/OrderInfoInfo';
+import OrderItemInfoDetails from './model/OrderItemInfoDetails';
 import OrderItemInfoInfo from './model/OrderItemInfoInfo';
 import PreSignUrl from './model/PreSignUrl';
 import ProductCategoryInfo from './model/ProductCategoryInfo';
@@ -101,6 +111,7 @@ import AppUserControllerApi from './api/AppUserControllerApi';
 import AuthControllerApi from './api/AuthControllerApi';
 import LocationControllerApi from './api/LocationControllerApi';
 import MediaControllerApi from './api/MediaControllerApi';
+import MerchantOrderControllerApi from './api/MerchantOrderControllerApi';
 import PaymentControllerApi from './api/PaymentControllerApi';
 import SystemMerchantControllerApi from './api/SystemMerchantControllerApi';
 import SystemProductCategoryControllerApi from './api/SystemProductCategoryControllerApi';
@@ -202,6 +213,18 @@ export {
     BaseResponseCreateOrderResponse,
 
     /**
+     * The BaseResponseIBusinessPerformanceProjection model constructor.
+     * @property {module:model/BaseResponseIBusinessPerformanceProjection}
+     */
+    BaseResponseIBusinessPerformanceProjection,
+
+    /**
+     * The BaseResponseListIRevenueThisAndLastMonthProjection model constructor.
+     * @property {module:model/BaseResponseListIRevenueThisAndLastMonthProjection}
+     */
+    BaseResponseListIRevenueThisAndLastMonthProjection,
+
+    /**
      * The BaseResponseListLocationInfoInfo model constructor.
      * @property {module:model/BaseResponseListLocationInfoInfo}
      */
@@ -254,6 +277,12 @@ export {
      * @property {module:model/BaseResponseMerchantInfoInfo}
      */
     BaseResponseMerchantInfoInfo,
+
+    /**
+     * The BaseResponseOrderDetailsDetails model constructor.
+     * @property {module:model/BaseResponseOrderDetailsDetails}
+     */
+    BaseResponseOrderDetailsDetails,
 
     /**
      * The BaseResponsePreSignUrl model constructor.
@@ -316,6 +345,18 @@ export {
     ChangeOrderProductCategoryRequest,
 
     /**
+     * The ChangeOrderStatusRequest model constructor.
+     * @property {module:model/ChangeOrderStatusRequest}
+     */
+    ChangeOrderStatusRequest,
+
+    /**
+     * The ChangeUserStatusRequest model constructor.
+     * @property {module:model/ChangeUserStatusRequest}
+     */
+    ChangeUserStatusRequest,
+
+    /**
      * The CreateOrderItemRequest model constructor.
      * @property {module:model/CreateOrderItemRequest}
      */
@@ -358,6 +399,18 @@ export {
     ErrorResponse,
 
     /**
+     * The IBusinessPerformanceProjection model constructor.
+     * @property {module:model/IBusinessPerformanceProjection}
+     */
+    IBusinessPerformanceProjection,
+
+    /**
+     * The IRevenueThisAndLastMonthProjection model constructor.
+     * @property {module:model/IRevenueThisAndLastMonthProjection}
+     */
+    IRevenueThisAndLastMonthProjection,
+
+    /**
      * The LocationInfoInfo model constructor.
      * @property {module:model/LocationInfoInfo}
      */
@@ -382,6 +435,18 @@ export {
     MerchantInfoInfo,
 
     /**
+     * The OrderDetailsDetails model constructor.
+     * @property {module:model/OrderDetailsDetails}
+     */
+    OrderDetailsDetails,
+
+    /**
+     * The OrderExtraVariantDetails model constructor.
+     * @property {module:model/OrderExtraVariantDetails}
+     */
+    OrderExtraVariantDetails,
+
+    /**
      * The OrderExtraVariantInfo model constructor.
      * @property {module:model/OrderExtraVariantInfo}
      */
@@ -392,6 +457,12 @@ export {
      * @property {module:model/OrderInfoInfo}
      */
     OrderInfoInfo,
+
+    /**
+     * The OrderItemInfoDetails model constructor.
+     * @property {module:model/OrderItemInfoDetails}
+     */
+    OrderItemInfoDetails,
 
     /**
      * The OrderItemInfoInfo model constructor.
@@ -674,6 +745,12 @@ export {
     * @property {module:api/MediaControllerApi}
     */
     MediaControllerApi,
+
+    /**
+    * The MerchantOrderControllerApi service constructor.
+    * @property {module:api/MerchantOrderControllerApi}
+    */
+    MerchantOrderControllerApi,
 
     /**
     * The PaymentControllerApi service constructor.

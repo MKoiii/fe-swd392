@@ -224,7 +224,7 @@ const ManageProductDetail = () => {
     <ProductContext.Provider
       value={{ addProduct, setAddProduct, skus, setSkus, reload, setReload }}
     >
-      <MainBoard children={<ProductDetailContent />} />
+      <ProductDetailContent />
     </ProductContext.Provider>
   );
 };

@@ -204,7 +204,7 @@ const SettingSku = () => {
     <ProductContext.Provider
       value={{ addProduct, setAddProduct, skus, setSkus }}
     >
-      <MainBoard children={<SettingSkuContent />} />
+      <SettingSkuContent />
     </ProductContext.Provider>
   );
 };

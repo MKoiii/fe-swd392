@@ -61,7 +61,7 @@ const ManageProducts = () => {
   const [reload, setReload] = useState();
   return (
     <ProductContext.Provider value={{ reload, setReload }}>
-      <MainBoard children={<ManageProductsContent />} />
+      <ManageProductsContent />
     </ProductContext.Provider>
   );
 };

@@ -38,7 +38,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { ROLE, TOKEN } from "../../constant";
 import { AuthContext } from "../../App";
-import { FaUserTag } from "react-icons/fa";
+import { FaShoppingCart, FaUserTag } from "react-icons/fa";
 
 const LinkItems = [
   {
@@ -63,6 +63,12 @@ const LinkItems = [
     name: "Products",
     icon: MdOutlineSell,
     path: "/manage-products",
+    roles: [ROLE.MERCHANT],
+  },
+  {
+    name: "Orders",
+    icon: FaShoppingCart,
+    path: "/manage-orders",
     roles: [ROLE.MERCHANT],
   },
   {
@@ -242,23 +248,91 @@ const MobileNav = ({ onOpen, ...rest }) => {
                 </Box>
               </HStack>
             </MenuButton>
-            <MenuList
-              bg={useColorModeValue("white", "gray.900")}
-              borderColor={useColorModeValue("gray.200", "gray.700")}
-            >
-              <MenuItem onClick={() => navigate("/my-profile")}>
-                Profile
+            <MenuList bg={"white"} borderColor={"gray.200"}>
+              <MenuItem
+                p={"4px 24px"}
+                _hover={{
+                  backgroundColor: "rgba(134, 134, 134, 0.3)",
+                }}
+                m={"0 !important"}
+                onClick={() => {
+                  TOKEN.isCMS
+                    ? navigate("/admin-profile")
+                    : navigate("/user-profile");
+                }}
+              >
+                Thông tin cá nhân
               </MenuItem>
-              <MenuItem>Settings</MenuItem>
-              <MenuItem>Billing</MenuItem>
+              {TOKEN.isMerchant() || TOKEN.isUser() ? (
+                <MenuItem
+                  p={"4px 24px"}
+                  _hover={{
+                    backgroundColor: "rgba(134, 134, 134, 0.3)",
+                  }}
+                  m={"0 !important"}
+                  onClick={() => navigate("/my-order")}
+                >
+                  Đơn hàng
+                </MenuItem>
+              ) : (
+                <></>
+              )}
+              {TOKEN.isMerchant() ? (
+                <MenuItem
+                  p={"4px 24px"}
+                  _hover={{
+                    backgroundColor: "rgba(134, 134, 134, 0.3)",
+                  }}
+                  m={"0 !important"}
+                  onClick={() => navigate("/manage-products")}
+                >
+                  Quản lí quản phẩm
+                </MenuItem>
+              ) : (
+                <></>
+              )}
+              {TOKEN.isMerchant() ? (
+                <MenuItem
+                  p={"4px 24px"}
+                  _hover={{
+                    backgroundColor: "rgba(134, 134, 134, 0.3)",
+                  }}
+                  m={"0 !important"}
+                  onClick={() => navigate("/manage-orders")}
+                >
+                  Quản lí đơn hàng
+                </MenuItem>
+              ) : (
+                <></>
+              )}
+              {TOKEN.isUser() ? (
+                <MenuItem
+                  p={"4px 24px"}
+                  _hover={{
+                    backgroundColor: "rgba(134, 134, 134, 0.3)",
+                  }}
+                  m={"0 !important"}
+                  onClick={() => navigate("/register-merchant")}
+                >
+                  Đăng ký merchant
+                </MenuItem>
+              ) : (
+                <></>
+              )}
+
               <MenuDivider />
               <MenuItem
+                p={"4px 24px"}
+                _hover={{
+                  backgroundColor: "rgba(134, 134, 134, 0.3)",
+                }}
+                m={"0 !important"}
                 onClick={() => {
                   navigate("/login");
                   TOKEN.clear();
                 }}
               >
-                Sign out
+                Đăng xuất
               </MenuItem>
             </MenuList>
           </Menu>

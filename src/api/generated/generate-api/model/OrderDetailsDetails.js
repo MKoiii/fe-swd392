@@ -23,17 +23,10 @@ class OrderDetailsDetails {
     /**
      * Constructs a new <code>OrderDetailsDetails</code>.
      * @alias module:model/OrderDetailsDetails
-     * @param receiverFullName {String} 
-     * @param phone {String} 
-     * @param provinceId {Number} 
-     * @param districtId {Number} 
-     * @param wardId {Number} 
-     * @param addressDetails {String} 
-     * @param status {module:model/OrderDetailsDetails.StatusEnum} 
      */
-    constructor(receiverFullName, phone, provinceId, districtId, wardId, addressDetails, status) { 
+    constructor() { 
         
-        OrderDetailsDetails.initialize(this, receiverFullName, phone, provinceId, districtId, wardId, addressDetails, status);
+        OrderDetailsDetails.initialize(this);
     }
 
     /**
@@ -41,14 +34,7 @@ class OrderDetailsDetails {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, receiverFullName, phone, provinceId, districtId, wardId, addressDetails, status) { 
-        obj['receiverFullName'] = receiverFullName;
-        obj['phone'] = phone;
-        obj['provinceId'] = provinceId;
-        obj['districtId'] = districtId;
-        obj['wardId'] = wardId;
-        obj['addressDetails'] = addressDetails;
-        obj['status'] = status;
+    static initialize(obj) { 
     }
 
     /**
@@ -132,12 +118,6 @@ class OrderDetailsDetails {
      * @return {boolean} to indicate whether the JSON data is valid with respect to <code>OrderDetailsDetails</code>.
      */
     static validateJSON(data) {
-        // check to make sure all required properties are present in the JSON string
-        for (const property of OrderDetailsDetails.RequiredProperties) {
-            if (!data.hasOwnProperty(property)) {
-                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
-            }
-        }
         // ensure the json data is a string
         if (data['id'] && !(typeof data['id'] === 'string' || data['id'] instanceof String)) {
             throw new Error("Expected the field `id` to be a primitive type in the JSON string but got " + data['id']);
@@ -203,7 +183,7 @@ class OrderDetailsDetails {
 
 }
 
-OrderDetailsDetails.RequiredProperties = ["receiverFullName", "phone", "provinceId", "districtId", "wardId", "addressDetails", "status"];
+
 
 /**
  * @member {String} id
@@ -354,12 +334,6 @@ OrderDetailsDetails['StatusEnum'] = {
      * @const
      */
     "NEW": "NEW",
-
-    /**
-     * value: "CHECKOUT"
-     * @const
-     */
-    "CHECKOUT": "CHECKOUT",
 
     /**
      * value: "PAID"

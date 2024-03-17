@@ -78,6 +78,7 @@ export default function LandingPage(props) {
           {...props}
           py={12}
           position={"relative"}
+          id="products"
         >
           <ProductCards products={products} />
           <div style={{ position: "absolute", top: "6px", right: 0 }}>

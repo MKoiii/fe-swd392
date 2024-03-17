@@ -14,6 +14,7 @@ import {
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 import { FiShoppingCart } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import { IMAGES } from "../../constant";
 
 const data = {
   isNew: true,
@@ -70,7 +71,7 @@ function ProductCart({ product }) {
           <Image
             width={"280px"}
             height={"200px"}
-            src={product?.image}
+            src={IMAGES.getImage(product?.image)}
             alt={`Picture of ${product?.name}`}
             roundedTop="lg"
           />
@@ -91,7 +92,7 @@ function ProductCart({ product }) {
             >
               {product.name}
             </Box>
-            <Tooltip
+            {/* <Tooltip
               label="Add to cart"
               bg="white"
               placement={"top"}
@@ -101,7 +102,7 @@ function ProductCart({ product }) {
               <chakra.a href={"#"} display={"flex"}>
                 <Icon as={FiShoppingCart} h={7} w={7} alignSelf={"center"} />
               </chakra.a>
-            </Tooltip>
+            </Tooltip> */}
           </Flex>
 
           <Flex

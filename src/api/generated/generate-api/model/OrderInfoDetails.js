@@ -12,21 +12,21 @@
  */
 
 import ApiClient from '../ApiClient';
-import OrderItemInfoInfo from './OrderItemInfoInfo';
+import OrderItemInfoDetails from './OrderItemInfoDetails';
 
 /**
- * The OrderInfoInfo model module.
- * @module model/OrderInfoInfo
+ * The OrderInfoDetails model module.
+ * @module model/OrderInfoDetails
  * @version 1.0.0
  */
-class OrderInfoInfo {
+class OrderInfoDetails {
     /**
-     * Constructs a new <code>OrderInfoInfo</code>.
-     * @alias module:model/OrderInfoInfo
+     * Constructs a new <code>OrderInfoDetails</code>.
+     * @alias module:model/OrderInfoDetails
      */
     constructor() { 
         
-        OrderInfoInfo.initialize(this);
+        OrderInfoDetails.initialize(this);
     }
 
     /**
@@ -38,15 +38,15 @@ class OrderInfoInfo {
     }
 
     /**
-     * Constructs a <code>OrderInfoInfo</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>OrderInfoDetails</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/OrderInfoInfo} obj Optional instance to populate.
-     * @return {module:model/OrderInfoInfo} The populated <code>OrderInfoInfo</code> instance.
+     * @param {module:model/OrderInfoDetails} obj Optional instance to populate.
+     * @return {module:model/OrderInfoDetails} The populated <code>OrderInfoDetails</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new OrderInfoInfo();
+            obj = obj || new OrderInfoDetails();
 
             if (data.hasOwnProperty('id')) {
                 obj['id'] = ApiClient.convertToType(data['id'], 'String');
@@ -100,16 +100,16 @@ class OrderInfoInfo {
                 obj['numItem'] = ApiClient.convertToType(data['numItem'], 'Number');
             }
             if (data.hasOwnProperty('firstItem')) {
-                obj['firstItem'] = OrderItemInfoInfo.constructFromObject(data['firstItem']);
+                obj['firstItem'] = OrderItemInfoDetails.constructFromObject(data['firstItem']);
             }
         }
         return obj;
     }
 
     /**
-     * Validates the JSON data with respect to <code>OrderInfoInfo</code>.
+     * Validates the JSON data with respect to <code>OrderInfoDetails</code>.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>OrderInfoInfo</code>.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>OrderInfoDetails</code>.
      */
     static validateJSON(data) {
         // ensure the json data is a string
@@ -154,7 +154,7 @@ class OrderInfoInfo {
         }
         // validate the optional field `firstItem`
         if (data['firstItem']) { // data not null
-          OrderItemInfoInfo.validateJSON(data['firstItem']);
+          OrderItemInfoDetails.validateJSON(data['firstItem']);
         }
 
         return true;
@@ -168,92 +168,92 @@ class OrderInfoInfo {
 /**
  * @member {String} id
  */
-OrderInfoInfo.prototype['id'] = undefined;
+OrderInfoDetails.prototype['id'] = undefined;
 
 /**
  * @member {Date} createdDate
  */
-OrderInfoInfo.prototype['createdDate'] = undefined;
+OrderInfoDetails.prototype['createdDate'] = undefined;
 
 /**
  * @member {String} receiverFullName
  */
-OrderInfoInfo.prototype['receiverFullName'] = undefined;
+OrderInfoDetails.prototype['receiverFullName'] = undefined;
 
 /**
  * @member {String} phone
  */
-OrderInfoInfo.prototype['phone'] = undefined;
+OrderInfoDetails.prototype['phone'] = undefined;
 
 /**
  * @member {Number} provinceId
  */
-OrderInfoInfo.prototype['provinceId'] = undefined;
+OrderInfoDetails.prototype['provinceId'] = undefined;
 
 /**
  * @member {String} provinceName
  */
-OrderInfoInfo.prototype['provinceName'] = undefined;
+OrderInfoDetails.prototype['provinceName'] = undefined;
 
 /**
  * @member {Number} districtId
  */
-OrderInfoInfo.prototype['districtId'] = undefined;
+OrderInfoDetails.prototype['districtId'] = undefined;
 
 /**
  * @member {String} districtName
  */
-OrderInfoInfo.prototype['districtName'] = undefined;
+OrderInfoDetails.prototype['districtName'] = undefined;
 
 /**
  * @member {Number} wardId
  */
-OrderInfoInfo.prototype['wardId'] = undefined;
+OrderInfoDetails.prototype['wardId'] = undefined;
 
 /**
  * @member {String} wardName
  */
-OrderInfoInfo.prototype['wardName'] = undefined;
+OrderInfoDetails.prototype['wardName'] = undefined;
 
 /**
  * @member {String} addressDetails
  */
-OrderInfoInfo.prototype['addressDetails'] = undefined;
+OrderInfoDetails.prototype['addressDetails'] = undefined;
 
 /**
  * @member {Number} subTotal
  */
-OrderInfoInfo.prototype['subTotal'] = undefined;
+OrderInfoDetails.prototype['subTotal'] = undefined;
 
 /**
  * @member {Number} shippingCharge
  */
-OrderInfoInfo.prototype['shippingCharge'] = undefined;
+OrderInfoDetails.prototype['shippingCharge'] = undefined;
 
 /**
  * @member {String} description
  */
-OrderInfoInfo.prototype['description'] = undefined;
+OrderInfoDetails.prototype['description'] = undefined;
 
 /**
- * @member {module:model/OrderInfoInfo.PaymentMethodEnum} paymentMethod
+ * @member {module:model/OrderInfoDetails.PaymentMethodEnum} paymentMethod
  */
-OrderInfoInfo.prototype['paymentMethod'] = undefined;
+OrderInfoDetails.prototype['paymentMethod'] = undefined;
 
 /**
- * @member {module:model/OrderInfoInfo.StatusEnum} status
+ * @member {module:model/OrderInfoDetails.StatusEnum} status
  */
-OrderInfoInfo.prototype['status'] = undefined;
+OrderInfoDetails.prototype['status'] = undefined;
 
 /**
  * @member {Number} numItem
  */
-OrderInfoInfo.prototype['numItem'] = undefined;
+OrderInfoDetails.prototype['numItem'] = undefined;
 
 /**
- * @member {module:model/OrderItemInfoInfo} firstItem
+ * @member {module:model/OrderItemInfoDetails} firstItem
  */
-OrderInfoInfo.prototype['firstItem'] = undefined;
+OrderInfoDetails.prototype['firstItem'] = undefined;
 
 
 
@@ -264,7 +264,7 @@ OrderInfoInfo.prototype['firstItem'] = undefined;
  * @enum {String}
  * @readonly
  */
-OrderInfoInfo['PaymentMethodEnum'] = {
+OrderInfoDetails['PaymentMethodEnum'] = {
 
     /**
      * value: "CARD"
@@ -297,7 +297,7 @@ OrderInfoInfo['PaymentMethodEnum'] = {
  * @enum {String}
  * @readonly
  */
-OrderInfoInfo['StatusEnum'] = {
+OrderInfoDetails['StatusEnum'] = {
 
     /**
      * value: "NEW"
@@ -338,5 +338,5 @@ OrderInfoInfo['StatusEnum'] = {
 
 
 
-export default OrderInfoInfo;
+export default OrderInfoDetails;
 

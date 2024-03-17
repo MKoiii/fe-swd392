@@ -16,6 +16,7 @@ import ApiClient from "../ApiClient";
 import BasePagingResponseUserInfoInfo from '../model/BasePagingResponseUserInfoInfo';
 import BaseResponseUserDetails from '../model/BaseResponseUserDetails';
 import BaseResponseUserDetailsDetails from '../model/BaseResponseUserDetailsDetails';
+import ChangeUserStatusRequest from '../model/ChangeUserStatusRequest';
 import ErrorResponse from '../model/ErrorResponse';
 import SuccessResponse from '../model/SuccessResponse';
 import UserDetails from '../model/UserDetails';
@@ -40,6 +41,46 @@ export default class SystemUserControllerApi {
         this.apiClient = apiClient || ApiClient.instance;
     }
 
+
+    /**
+     * Callback function to receive the result of the systemUserControllerChangeStatus operation.
+     * @callback module:api/SystemUserControllerApi~systemUserControllerChangeStatusCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/SuccessResponse} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * @param {module:model/ChangeUserStatusRequest} changeUserStatusRequest 
+     * @param {module:api/SystemUserControllerApi~systemUserControllerChangeStatusCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/SuccessResponse}
+     */
+    systemUserControllerChangeStatus(changeUserStatusRequest, callback) {
+      let postBody = changeUserStatusRequest;
+      // verify the required parameter 'changeUserStatusRequest' is set
+      if (changeUserStatusRequest === undefined || changeUserStatusRequest === null) {
+        throw new Error("Missing the required parameter 'changeUserStatusRequest' when calling systemUserControllerChangeStatus");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['Authorization'];
+      let contentTypes = ['application/json'];
+      let accepts = ['*/*'];
+      let returnType = SuccessResponse;
+      return this.apiClient.callApi(
+        '/api/v1/system/user/change-status', 'PATCH',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
 
     /**
      * Callback function to receive the result of the systemUserControllerCreateAdmin operation.
@@ -116,47 +157,6 @@ export default class SystemUserControllerApi {
       let returnType = BaseResponseUserDetailsDetails;
       return this.apiClient.callApi(
         '/api/v1/system/user/create', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
-      );
-    }
-
-    /**
-     * Callback function to receive the result of the systemUserControllerDeleteModelById operation.
-     * @callback module:api/SystemUserControllerApi~systemUserControllerDeleteModelByIdCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/SuccessResponse} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * @param {String} id 
-     * @param {module:api/SystemUserControllerApi~systemUserControllerDeleteModelByIdCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/SuccessResponse}
-     */
-    systemUserControllerDeleteModelById(id, callback) {
-      let postBody = null;
-      // verify the required parameter 'id' is set
-      if (id === undefined || id === null) {
-        throw new Error("Missing the required parameter 'id' when calling systemUserControllerDeleteModelById");
-      }
-
-      let pathParams = {
-        'id': id
-      };
-      let queryParams = {
-      };
-      let headerParams = {
-      };
-      let formParams = {
-      };
-
-      let authNames = ['Authorization'];
-      let contentTypes = [];
-      let accepts = ['*/*'];
-      let returnType = SuccessResponse;
-      return this.apiClient.callApi(
-        '/api/v1/system/user/{id}/delete', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );

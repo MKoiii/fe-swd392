@@ -53,7 +53,7 @@ const ManageCategories = () => {
   const [reload, setReload] = useState(false);
   return (
     <CategoriesContext.Provider value={{ reload, setReload }}>
-      <MainBoard children={<ManageCategoriesContent />} />
+      <ManageCategoriesContent />
     </CategoriesContext.Provider>
   );
 };

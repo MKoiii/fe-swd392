@@ -5,7 +5,7 @@ import DashboardContent from "./page";
 const Dashboard = () => {
   return (
     <>
-      <MainBoard children={<DashboardContent />} />
+      <DashboardContent />
     </>
   );
 };

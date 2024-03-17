@@ -18,6 +18,8 @@ docs/BasePagingResponseProductInfo.md
 docs/BasePagingResponseProductInfoInfo.md
 docs/BasePagingResponseUserInfoInfo.md
 docs/BaseResponseCreateOrderResponse.md
+docs/BaseResponseIBusinessPerformanceProjection.md
+docs/BaseResponseListIRevenueThisAndLastMonthProjection.md
 docs/BaseResponseListLocationInfoInfo.md
 docs/BaseResponseListProductCategoryInfo.md
 docs/BaseResponseListProductCategoryInfoInfo.md
@@ -27,6 +29,7 @@ docs/BaseResponseListUserAddressInfoInfo.md
 docs/BaseResponseMerchantDetails.md
 docs/BaseResponseMerchantDetailsDetails.md
 docs/BaseResponseMerchantInfoInfo.md
+docs/BaseResponseOrderDetailsDetails.md
 docs/BaseResponsePreSignUrl.md
 docs/BaseResponseProductCategoryInfoDetails.md
 docs/BaseResponseProductDetails.md
@@ -37,6 +40,8 @@ docs/BaseResponseUserAddressInfoDetails.md
 docs/BaseResponseUserDetails.md
 docs/BaseResponseUserDetailsDetails.md
 docs/ChangeOrderProductCategoryRequest.md
+docs/ChangeOrderStatusRequest.md
+docs/ChangeUserStatusRequest.md
 docs/CreateOrderItemRequest.md
 docs/CreateOrderRequest.md
 docs/CreateOrderResponse.md
@@ -44,14 +49,20 @@ docs/CreateProductRequestCreate.md
 docs/CreateSkuRequestCreate.md
 docs/CreateUserAddressRequestCreate.md
 docs/ErrorResponse.md
+docs/IBusinessPerformanceProjection.md
+docs/IRevenueThisAndLastMonthProjection.md
 docs/LocationControllerApi.md
 docs/LocationInfoInfo.md
 docs/MediaControllerApi.md
 docs/MerchantDetails.md
 docs/MerchantDetailsDetails.md
 docs/MerchantInfoInfo.md
+docs/MerchantOrderControllerApi.md
+docs/OrderDetailsDetails.md
+docs/OrderExtraVariantDetails.md
 docs/OrderExtraVariantInfo.md
 docs/OrderInfoInfo.md
+docs/OrderItemInfoDetails.md
 docs/OrderItemInfoInfo.md
 docs/PaymentControllerApi.md
 docs/PreSignUrl.md
@@ -106,6 +117,7 @@ generate-api/api/AppUserControllerApi.js
 generate-api/api/AuthControllerApi.js
 generate-api/api/LocationControllerApi.js
 generate-api/api/MediaControllerApi.js
+generate-api/api/MerchantOrderControllerApi.js
 generate-api/api/PaymentControllerApi.js
 generate-api/api/SystemMerchantControllerApi.js
 generate-api/api/SystemProductCategoryControllerApi.js
@@ -122,6 +134,8 @@ generate-api/model/BasePagingResponseProductInfo.js
 generate-api/model/BasePagingResponseProductInfoInfo.js
 generate-api/model/BasePagingResponseUserInfoInfo.js
 generate-api/model/BaseResponseCreateOrderResponse.js
+generate-api/model/BaseResponseIBusinessPerformanceProjection.js
+generate-api/model/BaseResponseListIRevenueThisAndLastMonthProjection.js
 generate-api/model/BaseResponseListLocationInfoInfo.js
 generate-api/model/BaseResponseListProductCategoryInfo.js
 generate-api/model/BaseResponseListProductCategoryInfoInfo.js
@@ -131,6 +145,7 @@ generate-api/model/BaseResponseListUserAddressInfoInfo.js
 generate-api/model/BaseResponseMerchantDetails.js
 generate-api/model/BaseResponseMerchantDetailsDetails.js
 generate-api/model/BaseResponseMerchantInfoInfo.js
+generate-api/model/BaseResponseOrderDetailsDetails.js
 generate-api/model/BaseResponsePreSignUrl.js
 generate-api/model/BaseResponseProductCategoryInfoDetails.js
 generate-api/model/BaseResponseProductDetails.js
@@ -141,6 +156,8 @@ generate-api/model/BaseResponseUserAddressInfoDetails.js
 generate-api/model/BaseResponseUserDetails.js
 generate-api/model/BaseResponseUserDetailsDetails.js
 generate-api/model/ChangeOrderProductCategoryRequest.js
+generate-api/model/ChangeOrderStatusRequest.js
+generate-api/model/ChangeUserStatusRequest.js
 generate-api/model/CreateOrderItemRequest.js
 generate-api/model/CreateOrderRequest.js
 generate-api/model/CreateOrderResponse.js
@@ -148,12 +165,17 @@ generate-api/model/CreateProductRequestCreate.js
 generate-api/model/CreateSkuRequestCreate.js
 generate-api/model/CreateUserAddressRequestCreate.js
 generate-api/model/ErrorResponse.js
+generate-api/model/IBusinessPerformanceProjection.js
+generate-api/model/IRevenueThisAndLastMonthProjection.js
 generate-api/model/LocationInfoInfo.js
 generate-api/model/MerchantDetails.js
 generate-api/model/MerchantDetailsDetails.js
 generate-api/model/MerchantInfoInfo.js
+generate-api/model/OrderDetailsDetails.js
+generate-api/model/OrderExtraVariantDetails.js
 generate-api/model/OrderExtraVariantInfo.js
 generate-api/model/OrderInfoInfo.js
+generate-api/model/OrderItemInfoDetails.js
 generate-api/model/OrderItemInfoInfo.js
 generate-api/model/PreSignUrl.js
 generate-api/model/ProductCategoryInfo.js
@@ -195,4 +217,3 @@ generate-api/model/UserInfoInfo.js
 git_push.sh
 mocha.opts
 package.json
-test/api/PaymentControllerApi.spec.js

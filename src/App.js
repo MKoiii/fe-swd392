@@ -30,6 +30,9 @@ import Cart from "./pages/cart";
 import Checkout from "./pages/checkout";
 import ConfirmPayment from "./pages/confirmPayment";
 import MyOrder from "./pages/myOrder";
+import ManageOrders from "./pages/manageOrders";
+import OrderDetail from "./pages/manageOrders/OrderDetail";
+import AdminProfile from "./pages/adminProfile";
 
 const AuthContext = createContext(null);
 const initialValue = {
@@ -54,6 +57,7 @@ function App() {
           <Route path="/rest-pass" element={<ResetPasswordForm />} />
           <Route path="/home" element={<LandingPage />} />
           <Route path="/product-detail/:id" element={<ProductDetail />} />
+          {/* Role user */}
           <Route element={<UserPrivateRouter />}>
             <Route path="/products" element={<Products />} />
             <Route path="/cart" element={<Cart />} />
@@ -63,6 +67,7 @@ function App() {
             <Route path="/order" element={<ConfirmPayment />} />
             <Route path="/my-order" element={<MyOrder />} />
           </Route>
+          {/* Role Admin */}
           <Route element={<AdminPrivateRouter />}>
             <Route path="/manage-users" element={<ManageUsers />} />
             <Route path="/manage-merchants">
@@ -74,10 +79,9 @@ function App() {
               path="/manage-categories/:categoryId"
               element={<CategoryDetail />}
             />
+            <Route path="/admin-profile" element={<AdminProfile />} />
           </Route>
-          <Route element={<CommonPrivateRouter />}>
-            <Route path="/my-profile" element={<Profile />} />
-          </Route>
+          {/* Role merchant */}
           <Route element={<MerchantPrivateRouter />}>
             <Route path="/manage-products">
               <Route path="" element={<ManageProducts />} />
@@ -92,6 +96,10 @@ function App() {
                 path="update-sku/:productId/:skuId"
                 element={<SettingSku />}
               />
+            </Route>
+            <Route path="manage-orders">
+              <Route path="" element={<ManageOrders />} />
+              <Route path=":id" element={<OrderDetail />} />
             </Route>
           </Route>
           <Route element={<AdminAndMerchantPrivateRouter />}>

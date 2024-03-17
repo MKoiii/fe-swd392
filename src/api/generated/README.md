@@ -130,7 +130,9 @@ Class | Method | HTTP request | Description
 *Swd392AuctionApi.AppMerchantControllerApi* | [**appMerchantControllerGetInfoById**](docs/AppMerchantControllerApi.md#appMerchantControllerGetInfoById) | **GET** /api/v1/app/merchant/public/{id}/info | 
 *Swd392AuctionApi.AppMerchantControllerApi* | [**appMerchantControllerSubmitDraft**](docs/AppMerchantControllerApi.md#appMerchantControllerSubmitDraft) | **PATCH** /api/v1/app/merchant/draft/submit | 
 *Swd392AuctionApi.AppMerchantControllerApi* | [**appMerchantControllerUpdateModel**](docs/AppMerchantControllerApi.md#appMerchantControllerUpdateModel) | **PUT** /api/v1/app/merchant/update | 
+*Swd392AuctionApi.AppOrderControllerApi* | [**appOrderControllerChangeStatus**](docs/AppOrderControllerApi.md#appOrderControllerChangeStatus) | **PATCH** /api/v1/app/order/change-status | 
 *Swd392AuctionApi.AppOrderControllerApi* | [**appOrderControllerCreateModel**](docs/AppOrderControllerApi.md#appOrderControllerCreateModel) | **POST** /api/v1/app/order/create | 
+*Swd392AuctionApi.AppOrderControllerApi* | [**appOrderControllerGetDetailsById**](docs/AppOrderControllerApi.md#appOrderControllerGetDetailsById) | **GET** /api/v1/app/order/{id}/details | 
 *Swd392AuctionApi.AppOrderControllerApi* | [**appOrderControllerGetInfoPageWithFilter**](docs/AppOrderControllerApi.md#appOrderControllerGetInfoPageWithFilter) | **GET** /api/v1/app/order/info/page/filter | 
 *Swd392AuctionApi.AppOrderControllerApi* | [**appOrderControllerGetPaymentUrl**](docs/AppOrderControllerApi.md#appOrderControllerGetPaymentUrl) | **GET** /api/v1/app/order/create-payment/{orderId} | 
 *Swd392AuctionApi.AppProductCategoryControllerApi* | [**appProductCategoryControllerGetInfoList**](docs/AppProductCategoryControllerApi.md#appProductCategoryControllerGetInfoList) | **GET** /api/v1/app/product-category/public/list | 
@@ -154,6 +156,11 @@ Class | Method | HTTP request | Description
 *Swd392AuctionApi.MediaControllerApi* | [**mediaControllerPreviewPreSignPublic**](docs/MediaControllerApi.md#mediaControllerPreviewPreSignPublic) | **GET** /api/v1/media/public/preview/pre-sign/{fileType}/{objectName} | Preview file public
 *Swd392AuctionApi.MediaControllerApi* | [**mediaControllerPreviewPubic**](docs/MediaControllerApi.md#mediaControllerPreviewPubic) | **GET** /api/v1/media/public/preview/{fileType}/{objectName} | Preview file public
 *Swd392AuctionApi.MediaControllerApi* | [**mediaControllerUploadPublic**](docs/MediaControllerApi.md#mediaControllerUploadPublic) | **POST** /api/v1/media/public/upload | Upload file public
+*Swd392AuctionApi.MerchantOrderControllerApi* | [**merchantOrderControllerBusinessPerformance**](docs/MerchantOrderControllerApi.md#merchantOrderControllerBusinessPerformance) | **GET** /api/v1/merchant/order/business-performance | 
+*Swd392AuctionApi.MerchantOrderControllerApi* | [**merchantOrderControllerChangeStatus**](docs/MerchantOrderControllerApi.md#merchantOrderControllerChangeStatus) | **PATCH** /api/v1/merchant/order/change-status | 
+*Swd392AuctionApi.MerchantOrderControllerApi* | [**merchantOrderControllerGetDetailsById**](docs/MerchantOrderControllerApi.md#merchantOrderControllerGetDetailsById) | **GET** /api/v1/merchant/order/{id}/details | 
+*Swd392AuctionApi.MerchantOrderControllerApi* | [**merchantOrderControllerGetInfoPageWithFilter**](docs/MerchantOrderControllerApi.md#merchantOrderControllerGetInfoPageWithFilter) | **GET** /api/v1/merchant/order/info/page/filter | 
+*Swd392AuctionApi.MerchantOrderControllerApi* | [**merchantOrderControllerRevenueByThisAndLastMonth**](docs/MerchantOrderControllerApi.md#merchantOrderControllerRevenueByThisAndLastMonth) | **GET** /api/v1/merchant/order/revenue-by-month | 
 *Swd392AuctionApi.PaymentControllerApi* | [**paymentControllerConfirmCheckedOut**](docs/PaymentControllerApi.md#paymentControllerConfirmCheckedOut) | **GET** /api/v1/payment/checkout/{action}/{paymentId} | 
 *Swd392AuctionApi.SystemMerchantControllerApi* | [**systemMerchantControllerApproveOrRejectMerchant**](docs/SystemMerchantControllerApi.md#systemMerchantControllerApproveOrRejectMerchant) | **POST** /api/v1/system/merchant/change-status | 
 *Swd392AuctionApi.SystemMerchantControllerApi* | [**systemMerchantControllerGetDetailsById**](docs/SystemMerchantControllerApi.md#systemMerchantControllerGetDetailsById) | **GET** /api/v1/system/merchant/{id}/details | 
@@ -169,9 +176,9 @@ Class | Method | HTTP request | Description
 *Swd392AuctionApi.SystemSkuControllerApi* | [**appSkuControllerDeleteModelById**](docs/SystemSkuControllerApi.md#appSkuControllerDeleteModelById) | **DELETE** /api/v1/app/product-sku/{id}/delete | 
 *Swd392AuctionApi.SystemSkuControllerApi* | [**appSkuControllerGetInfoListWithFilter**](docs/SystemSkuControllerApi.md#appSkuControllerGetInfoListWithFilter) | **GET** /api/v1/app/product-sku/list | 
 *Swd392AuctionApi.SystemSkuControllerApi* | [**appSkuControllerUpdateModel**](docs/SystemSkuControllerApi.md#appSkuControllerUpdateModel) | **PUT** /api/v1/app/product-sku/update | 
+*Swd392AuctionApi.SystemUserControllerApi* | [**systemUserControllerChangeStatus**](docs/SystemUserControllerApi.md#systemUserControllerChangeStatus) | **PATCH** /api/v1/system/user/change-status | 
 *Swd392AuctionApi.SystemUserControllerApi* | [**systemUserControllerCreateAdmin**](docs/SystemUserControllerApi.md#systemUserControllerCreateAdmin) | **POST** /api/v1/system/user/admin/create | 
 *Swd392AuctionApi.SystemUserControllerApi* | [**systemUserControllerCreateModel**](docs/SystemUserControllerApi.md#systemUserControllerCreateModel) | **POST** /api/v1/system/user/create | 
-*Swd392AuctionApi.SystemUserControllerApi* | [**systemUserControllerDeleteModelById**](docs/SystemUserControllerApi.md#systemUserControllerDeleteModelById) | **DELETE** /api/v1/system/user/{id}/delete | 
 *Swd392AuctionApi.SystemUserControllerApi* | [**systemUserControllerGetDetailsByContext**](docs/SystemUserControllerApi.md#systemUserControllerGetDetailsByContext) | **GET** /api/v1/system/user/details/context | 
 *Swd392AuctionApi.SystemUserControllerApi* | [**systemUserControllerGetDetailsById**](docs/SystemUserControllerApi.md#systemUserControllerGetDetailsById) | **GET** /api/v1/system/user/{id}/details | 
 *Swd392AuctionApi.SystemUserControllerApi* | [**systemUserControllerGetInfoPageWithFilter**](docs/SystemUserControllerApi.md#systemUserControllerGetInfoPageWithFilter) | **GET** /api/v1/system/user/info/page/filter | 
@@ -189,6 +196,8 @@ Class | Method | HTTP request | Description
  - [Swd392AuctionApi.BasePagingResponseProductInfoInfo](docs/BasePagingResponseProductInfoInfo.md)
  - [Swd392AuctionApi.BasePagingResponseUserInfoInfo](docs/BasePagingResponseUserInfoInfo.md)
  - [Swd392AuctionApi.BaseResponseCreateOrderResponse](docs/BaseResponseCreateOrderResponse.md)
+ - [Swd392AuctionApi.BaseResponseIBusinessPerformanceProjection](docs/BaseResponseIBusinessPerformanceProjection.md)
+ - [Swd392AuctionApi.BaseResponseListIRevenueThisAndLastMonthProjection](docs/BaseResponseListIRevenueThisAndLastMonthProjection.md)
  - [Swd392AuctionApi.BaseResponseListLocationInfoInfo](docs/BaseResponseListLocationInfoInfo.md)
  - [Swd392AuctionApi.BaseResponseListProductCategoryInfo](docs/BaseResponseListProductCategoryInfo.md)
  - [Swd392AuctionApi.BaseResponseListProductCategoryInfoInfo](docs/BaseResponseListProductCategoryInfoInfo.md)
@@ -198,6 +207,7 @@ Class | Method | HTTP request | Description
  - [Swd392AuctionApi.BaseResponseMerchantDetails](docs/BaseResponseMerchantDetails.md)
  - [Swd392AuctionApi.BaseResponseMerchantDetailsDetails](docs/BaseResponseMerchantDetailsDetails.md)
  - [Swd392AuctionApi.BaseResponseMerchantInfoInfo](docs/BaseResponseMerchantInfoInfo.md)
+ - [Swd392AuctionApi.BaseResponseOrderDetailsDetails](docs/BaseResponseOrderDetailsDetails.md)
  - [Swd392AuctionApi.BaseResponsePreSignUrl](docs/BaseResponsePreSignUrl.md)
  - [Swd392AuctionApi.BaseResponseProductCategoryInfoDetails](docs/BaseResponseProductCategoryInfoDetails.md)
  - [Swd392AuctionApi.BaseResponseProductDetails](docs/BaseResponseProductDetails.md)
@@ -208,6 +218,8 @@ Class | Method | HTTP request | Description
  - [Swd392AuctionApi.BaseResponseUserDetails](docs/BaseResponseUserDetails.md)
  - [Swd392AuctionApi.BaseResponseUserDetailsDetails](docs/BaseResponseUserDetailsDetails.md)
  - [Swd392AuctionApi.ChangeOrderProductCategoryRequest](docs/ChangeOrderProductCategoryRequest.md)
+ - [Swd392AuctionApi.ChangeOrderStatusRequest](docs/ChangeOrderStatusRequest.md)
+ - [Swd392AuctionApi.ChangeUserStatusRequest](docs/ChangeUserStatusRequest.md)
  - [Swd392AuctionApi.CreateOrderItemRequest](docs/CreateOrderItemRequest.md)
  - [Swd392AuctionApi.CreateOrderRequest](docs/CreateOrderRequest.md)
  - [Swd392AuctionApi.CreateOrderResponse](docs/CreateOrderResponse.md)
@@ -215,12 +227,17 @@ Class | Method | HTTP request | Description
  - [Swd392AuctionApi.CreateSkuRequestCreate](docs/CreateSkuRequestCreate.md)
  - [Swd392AuctionApi.CreateUserAddressRequestCreate](docs/CreateUserAddressRequestCreate.md)
  - [Swd392AuctionApi.ErrorResponse](docs/ErrorResponse.md)
+ - [Swd392AuctionApi.IBusinessPerformanceProjection](docs/IBusinessPerformanceProjection.md)
+ - [Swd392AuctionApi.IRevenueThisAndLastMonthProjection](docs/IRevenueThisAndLastMonthProjection.md)
  - [Swd392AuctionApi.LocationInfoInfo](docs/LocationInfoInfo.md)
  - [Swd392AuctionApi.MerchantDetails](docs/MerchantDetails.md)
  - [Swd392AuctionApi.MerchantDetailsDetails](docs/MerchantDetailsDetails.md)
  - [Swd392AuctionApi.MerchantInfoInfo](docs/MerchantInfoInfo.md)
+ - [Swd392AuctionApi.OrderDetailsDetails](docs/OrderDetailsDetails.md)
+ - [Swd392AuctionApi.OrderExtraVariantDetails](docs/OrderExtraVariantDetails.md)
  - [Swd392AuctionApi.OrderExtraVariantInfo](docs/OrderExtraVariantInfo.md)
  - [Swd392AuctionApi.OrderInfoInfo](docs/OrderInfoInfo.md)
+ - [Swd392AuctionApi.OrderItemInfoDetails](docs/OrderItemInfoDetails.md)
  - [Swd392AuctionApi.OrderItemInfoInfo](docs/OrderItemInfoInfo.md)
  - [Swd392AuctionApi.PreSignUrl](docs/PreSignUrl.md)
  - [Swd392AuctionApi.ProductCategoryInfo](docs/ProductCategoryInfo.md)

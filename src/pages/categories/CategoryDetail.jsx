@@ -127,7 +127,7 @@ const CategoryDetail = () => {
   const [reload, setReload] = useState(false);
   return (
     <CategoriesContext.Provider value={{ reload, setReload }}>
-      <MainBoard children={<CategoryDetailContent />} />
+      <CategoryDetailContent />
     </CategoriesContext.Provider>
   );
 };

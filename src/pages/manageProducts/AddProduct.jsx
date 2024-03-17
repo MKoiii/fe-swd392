@@ -303,7 +303,7 @@ const AddProduct = () => {
         setAddSku,
       }}
     >
-      <MainBoard children={<AddProductContent />} />
+      <AddProductContent />
     </ProductContext.Provider>
   );
 };

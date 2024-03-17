@@ -14,23 +14,23 @@
 
 import ApiClient from "../ApiClient";
 import BasePagingResponseOrderInfoInfo from '../model/BasePagingResponseOrderInfoInfo';
-import BaseResponseCreateOrderResponse from '../model/BaseResponseCreateOrderResponse';
+import BaseResponseIBusinessPerformanceProjection from '../model/BaseResponseIBusinessPerformanceProjection';
+import BaseResponseListIRevenueThisAndLastMonthProjection from '../model/BaseResponseListIRevenueThisAndLastMonthProjection';
 import BaseResponseOrderDetailsDetails from '../model/BaseResponseOrderDetailsDetails';
 import ChangeOrderStatusRequest from '../model/ChangeOrderStatusRequest';
-import CreateOrderRequest from '../model/CreateOrderRequest';
 import ErrorResponse from '../model/ErrorResponse';
 import SuccessResponse from '../model/SuccessResponse';
 
 /**
-* AppOrderController service.
-* @module api/AppOrderControllerApi
+* MerchantOrderController service.
+* @module api/MerchantOrderControllerApi
 * @version 1.0.0
 */
-export default class AppOrderControllerApi {
+export default class MerchantOrderControllerApi {
 
     /**
-    * Constructs a new AppOrderControllerApi. 
-    * @alias module:api/AppOrderControllerApi
+    * Constructs a new MerchantOrderControllerApi. 
+    * @alias module:api/MerchantOrderControllerApi
     * @class
     * @param {module:ApiClient} [apiClient] Optional API client implementation to use,
     * default to {@link module:ApiClient#instance} if unspecified.
@@ -41,8 +41,47 @@ export default class AppOrderControllerApi {
 
 
     /**
-     * Callback function to receive the result of the appOrderControllerChangeStatus operation.
-     * @callback module:api/AppOrderControllerApi~appOrderControllerChangeStatusCallback
+     * Callback function to receive the result of the merchantOrderControllerBusinessPerformance operation.
+     * @callback module:api/MerchantOrderControllerApi~merchantOrderControllerBusinessPerformanceCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/BaseResponseIBusinessPerformanceProjection} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * @param {Object} opts Optional parameters
+     * @param {Date} [date] 
+     * @param {module:api/MerchantOrderControllerApi~merchantOrderControllerBusinessPerformanceCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/BaseResponseIBusinessPerformanceProjection}
+     */
+    merchantOrderControllerBusinessPerformance(opts, callback) {
+      opts = opts || {};
+      let postBody = null;
+
+      let pathParams = {
+      };
+      let queryParams = {
+        'date': opts['date']
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['Authorization'];
+      let contentTypes = [];
+      let accepts = ['*/*'];
+      let returnType = BaseResponseIBusinessPerformanceProjection;
+      return this.apiClient.callApi(
+        '/api/v1/merchant/order/business-performance', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the merchantOrderControllerChangeStatus operation.
+     * @callback module:api/MerchantOrderControllerApi~merchantOrderControllerChangeStatusCallback
      * @param {String} error Error message, if any.
      * @param {module:model/SuccessResponse} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -50,14 +89,14 @@ export default class AppOrderControllerApi {
 
     /**
      * @param {module:model/ChangeOrderStatusRequest} changeOrderStatusRequest 
-     * @param {module:api/AppOrderControllerApi~appOrderControllerChangeStatusCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/MerchantOrderControllerApi~merchantOrderControllerChangeStatusCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/SuccessResponse}
      */
-    appOrderControllerChangeStatus(changeOrderStatusRequest, callback) {
+    merchantOrderControllerChangeStatus(changeOrderStatusRequest, callback) {
       let postBody = changeOrderStatusRequest;
       // verify the required parameter 'changeOrderStatusRequest' is set
       if (changeOrderStatusRequest === undefined || changeOrderStatusRequest === null) {
-        throw new Error("Missing the required parameter 'changeOrderStatusRequest' when calling appOrderControllerChangeStatus");
+        throw new Error("Missing the required parameter 'changeOrderStatusRequest' when calling merchantOrderControllerChangeStatus");
       }
 
       let pathParams = {
@@ -74,55 +113,15 @@ export default class AppOrderControllerApi {
       let accepts = ['*/*'];
       let returnType = SuccessResponse;
       return this.apiClient.callApi(
-        '/api/v1/app/order/change-status', 'PATCH',
+        '/api/v1/merchant/order/change-status', 'PATCH',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );
     }
 
     /**
-     * Callback function to receive the result of the appOrderControllerCreateModel operation.
-     * @callback module:api/AppOrderControllerApi~appOrderControllerCreateModelCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/BaseResponseCreateOrderResponse} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * @param {module:model/CreateOrderRequest} createOrderRequest 
-     * @param {module:api/AppOrderControllerApi~appOrderControllerCreateModelCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/BaseResponseCreateOrderResponse}
-     */
-    appOrderControllerCreateModel(createOrderRequest, callback) {
-      let postBody = createOrderRequest;
-      // verify the required parameter 'createOrderRequest' is set
-      if (createOrderRequest === undefined || createOrderRequest === null) {
-        throw new Error("Missing the required parameter 'createOrderRequest' when calling appOrderControllerCreateModel");
-      }
-
-      let pathParams = {
-      };
-      let queryParams = {
-      };
-      let headerParams = {
-      };
-      let formParams = {
-      };
-
-      let authNames = ['Authorization'];
-      let contentTypes = ['application/json'];
-      let accepts = ['*/*'];
-      let returnType = BaseResponseCreateOrderResponse;
-      return this.apiClient.callApi(
-        '/api/v1/app/order/create', 'POST',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
-      );
-    }
-
-    /**
-     * Callback function to receive the result of the appOrderControllerGetDetailsById operation.
-     * @callback module:api/AppOrderControllerApi~appOrderControllerGetDetailsByIdCallback
+     * Callback function to receive the result of the merchantOrderControllerGetDetailsById operation.
+     * @callback module:api/MerchantOrderControllerApi~merchantOrderControllerGetDetailsByIdCallback
      * @param {String} error Error message, if any.
      * @param {module:model/BaseResponseOrderDetailsDetails} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -130,14 +129,14 @@ export default class AppOrderControllerApi {
 
     /**
      * @param {String} id 
-     * @param {module:api/AppOrderControllerApi~appOrderControllerGetDetailsByIdCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/MerchantOrderControllerApi~merchantOrderControllerGetDetailsByIdCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/BaseResponseOrderDetailsDetails}
      */
-    appOrderControllerGetDetailsById(id, callback) {
+    merchantOrderControllerGetDetailsById(id, callback) {
       let postBody = null;
       // verify the required parameter 'id' is set
       if (id === undefined || id === null) {
-        throw new Error("Missing the required parameter 'id' when calling appOrderControllerGetDetailsById");
+        throw new Error("Missing the required parameter 'id' when calling merchantOrderControllerGetDetailsById");
       }
 
       let pathParams = {
@@ -155,15 +154,15 @@ export default class AppOrderControllerApi {
       let accepts = ['*/*'];
       let returnType = BaseResponseOrderDetailsDetails;
       return this.apiClient.callApi(
-        '/api/v1/app/order/{id}/details', 'GET',
+        '/api/v1/merchant/order/{id}/details', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );
     }
 
     /**
-     * Callback function to receive the result of the appOrderControllerGetInfoPageWithFilter operation.
-     * @callback module:api/AppOrderControllerApi~appOrderControllerGetInfoPageWithFilterCallback
+     * Callback function to receive the result of the merchantOrderControllerGetInfoPageWithFilter operation.
+     * @callback module:api/MerchantOrderControllerApi~merchantOrderControllerGetInfoPageWithFilterCallback
      * @param {String} error Error message, if any.
      * @param {module:model/BasePagingResponseOrderInfoInfo} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -171,29 +170,29 @@ export default class AppOrderControllerApi {
 
     /**
      * @param {Object} opts Optional parameters
-     * @param {module:model/String} [status] 
      * @param {String} [id] 
-     * @param {String} [productName] 
-     * @param {String} [shopName] 
-     * @param {String} [userId] 
+     * @param {module:model/String} [status] 
+     * @param {String} [receiverFullName] 
+     * @param {String} [phone] 
+     * @param {module:model/String} [paymentMethod] 
      * @param {Number} [page = 0)] Zero-based page index (0..N)
      * @param {Number} [size = 20)] The size of the page to be returned
      * @param {Array.<String>} [sort] Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.
-     * @param {module:api/AppOrderControllerApi~appOrderControllerGetInfoPageWithFilterCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/MerchantOrderControllerApi~merchantOrderControllerGetInfoPageWithFilterCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/BasePagingResponseOrderInfoInfo}
      */
-    appOrderControllerGetInfoPageWithFilter(opts, callback) {
+    merchantOrderControllerGetInfoPageWithFilter(opts, callback) {
       opts = opts || {};
       let postBody = null;
 
       let pathParams = {
       };
       let queryParams = {
-        'status': opts['status'],
         'id': opts['id'],
-        'productName': opts['productName'],
-        'shopName': opts['shopName'],
-        'userId': opts['userId'],
+        'status': opts['status'],
+        'receiverFullName': opts['receiverFullName'],
+        'phone': opts['phone'],
+        'paymentMethod': opts['paymentMethod'],
         'page': opts['page'],
         'size': opts['size'],
         'sort': this.apiClient.buildCollectionParam(opts['sort'], 'multi')
@@ -208,34 +207,28 @@ export default class AppOrderControllerApi {
       let accepts = ['*/*'];
       let returnType = BasePagingResponseOrderInfoInfo;
       return this.apiClient.callApi(
-        '/api/v1/app/order/info/page/filter', 'GET',
+        '/api/v1/merchant/order/info/page/filter', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );
     }
 
     /**
-     * Callback function to receive the result of the appOrderControllerGetPaymentUrl operation.
-     * @callback module:api/AppOrderControllerApi~appOrderControllerGetPaymentUrlCallback
+     * Callback function to receive the result of the merchantOrderControllerRevenueByThisAndLastMonth operation.
+     * @callback module:api/MerchantOrderControllerApi~merchantOrderControllerRevenueByThisAndLastMonthCallback
      * @param {String} error Error message, if any.
-     * @param {module:model/BaseResponseCreateOrderResponse} data The data returned by the service call.
+     * @param {module:model/BaseResponseListIRevenueThisAndLastMonthProjection} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
     /**
-     * @param {String} orderId 
-     * @param {module:api/AppOrderControllerApi~appOrderControllerGetPaymentUrlCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/BaseResponseCreateOrderResponse}
+     * @param {module:api/MerchantOrderControllerApi~merchantOrderControllerRevenueByThisAndLastMonthCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/BaseResponseListIRevenueThisAndLastMonthProjection}
      */
-    appOrderControllerGetPaymentUrl(orderId, callback) {
+    merchantOrderControllerRevenueByThisAndLastMonth(callback) {
       let postBody = null;
-      // verify the required parameter 'orderId' is set
-      if (orderId === undefined || orderId === null) {
-        throw new Error("Missing the required parameter 'orderId' when calling appOrderControllerGetPaymentUrl");
-      }
 
       let pathParams = {
-        'orderId': orderId
       };
       let queryParams = {
       };
@@ -247,9 +240,9 @@ export default class AppOrderControllerApi {
       let authNames = ['Authorization'];
       let contentTypes = [];
       let accepts = ['*/*'];
-      let returnType = BaseResponseCreateOrderResponse;
+      let returnType = BaseResponseListIRevenueThisAndLastMonthProjection;
       return this.apiClient.callApi(
-        '/api/v1/app/order/create-payment/{orderId}', 'GET',
+        '/api/v1/merchant/order/revenue-by-month', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );

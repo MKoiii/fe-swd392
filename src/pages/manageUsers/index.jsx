@@ -7,7 +7,7 @@ const ManageUsers = () => {
   const [reload, setReload] = useState(false);
   return (
     <UserContext.Provider value={{ reload, setReload }}>
-      <MainBoard children={<ManageUserContent />} />
+      <ManageUserContent />
     </UserContext.Provider>
   );
 };
