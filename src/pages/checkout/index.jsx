@@ -88,11 +88,13 @@ const Checkout = () => {
       }),
     };
     itemPayment?.forEach((i) => CART.removeItem(i));
-    orderApi.appOrderControllerCreateModel(data, (err, data) => {
+    orderApi.appOrderControllerCreateModel(data, (err, data, response) => {
       if (data) {
         window.open(data?.data.paymentUrl);
         dispatchEvent(updateItemPayment([]));
         CART.setItemPayment([]);
+      } else {
+        TOAST.error(toast, "Đặt hàng", response?.body?.message)
       }
     });
   };

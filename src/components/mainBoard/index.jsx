@@ -238,9 +238,18 @@ const MobileNav = ({ onOpen, ...rest }) => {
                   spacing="1px"
                   ml="2"
                 >
-                  <Text fontSize="sm">{userInfo?.displayName}</Text>
-                  <Text fontSize="xs" color="gray.600">
-                    Admin
+                  <Text fontSize="sm">
+                    {TOKEN.getUserInfo()?.displayName}
+                  </Text>
+                  <Text
+                    fontSize="xs"
+                    color="gray.600"
+                    width={"48px"}
+                    whiteSpace={"nowrap"}
+                    textOverflow={"ellipsis"}
+                    overflow={"hidden"}
+                  >
+                    {TOKEN.getUserInfo()?.email}
                   </Text>
                 </VStack>
                 <Box display={{ base: "none", md: "flex" }}>

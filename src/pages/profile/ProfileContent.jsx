@@ -15,16 +15,18 @@ import {
   MediaControllerApi,
 } from "../../api/generated/generate-api";
 import ApiClientSingleton from "../../api/apiClientImpl";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import moment from "moment";
 import FileUpload from "../../components/upload";
 import LogoImage from "../../assets/logo512.png";
+import { GlobalContext } from "../../App";
 
 const userApi = new AppUserControllerApi(ApiClientSingleton.getInstance());
 const mediaApi = new MediaControllerApi(ApiClientSingleton.getInstance());
 const ProfileContent = () => {
   const [user, setUser] = useState();
   const toast = useToast();
+  const { reload, setReload } = useContext(GlobalContext)
 
   useEffect(() => {
     userApi.appUserControllerGetDetailsByContext((err, data) => {
@@ -32,7 +34,7 @@ const ProfileContent = () => {
         setUser(data?.data);
       }
     });
-  }, []);
+  }, [reload]);
 
   return (
     <Flex width={"960px"} minH={"600px"} justify={"center"}>
@@ -112,6 +114,7 @@ const ProfileContent = () => {
                   console.log(user);
                   userApi.appUserControllerUpdateModel(user, (err, data) => {
                     if (data) {
+                      setReload(!reload)
                       TOAST.success(
                         toast,
                         "Thông tin cá nhân",
@@ -136,8 +139,8 @@ const ProfileContent = () => {
                 user?.photo && user?.isReview
                   ? user?.photo
                   : user?.photo && !user?.isReview
-                  ? IMAGES.getImage(user?.photo)
-                  : LogoImage
+                    ? IMAGES.getImage(user?.photo)
+                    : LogoImage
               }
               borderRadius={"50%"}
             />

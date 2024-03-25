@@ -39,6 +39,7 @@ import {
 import ApiClientSingleton from "../../api/apiClientImpl";
 import { IMAGES, STATUS_STR, TOAST } from "../../constant";
 import { useParams } from "react-router-dom";
+import { GlobalContext } from "../../App";
 
 const categoryApi = new AppProductCategoryControllerApi(
   ApiClientSingleton.getInstance()
@@ -60,6 +61,7 @@ const AddProductContent = () => {
   const { addProduct, setAddProduct } = useContext(ProductContext);
   const [categories, setCategories] = useState([]);
   const [previewUrls, setPriviewUrls] = useState([]);
+  const { reload, setReload } = useContext(GlobalContext);
 
   useEffect(() => {
     categoryApi.appProductCategoryControllerGetInfoList((err, data, res) => {
@@ -75,7 +77,7 @@ const AddProductContent = () => {
         setCategories(newCategories);
       }
     });
-  }, []);
+  }, [reload]);
 
   useEffect(() => {
     if (productId) {
@@ -90,7 +92,7 @@ const AddProductContent = () => {
         }
       );
     }
-  }, []);
+  }, [reload]);
 
   return (
     <Flex flexDirection={"column"} gap={"16px"}>
@@ -244,7 +246,8 @@ const AddProductContent = () => {
                             "Sản phẩm",
                             "Cập nhật sản phẩm thành công"
                           );
-                          setAddProduct({});
+                          setAddProduct(undefined);
+                          setReload(!reload)
                         } else {
                           TOAST.error(
                             toast,
@@ -264,7 +267,9 @@ const AddProductContent = () => {
                             "Sản phẩm",
                             "Thêm sản phẩm thành công"
                           );
-                          setAddProduct({});
+                          setAddProduct(undefined);
+                          setReload(!reload)
+                          window.location.reload(true)
                         } else {
                           TOAST.error(
                             toast,

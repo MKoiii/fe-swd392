@@ -65,8 +65,9 @@ const DeliveryAddress = () => {
           TOAST.success(toast, "Địa chỉ", "Thêm địa chỉ thành công");
           setData({});
           setIsOpen(false);
+          setReload(!reload)
         } else {
-          TOAST.success(toast, "Địa chỉ", "Thêm địa chỉ không thành công");
+          TOAST.error(toast, "Địa chỉ", "Thêm địa chỉ không thành công");
         }
       });
     } else {
@@ -75,8 +76,9 @@ const DeliveryAddress = () => {
           TOAST.success(toast, "Địa chỉ", "Cập nhật địa chỉ thành công");
           setData({});
           setIsOpen(false);
+          setReload(!reload)
         } else {
-          TOAST.success(toast, "Địa chỉ", "Cập nhật địa chỉ không thành công");
+          TOAST.error(toast, "Địa chỉ", "Cập nhật địa chỉ không thành công");
         }
       });
     }
@@ -158,7 +160,7 @@ const DeliveryAddress = () => {
                                 );
                                 setReload(!reload);
                               } else {
-                                TOAST.success(
+                                TOAST.error(
                                   toast,
                                   "Địa chỉ",
                                   "Xoá địa chỉ không thành công"
